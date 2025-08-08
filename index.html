@@ -115,16 +115,12 @@
 
   <script>
     // Muat table.html secara dinamis
-    fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
-  .then(response => response.json())
-  .then(data => {
-    const filteredData = data.filter(item => item["No. Urut"]);
-    allData = filteredData;
-
-    populateFilterOptions(filteredData);
-    renderTable(filteredData);
-  })
-
+    fetch('table.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('table-container-placeholder').innerHTML = html;
+        fetchData(); // Lanjut render data setelah tabel dimuat
+      });
 
     let allData = [];
 
@@ -132,9 +128,12 @@
       fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
         .then(response => response.json())
         .then(data => {
-          allData = data;
-          populateFilterOptions(data);
-          renderTable(data);
+          // ✅ Filter hanya data yang memiliki "No. Urut"
+          const filteredData = data.filter(item => item["No. Urut"]);
+          allData = filteredData;
+
+          populateFilterOptions(filteredData);
+          renderTable(filteredData);
         })
         .catch(error => console.error("Gagal mengambil data:", error));
     }
@@ -182,4 +181,3 @@
   </script>
 </body>
 </html>
-
