@@ -1,8 +1,9 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5faff;
+  background: linear-gradient(to bottom right, #2196f3, #0d47a1);
   margin: 0;
   padding: 0;
+  color: #fff;
 }
 
 .container {
@@ -13,7 +14,7 @@ body {
 
 h1 {
   text-align: center;
-  color: #007acc;
+  color: #fff;
   margin-bottom: 30px;
 }
 
@@ -23,35 +24,43 @@ h1 {
   align-items: center;
   margin-bottom: 15px;
   flex-wrap: wrap;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
 }
 
 .filter-bar label {
   margin-right: 10px;
+  color: #fff;
 }
 
 .total-info {
   font-weight: bold;
-  color: #333;
+  color: #fff;
 }
 
 .table-container {
   overflow-x: auto;
   max-height: 600px;
   overflow-y: auto;
-  border: 1px solid #ccc;
   border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
+  min-width: 600px;
 }
 
 th, td {
   padding: 12px 15px;
   border: 1px solid #ddd;
   text-align: left;
+  color: #333;
 }
 
 th {
@@ -67,6 +76,23 @@ tr:nth-child(even) {
   .filter-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+
+  .table-container {
+    max-height: 400px;
   }
 }
