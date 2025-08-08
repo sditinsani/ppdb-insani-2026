@@ -2,182 +2,33 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>PPDB SDIT INSANI 2026/2027</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    select {
-      padding: 8px;
-      font-size: 14px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .total {
-      font-weight: bold;
-    }
-
-    .table-container {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
-
-    .table-wrapper {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    th {
-      background-color: #f1f1f1;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    tr:hover {
-      background-color: #f9f9f9;
-    }
-
-    @media (max-width: 600px) {
-      .controls {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  <title>Daftar Pendaftar PPDB SD</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Daftar Pendaftar PPDB SDIT INSANI 2026/2027</h1>
-  </header>
+  <div class="container">
+    <h1>Daftar Pendaftar PPDB SD Tahun 2025</h1>
 
-  <main>
     <div class="controls">
-      <div>
-        Filter Status:
-        <select id="statusFilter">
-          <option value="semua">Semua</option>
-        </select>
-      </div>
-      <div class="total">
-        Total: <span id="totalPendaftar">0</span> pendaftar
-      </div>
+      <label for="statusFilter">Filter Status:</label>
+      <select id="statusFilter">
+        <option value="semua">Semua</option>
+        <!-- Opsi akan diisi lewat JavaScript -->
+      </select>
+      <span id="totalPendaftar">0</span> pendaftar
     </div>
 
-    <!-- Tempat menampilkan tabel -->
-    <div id="table-container-placeholder"></div>
-  </main>
+    <!-- Tabel akan dimuat dari file eksternal -->
+    <div id="tabel-wrapper"></div>
+  </div>
 
+  <!-- Load table.html secara dinamis -->
   <script>
-    // Muat table.html secara dinamis
-    fetch('table.html')
-      .then(res => res.text())
+    fetch("table.html")
+      .then(response => response.text())
       .then(html => {
-        document.getElementById('table-container-placeholder').innerHTML = html;
-        fetchData(); // Lanjut render data setelah tabel dimuat
+        document.getElementById("tabel-wrapper").innerHTML = html;
       });
-
-    let allData = [];
-
-    function fetchData() {
-      fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
-        .then(response => response.json())
-        .then(data => {
-          // ✅ Filter hanya data yang memiliki "No. Urut"
-          const filteredData = data.filter(item => item["No. Urut"]);
-          allData = filteredData;
-
-          populateFilterOptions(filteredData);
-          renderTable(filteredData);
-        })
-        .catch(error => console.error("Gagal mengambil data:", error));
-    }
-
-    function populateFilterOptions(data) {
-      const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
-      const filter = document.getElementById("statusFilter");
-
-      statusSet.forEach(status => {
-        const option = document.createElement("option");
-        option.value = status;
-        option.textContent = status;
-        filter.appendChild(option);
-      });
-
-      filter.addEventListener("change", handleFilterChange);
-    }
-
-    function handleFilterChange() {
-      const selected = document.getElementById("statusFilter").value;
-      const filtered = selected === "semua"
-        ? allData
-        : allData.filter(item => item["Status Pendaftaran"] === selected);
-      renderTable(filtered);
-    }
-
-    function renderTable(data) {
-      const tbody = document.querySelector("#pendaftarTable tbody");
-      tbody.innerHTML = "";
-      document.getElementById("totalPendaftar").textContent = data.length;
-
-      data.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${item["No. Urut"]}</td>
-          <td>${item["Nama Lengkap Siswa"]}</td>
-          <td>${item["Asal TK/RA"]}</td>
-          <td>${item["Jenis Kelamin"]}</td>
-          <td>${item["Tanggal Pendaftaran"]}</td>
-          <td>${item["Status Pendaftaran"]}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
   </script>
 </body>
 </html>
