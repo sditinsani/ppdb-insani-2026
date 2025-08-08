@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>PPDB SDIT INSANI 2026/2027</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -57,16 +56,20 @@
 
     .table-container {
       background: white;
-      padding: 20px;
+      padding: 0;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      overflow-x: auto;
+      overflow: hidden;
+    }
+
+    .table-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
     }
 
     th, td {
@@ -79,6 +82,9 @@
     th {
       background-color: #f1f1f1;
       font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
     tr:hover {
@@ -86,19 +92,32 @@
     }
 
     @media (max-width: 600px) {
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .table-wrapper {
+        max-height: 300px;
+      }
+
       table, thead, tbody, th, td, tr {
         display: block;
       }
+
+      thead {
+        display: none;
+      }
+
       tr {
         margin-bottom: 15px;
       }
-      th {
-        display: none;
-      }
+
       td {
         position: relative;
         padding-left: 50%;
       }
+
       td::before {
         position: absolute;
         left: 15px;
@@ -106,6 +125,7 @@
         font-weight: bold;
         white-space: nowrap;
       }
+
       td:nth-of-type(1)::before { content: "No. Urut"; }
       td:nth-of-type(2)::before { content: "Nama Lengkap"; }
       td:nth-of-type(3)::before { content: "Asal TK/RA"; }
@@ -134,19 +154,21 @@
     </div>
 
     <div class="table-container">
-      <table id="pendaftarTable">
-        <thead>
-          <tr>
-            <th>No. Urut</th>
-            <th>Nama Lengkap</th>
-            <th>Asal TK/RA</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Pendaftaran</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div class="table-wrapper">
+        <table id="pendaftarTable">
+          <thead>
+            <tr>
+              <th>No. Urut</th>
+              <th>Nama Lengkap</th>
+              <th>Asal TK/RA</th>
+              <th>Jenis Kelamin</th>
+              <th>Tanggal Pendaftaran</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
   </main>
 
