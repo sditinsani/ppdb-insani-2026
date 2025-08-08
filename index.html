@@ -2,29 +2,42 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PPDB SDIT INSANI 2026/2027</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <div class="container">
-    <h1><i class="fas fa-user-graduate"></i>DATA PENDAFTAR PPDB SDIT INSANI 2026/2027</h1>
+    <h1><i class="fas fa-user-graduate"></i> Daftar Pendaftar PPDB SDIT INSANI</h1>
 
-    <div class="controls">
+    <div class="filter-bar">
       <label for="statusFilter"><i class="fas fa-filter"></i> Filter Status:</label>
       <select id="statusFilter">
         <option value="semua">Semua</option>
       </select>
       <div class="total-info">
-        <i class="fas fa-users"></i> Total: <span id="totalPendaftar">0</span> pendaftar
+        <i class="fas fa-users"></i> Total: <span id="totalPendaftar">0</span>
       </div>
     </div>
 
-    <div id="tabel-wrapper"></div>
+    <div class="table-container">
+      <table id="pendaftarTable">
+        <thead>
+          <tr>
+            <th>No. Urut</th>
+            <th>Nama Lengkap</th>
+            <th>Asal TK/RA</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Pendaftaran</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
-  <script src="table.html" type="text/javascript"></script>
+  <script src="table.js"></script>
 </body>
 </html>
-
