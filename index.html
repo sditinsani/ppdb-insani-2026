@@ -3,49 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Pendaftar PPDB SD</title>
+  <title>PPDB SDIT INSANI 2026/2027</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>DAFTAR PENDAFTAR PPDB SD</h1>
+  <header>
+    <h1>DAFTAR PENDAFTAR PPDB SDIT INSANI 2026/2027</h1>
+  </header>
 
-    <div class="filter-bar">
-      <div>
-        <label for="statusFilter">Status:</label>
-        <select id="statusFilter">
-          <option value="">Semua</option>
-          <option value="Diterima">Diterima</option>
-          <option value="Diproses">Diproses</option>
-          <option value="Ditolak">Ditolak</option>
-        </select>
-      </div>
-      <div>
-        <label for="searchNama">Cari Nama:</label>
-        <input type="text" id="searchNama" placeholder="Masukkan nama...">
-      </div>
-      <div class="total-info">
-        Total Pendaftar: <span id="totalCount">0</span>
-      </div>
-    </div>
+  <main>
+    <section class="info">
+      <p>Total Pendaftar: <span id="totalCount">0</span></p>
+    </section>
 
-    <div class="table-container">
+    <section class="table-container">
       <table id="pendaftarTable">
         <thead>
           <tr>
-            <th><i class="fas fa-list-ol"></i> No</th>
-            <th><i class="fas fa-user"></i> Nama Lengkap</th>
-            <th><i class="fas fa-school"></i> Asal TK/RA</th>
-            <th><i class="fas fa-venus-mars"></i> Jenis Kelamin</th>
-            <th><i class="fas fa-calendar-alt"></i> Tanggal Daftar</th>
-            <th><i class="fas fa-check-circle"></i> Status</th>
+            <th>No. Urut</th>
+            <th>Nama Lengkap</th>
+            <th>Asal TK/RA</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Pendaftaran</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script src="table.js"></script>
 </body>
