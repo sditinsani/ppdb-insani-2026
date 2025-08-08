@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Tahoma', sans-serif;
   background: linear-gradient(to bottom right, #2196f3, #0d47a1);
   margin: 0;
   padding: 0;
@@ -16,6 +16,8 @@ h1 {
   text-align: center;
   color: #fff;
   margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: normal;
 }
 
 .filter-bar {
@@ -33,10 +35,18 @@ h1 {
 .filter-bar label {
   margin-right: 10px;
   color: #fff;
+  font-weight: normal;
+}
+
+.filter-bar input[type="text"] {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  font-family: Tahoma, sans-serif;
 }
 
 .total-info {
-  font-weight: bold;
+  font-weight: normal;
   color: #fff;
 }
 
@@ -61,11 +71,13 @@ th, td {
   border: 1px solid #ddd;
   text-align: left;
   color: #333;
+  font-weight: normal;
 }
 
 th {
   background-color: #e0f3ff;
   color: #007acc;
+  text-transform: uppercase;
 }
 
 tr:nth-child(even) {
