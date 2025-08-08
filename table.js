@@ -1,17 +1,12 @@
-// table.js versi sederhana tanpa filter & ikon
-const url = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
-
-const tableBody = document.querySelector("#pendaftarTable tbody");
-const totalCount = document.getElementById("totalCount");
-
-fetch(url)
+fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
   .then(response => response.json())
   .then(data => {
+    const tbody = document.querySelector("#pendaftarTable tbody");
     let count = 0;
-    tableBody.innerHTML = "";
 
     data.forEach(item => {
-      if (!item["No. Urut"] || !item["Nama Lengkap Siswa"] || !item["Asal TK/RA"] || !item["Jenis Kelamin"] || !item["Tanggal Pendaftaran"] || !item["Status Pendaftaran"]) return;
+      // Lewati data kosong
+      if (!item["No. Urut"] || !item["Nama Lengkap Siswa"]) return;
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -22,11 +17,11 @@ fetch(url)
         <td>${item["Tanggal Pendaftaran"]}</td>
         <td>${item["Status Pendaftaran"]}</td>
       `;
-      tableBody.appendChild(tr);
+      tbody.appendChild(tr);
       count++;
     });
 
-    totalCount.textContent = count;
+    document.getElementById("totalCount").textContent = count;
   })
   .catch(error => {
     console.error("Gagal mengambil data:", error);
