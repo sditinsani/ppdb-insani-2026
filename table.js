@@ -1,45 +1,20 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+const url = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
+const tableBody = document.querySelector("#pendaftarTable tbody");
+const totalCount = document.getElementById("totalCount");
 const statusFilter = document.getElementById("statusFilter");
-const totalDisplay = document.getElementById("totalPendaftar");
-const tbody = document.querySelector("#pendaftarTable tbody");
+const searchNama = document.getElementById("searchNama");
 
 let allData = [];
 
-fetch(API_URL)
-  .then(response => response.json())
-  .then(data => {
-    allData = data.filter(item => item["No. Urut"]);
-    renderTable(allData);
-    populateStatusOptions(allData);
-  })
-  .catch(error => {
-    console.error("Gagal memuat data:", error);
-  });
-
-function populateStatusOptions(data) {
-  const statuses = [...new Set(data.map(item => item["Status Pendaftaran"]))];
-  statuses.forEach(status => {
-    const option = document.createElement("option");
-    option.value = status;
-    option.textContent = status;
-    statusFilter.appendChild(option);
-  });
-
-  statusFilter.addEventListener("change", () => {
-    const selected = statusFilter.value;
-    const filtered = selected === "semua"
-      ? allData
-      : allData.filter(item => item["Status Pendaftaran"] === selected);
-    renderTable(filtered);
-  });
-}
-
 function renderTable(data) {
-  tbody.innerHTML = "";
-  totalDisplay.textContent = data.length;
+  tableBody.innerHTML = "";
+  let count = 0;
 
   data.forEach(item => {
+    // Lewati data yang kolomnya kosong
+    if (!item["No. Urut"] || !item["Nama Lengkap Siswa"] || !item["Asal TK/RA"] || !item["Jenis Kelamin"] || !item["Tanggal Pendaftaran"] || !item["Status Pendaftaran"]) return;
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${item["No. Urut"]}</td>
@@ -49,6 +24,35 @@ function renderTable(data) {
       <td>${item["Tanggal Pendaftaran"]}</td>
       <td>${item["Status Pendaftaran"]}</td>
     `;
-    tbody.appendChild(tr);
+    tableBody.appendChild(tr);
+    count++;
   });
+
+  totalCount.textContent = count;
 }
+
+function applyFilters() {
+  const statusValue = statusFilter.value.toLowerCase();
+  const namaValue = searchNama.value.toLowerCase();
+
+  const filtered = allData.filter(item => {
+    const statusMatch = statusValue === "" || (item["Status Pendaftaran"] && item["Status Pendaftaran"].toLowerCase() === statusValue);
+    const namaMatch = namaValue === "" || (item["Nama Lengkap Siswa"] && item["Nama Lengkap Siswa"].toLowerCase().includes(namaValue));
+    return statusMatch && namaMatch;
+  });
+
+  renderTable(filtered);
+}
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    allData = data;
+    applyFilters();
+  })
+  .catch(error => {
+    console.error("Gagal mengambil data:", error);
+  });
+
+statusFilter.addEventListener("change", applyFilters);
+searchNama.addEventListener("input", applyFilters);
