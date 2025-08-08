@@ -5,13 +5,14 @@
   <title>PPDB SDIT INSANI 2026/2027</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       font-family: 'Nunito', sans-serif;
-      margin: 0;
-      padding: 0;
       background-color: #f9f9f9;
       color: #333;
+      margin: 0;
+      padding: 0;
     }
 
     header {
@@ -19,28 +20,21 @@
       color: white;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     main {
-      padding: 30px 20px;
       max-width: 1000px;
       margin: auto;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 24px;
+      padding: 30px 20px;
     }
 
     .controls {
-      margin-top: 20px;
-      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 15px;
     }
 
     select {
@@ -56,7 +50,6 @@
 
     .table-container {
       background: white;
-      padding: 0;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       overflow: hidden;
@@ -81,7 +74,6 @@
 
     th {
       background-color: #f1f1f1;
-      font-weight: bold;
       position: sticky;
       top: 0;
       z-index: 1;
@@ -96,42 +88,6 @@
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .table-wrapper {
-        max-height: 300px;
-      }
-
-      table, thead, tbody, th, td, tr {
-        display: block;
-      }
-
-      thead {
-        display: none;
-      }
-
-      tr {
-        margin-bottom: 15px;
-      }
-
-      td {
-        position: relative;
-        padding-left: 50%;
-      }
-
-      td::before {
-        position: absolute;
-        left: 15px;
-        width: 45%;
-        font-weight: bold;
-        white-space: nowrap;
-      }
-
-      td:nth-of-type(1)::before { content: "No. Urut"; }
-      td:nth-of-type(2)::before { content: "Nama Lengkap"; }
-      td:nth-of-type(3)::before { content: "Asal TK/RA"; }
-      td:nth-of-type(4)::before { content: "Jenis Kelamin"; }
-      td:nth-of-type(5)::before { content: "Tanggal Pendaftaran"; }
-      td:nth-of-type(6)::before { content: "Status"; }
     }
   </style>
 </head>
@@ -153,29 +109,22 @@
       </div>
     </div>
 
-    <div class="table-container">
-      <div class="table-wrapper">
-        <table id="pendaftarTable">
-          <thead>
-            <tr>
-              <th>No. Urut</th>
-              <th>Nama Lengkap</th>
-              <th>Asal TK/RA</th>
-              <th>Jenis Kelamin</th>
-              <th>Tanggal Pendaftaran</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
+    <!-- Tempat menampilkan tabel -->
+    <div id="table-container-placeholder"></div>
   </main>
 
   <script>
+    // Muat table.html secara dinamis
+    fetch('table.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('table-container-placeholder').innerHTML = html;
+        fetchData(); // Lanjut render data setelah tabel dimuat
+      });
+
     let allData = [];
 
-    const fetchData = () => {
+    function fetchData() {
       fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
         .then(response => response.json())
         .then(data => {
@@ -183,12 +132,10 @@
           populateFilterOptions(data);
           renderTable(data);
         })
-        .catch(error => {
-          console.error("Gagal mengambil data:", error);
-        });
-    };
+        .catch(error => console.error("Gagal mengambil data:", error));
+    }
 
-    const populateFilterOptions = (data) => {
+    function populateFilterOptions(data) {
       const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
       const filter = document.getElementById("statusFilter");
 
@@ -200,19 +147,17 @@
       });
 
       filter.addEventListener("change", handleFilterChange);
-    };
+    }
 
-    const handleFilterChange = () => {
+    function handleFilterChange() {
       const selected = document.getElementById("statusFilter").value;
-      if (selected === "semua") {
-        renderTable(allData);
-      } else {
-        const filtered = allData.filter(item => item["Status Pendaftaran"] === selected);
-        renderTable(filtered);
-      }
-    };
+      const filtered = selected === "semua"
+        ? allData
+        : allData.filter(item => item["Status Pendaftaran"] === selected);
+      renderTable(filtered);
+    }
 
-    const renderTable = (data) => {
+    function renderTable(data) {
       const tbody = document.querySelector("#pendaftarTable tbody");
       tbody.innerHTML = "";
       document.getElementById("totalPendaftar").textContent = data.length;
@@ -229,9 +174,7 @@
         `;
         tbody.appendChild(tr);
       });
-    };
-
-    fetchData();
+    }
   </script>
 </body>
 </html>
