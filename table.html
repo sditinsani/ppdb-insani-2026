@@ -1,74 +1,100 @@
-<div class="table-container">
-  <div class="table-wrapper">
-    <table id="pendaftarTable">
-      <thead>
-        <tr>
-          <th>No. Urut</th>
-          <th>Nama Lengkap</th>
-          <th>Asal TK/RA</th>
-          <th>Jenis Kelamin</th>
-          <th>Tanggal Pendaftaran</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Pendaftar PPDB SD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-user-graduate"></i> Daftar Pendaftar PPDB SD Tahun 2025</h1>
+
+    <div class="controls">
+      <label for="statusFilter"><i class="fas fa-filter"></i> Filter Status:</label>
+      <select id="statusFilter">
+        <option value="semua">Semua</option>
+      </select>
+      <div class="total-info">
+        <i class="fas fa-users"></i> <span id="totalPendaftar">0</span> pendaftar
+      </div>
+    </div>
+
+    <div id="tabel-wrapper">
+      <div class="table-container">
+        <div class="table-wrapper">
+          <table id="pendaftarTable">
+            <thead>
+              <tr>
+                <th><i class="fas fa-hashtag"></i> No. Urut</th>
+                <th><i class="fas fa-user"></i> Nama Lengkap</th>
+                <th><i class="fas fa-school"></i> Asal TK/RA</th>
+                <th><i class="fas fa-venus-mars"></i> Jenis Kelamin</th>
+                <th><i class="fas fa-calendar-alt"></i> Tanggal Pendaftaran</th>
+                <th><i class="fas fa-info-circle"></i> Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-  const statusFilter = document.getElementById("statusFilter");
-  const totalDisplay = document.getElementById("totalPendaftar");
-  let allData = [];
+  <script>
+    const statusFilter = document.getElementById("statusFilter");
+    const totalDisplay = document.getElementById("totalPendaftar");
+    let allData = [];
 
-  fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
-    .then(response => response.json())
-    .then(data => {
-      const filteredData = data.filter(item => item["No. Urut"]);
-      allData = filteredData;
+    fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
+      .then(response => response.json())
+      .then(data => {
+        const filteredData = data.filter(item => item["No. Urut"]);
+        allData = filteredData;
+        renderTable(filteredData);
+        renderFilterOptions(filteredData);
+      })
+      .catch(error => console.error("Gagal memuat data:", error));
 
-      renderTable(filteredData);
-      renderFilterOptions(filteredData);
-    })
-    .catch(error => console.error("Gagal memuat data:", error));
+    function renderFilterOptions(data) {
+      if (!statusFilter) return;
+      const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
+      statusSet.forEach(status => {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status;
+        statusFilter.appendChild(option);
+      });
 
-  function renderFilterOptions(data) {
-    if (!statusFilter) return;
-    const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
-    statusSet.forEach(status => {
-      const option = document.createElement("option");
-      option.value = status;
-      option.textContent = status;
-      statusFilter.appendChild(option);
-    });
+      statusFilter.addEventListener("change", () => {
+        const selected = statusFilter.value;
+        const filtered = selected === "semua"
+          ? allData
+          : allData.filter(item => item["Status Pendaftaran"] === selected);
+        renderTable(filtered);
+      });
+    }
 
-    statusFilter.addEventListener("change", () => {
-      const selected = statusFilter.value;
-      const filtered = selected === "semua"
-        ? allData
-        : allData.filter(item => item["Status Pendaftaran"] === selected);
-      renderTable(filtered);
-    });
-  }
+    function renderTable(data) {
+      const tbody = document.querySelector("#pendaftarTable tbody");
+      if (!tbody) return;
 
-  function renderTable(data) {
-    const tbody = document.querySelector("#pendaftarTable tbody");
-    if (!tbody) return;
+      tbody.innerHTML = "";
+      if (totalDisplay) totalDisplay.textContent = data.length;
 
-    tbody.innerHTML = "";
-    if (totalDisplay) totalDisplay.textContent = data.length;
-
-    data.forEach(item => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${item["No. Urut"]}</td>
-        <td>${item["Nama Lengkap Siswa"]}</td>
-        <td>${item["Asal TK/RA"]}</td>
-        <td>${item["Jenis Kelamin"]}</td>
-        <td>${item["Tanggal Pendaftaran"]}</td>
-        <td>${item["Status Pendaftaran"]}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-</script>
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item["No. Urut"]}</td>
+          <td>${item["Nama Lengkap Siswa"]}</td>
+          <td>${item["Asal TK/RA"]}</td>
+          <td>${item["Jenis Kelamin"]}</td>
+          <td>${item["Tanggal Pendaftaran"]}</td>
+          <td>${item["Status Pendaftaran"]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>
