@@ -34,6 +34,27 @@
       font-size: 24px;
     }
 
+    .controls {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .total {
+      font-weight: bold;
+    }
+
     .table-container {
       background: white;
       padding: 20px;
@@ -100,6 +121,18 @@
   </header>
 
   <main>
+    <div class="controls">
+      <div>
+        Filter Status:
+        <select id="statusFilter">
+          <option value="semua">Semua</option>
+        </select>
+      </div>
+      <div class="total">
+        Total: <span id="totalPendaftar">0</span> pendaftar
+      </div>
+    </div>
+
     <div class="table-container">
       <table id="pendaftarTable">
         <thead>
@@ -118,26 +151,65 @@
   </main>
 
   <script>
-    fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec') // Ganti dengan URL Web App kamu
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector("#pendaftarTable tbody");
-        data.forEach(item => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${item["No. Urut"]}</td>
-            <td>${item["Nama Lengkap Siswa"]}</td>
-            <td>${item["Asal TK/RA"]}</td>
-            <td>${item["Jenis Kelamin"]}</td>
-            <td>${item["Tanggal Pendaftaran"]}</td>
-            <td>${item["Status Pendaftaran"]}</td>
-          `;
-          tbody.appendChild(tr);
+    let allData = [];
+
+    const fetchData = () => {
+      fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
+        .then(response => response.json())
+        .then(data => {
+          allData = data;
+          populateFilterOptions(data);
+          renderTable(data);
+        })
+        .catch(error => {
+          console.error("Gagal mengambil data:", error);
         });
-      })
-      .catch(error => {
-        console.error("Gagal mengambil data:", error);
+    };
+
+    const populateFilterOptions = (data) => {
+      const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
+      const filter = document.getElementById("statusFilter");
+
+      statusSet.forEach(status => {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status;
+        filter.appendChild(option);
       });
+
+      filter.addEventListener("change", handleFilterChange);
+    };
+
+    const handleFilterChange = () => {
+      const selected = document.getElementById("statusFilter").value;
+      if (selected === "semua") {
+        renderTable(allData);
+      } else {
+        const filtered = allData.filter(item => item["Status Pendaftaran"] === selected);
+        renderTable(filtered);
+      }
+    };
+
+    const renderTable = (data) => {
+      const tbody = document.querySelector("#pendaftarTable tbody");
+      tbody.innerHTML = "";
+      document.getElementById("totalPendaftar").textContent = data.length;
+
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item["No. Urut"]}</td>
+          <td>${item["Nama Lengkap Siswa"]}</td>
+          <td>${item["Asal TK/RA"]}</td>
+          <td>${item["Jenis Kelamin"]}</td>
+          <td>${item["Tanggal Pendaftaran"]}</td>
+          <td>${item["Status Pendaftaran"]}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    };
+
+    fetchData();
   </script>
 </body>
 </html>
