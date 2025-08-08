@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PPDB SDIT INSANI 2026/2027</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPDB SDIT INSANI</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>DAFTAR PENDAFTAR PPDB SDIT INSANI 2026/2027</h1>
+    <h1>DAFTAR PENDAFTAR PPDB SDIT INSANI</h1>
   </header>
 
   <main>
-    <section class="info">
-      <p>Total Pendaftar: <span id="totalCount">0</span></p>
-    </section>
-
-    <section class="table-container">
+    <button id="refreshButton">🔄 Refresh Status</button>
+    <div class="table-container">
       <table id="pendaftarTable">
         <thead>
           <tr>
@@ -30,11 +27,12 @@
         </thead>
         <tbody></tbody>
       </table>
-    </section>
+      <p>Total Pendaftar: <strong id="totalCount">0</strong></p>
+    </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 SDIT INSANI | Dikembangkan oleh Tim IT</p>
+    &copy; 2025 SDIT INSANI. Semua Hak Dilindungi.
   </footer>
 
   <script src="table.js"></script>
