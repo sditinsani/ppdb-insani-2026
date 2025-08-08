@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Daftar Pendaftar PPDB SD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Daftar Pendaftar PPDB SD Tahun 2025</h1>
+    <h1><i class="fas fa-user-graduate"></i> Daftar Pendaftar PPDB SD Tahun 2025</h1>
 
     <div class="controls">
-      <label for="statusFilter">Filter Status:</label>
+      <label for="statusFilter"><i class="fas fa-filter"></i> Filter Status:</label>
       <select id="statusFilter">
         <option value="semua">Semua</option>
-        <!-- Opsi akan diisi lewat JavaScript -->
       </select>
-      <span id="totalPendaftar">0</span> pendaftar
+      <div class="total-info">
+        <i class="fas fa-users"></i> <span id="totalPendaftar">0</span> pendaftar
+      </div>
     </div>
 
-    <!-- Tabel akan dimuat dari file eksternal -->
     <div id="tabel-wrapper"></div>
   </div>
 
-  <!-- Load table.html secara dinamis -->
   <script>
     fetch("table.html")
       .then(response => response.text())
