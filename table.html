@@ -1,4 +1,3 @@
-<!-- table.html -->
 <div class="table-container">
   <div class="table-wrapper">
     <table id="pendaftarTable">
@@ -16,3 +15,60 @@
     </table>
   </div>
 </div>
+
+<script>
+  const statusFilter = document.getElementById("statusFilter");
+  const totalDisplay = document.getElementById("totalPendaftar");
+  let allData = [];
+
+  fetch('https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec')
+    .then(response => response.json())
+    .then(data => {
+      const filteredData = data.filter(item => item["No. Urut"]);
+      allData = filteredData;
+
+      renderTable(filteredData);
+      renderFilterOptions(filteredData);
+    })
+    .catch(error => console.error("Gagal memuat data:", error));
+
+  function renderFilterOptions(data) {
+    if (!statusFilter) return;
+    const statusSet = new Set(data.map(item => item["Status Pendaftaran"]));
+    statusSet.forEach(status => {
+      const option = document.createElement("option");
+      option.value = status;
+      option.textContent = status;
+      statusFilter.appendChild(option);
+    });
+
+    statusFilter.addEventListener("change", () => {
+      const selected = statusFilter.value;
+      const filtered = selected === "semua"
+        ? allData
+        : allData.filter(item => item["Status Pendaftaran"] === selected);
+      renderTable(filtered);
+    });
+  }
+
+  function renderTable(data) {
+    const tbody = document.querySelector("#pendaftarTable tbody");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+    if (totalDisplay) totalDisplay.textContent = data.length;
+
+    data.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item["No. Urut"]}</td>
+        <td>${item["Nama Lengkap Siswa"]}</td>
+        <td>${item["Asal TK/RA"]}</td>
+        <td>${item["Jenis Kelamin"]}</td>
+        <td>${item["Tanggal Pendaftaran"]}</td>
+        <td>${item["Status Pendaftaran"]}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+</script>
