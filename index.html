@@ -1,42 +1,22 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Status Pendaftaran PPDB</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 <body>
-  <header>
-    <h1>Status Pendaftaran PPDB SDIT INSANI</h1>
-    <p>Periode 2026/2027</p>
-  </header>
-
-  <main>
+  <div class="container">
+    <h1>📋 Status Pendaftaran</h1>
+    <button id="refreshBtn">🔄 Refresh Status</button>
     <div class="table-container">
-      <button id="refreshBtn">🔄 Refresh Status</button>
       <table id="dataTable">
         <thead>
           <tr>
-            <th>No</th>
-            <th>Nama Lengkap</th>
+            <th>No. Urut</th>
+            <th>Nama Lengkap Siswa</th>
             <th>Asal TK/RA</th>
             <th>Jenis Kelamin</th>
             <th>Tanggal Pendaftaran</th>
-            <th>Status</th>
+            <th>Status Pendaftaran</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td colspan="6" class="loading">Memuat data...</td></tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 SDIT INSANI | Data Realtime dari Spreadsheet</p>
-  </footer>
-
+  </div>
   <script src="table.js"></script>
 </body>
-</html>
