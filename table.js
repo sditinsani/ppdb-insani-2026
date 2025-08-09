@@ -12,7 +12,6 @@ async function loadData() {
     let count = 0;
 
     data.forEach((row, index) => {
-      // Skip row jika "Nama Lengkap Siswa" kosong
       if (!row["Nama Lengkap Siswa"] || row["Nama Lengkap Siswa"].trim() === "") return;
 
       count++;
@@ -21,14 +20,13 @@ async function loadData() {
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${row["Nama Lengkap Siswa"]}</td>
-        <td>${row["Asal TK/RA"] || ""}</td>
-        <td>${row["Jenis Kelamin"] || ""}</td>
-        <td>${row["Tanggal Pendaftaran"] || ""}</td>
-        <td><span class="${statusClass}">${status}</span></td>
+        <td data-label="No. Urut">${index + 1}</td>
+        <td data-label="Nama Lengkap Siswa">${row["Nama Lengkap Siswa"]}</td>
+        <td data-label="Asal TK/RA">${row["Asal TK/RA"] || ""}</td>
+        <td data-label="Jenis Kelamin">${row["Jenis Kelamin"] || ""}</td>
+        <td data-label="Tanggal Pendaftaran">${row["Tanggal Pendaftaran"] || ""}</td>
+        <td data-label="Status Pendaftaran"><span class="${statusClass}">${status}</span></td>
       `;
-
       tableBody.appendChild(tr);
     });
 
