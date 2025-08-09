@@ -1,81 +1,91 @@
 body {
     font-family: Tahoma, sans-serif;
-    background-color: #0a3d62; /* Biru elegan */
-    color: white;
+    background-color: #0d47a1; /* Biru elegan */
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 header {
     text-align: center;
     padding: 20px;
+    background-color: #08306b;
 }
 
-header h1 {
+h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-size: 1.4em;
     margin: 0;
 }
 
-#refreshBtn {
-    margin-top: 10px;
-    background-color: #60a3bc;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-#refreshBtn:hover {
-    background-color: #82ccdd;
-}
-
 .table-container {
+    padding: 15px;
     overflow-x: auto;
-    padding: 10px;
+}
+
+#refreshButton {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+#refreshButton:hover {
+    background-color: #ffb300;
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
     background-color: white;
     color: black;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-}
-
-thead {
-    background-color: #60a3bc;
-    color: white;
 }
 
 th, td {
     padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+th {
+    background-color: #08306b;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #555;
 }
 
 footer {
-    background-color: #082b45;
     text-align: center;
-    padding: 10px;
-    font-size: 0.85em;
-    color: #ddd;
+    padding: 15px;
+    background-color: #08306b;
+    font-size: 12px;
+    color: white;
 }
 
-/* Responsif */
-@media (max-width: 768px) {
-    th, td {
-        font-size: 0.85em;
-        padding: 6px;
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 12px;
     }
-    header h1 {
-        font-size: 1.1em;
+    th, td {
+        padding: 8px;
+    }
+    #refreshButton {
+        width: 100%;
+        font-size: 13px;
     }
 }
