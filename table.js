@@ -1,40 +1,42 @@
-const tableBody = document.getElementById("tableBody");
-const refreshBtn = document.getElementById("refreshBtn");
+const SHEET_ID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ";
+const SHEET_NAME = "tampilan_web";
+const ENDPOINT = `https://script.google.com/macros/s/${SHEET_ID}/exec?sheet=${SHEET_NAME}`;
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+const tableBody = document.querySelector("#data-table tbody");
+const jumlahPendaftar = document.getElementById("jumlah-pendaftar");
 
-// Fungsi ambil data
 async function loadData() {
-    tableBody.innerHTML = "<tr><td colspan='6'>Memuat data...</td></tr>";
-    try {
-        const res = await fetch(scriptURL);
-        const data = await res.json();
+  try {
+    const res = await fetch(ENDPOINT);
+    const data = await res.json();
 
-        // Filter data kosong
-        const filteredData = data.filter(row => row['Nama Lengkap Siswa'] && row['Nama Lengkap Siswa'].trim() !== "");
+    tableBody.innerHTML = "";
+    let count = 0;
 
-        tableBody.innerHTML = "";
-        filteredData.forEach(row => {
-            const statusClass = row['Status Pendaftaran'].toLowerCase() === "diterima" ? "status-diterima" : "status-tolak";
+    data.forEach((row, index) => {
+      count++;
+      const tr = document.createElement("tr");
 
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${row['No. Urut']}</td>
-                <td>${row['Nama Lengkap Siswa']}</td>
-                <td>${row['Asal TK/RA']}</td>
-                <td>${row['Jenis Kelamin']}</td>
-                <td>${row['Tanggal Pendaftaran']}</td>
-                <td><span class="${statusClass}">${row['Status Pendaftaran'].toUpperCase()}</span></td>
-            `;
-            tableBody.appendChild(tr);
-        });
-    } catch (error) {
-        tableBody.innerHTML = `<tr><td colspan='6'>Gagal memuat data</td></tr>`;
-        console.error(error);
-    }
+      const statusClass = row["Status Pendaftaran"].toUpperCase() === "DITERIMA" 
+        ? "status-diterima" 
+        : "status-tidak";
+
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${row["Nama Lengkap Siswa"]}</td>
+        <td>${row["Asal TK/RA"]}</td>
+        <td>${row["Jenis Kelamin"]}</td>
+        <td>${row["Tanggal Pendaftaran"]}</td>
+        <td><span class="${statusClass}">${row["Status Pendaftaran"]}</span></td>
+      `;
+      tableBody.appendChild(tr);
+    });
+
+    jumlahPendaftar.textContent = `Jumlah Pendaftar: ${count}`;
+  } catch (err) {
+    console.error("Gagal memuat data", err);
+  }
 }
 
-refreshBtn.addEventListener("click", loadData);
-
-// Load data saat pertama kali
-loadData();
+document.getElementById("refresh-btn").addEventListener("click", loadData);
+window.addEventListener("DOMContentLoaded", loadData);
