@@ -24,13 +24,12 @@ async function loadData() {
     tableBody.innerHTML = "";
     let count = 0;
 
-    data.forEach((row, index) => {
-      // Skip rows with empty Nama Lengkap Siswa
+    data.forEach((row) => {
       if (!row["Nama Lengkap Siswa"] || row["Nama Lengkap Siswa"].trim() === "") return;
 
       count++;
-      const status = (row["Status Pendaftaran"] || "").toLowerCase();
-      const statusClass = status.includes("diterima") ? "status-diterima" : "status-tidak";
+      const statusText = (row["Status Pendaftaran"] || "").toLowerCase();
+      const statusClass = statusText === "diterima" ? "status-diterima" : "status-tidak";
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
