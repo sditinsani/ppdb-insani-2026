@@ -1,22 +1,20 @@
-/* ===== RESET STYLE ===== */
+/* Reset dasar */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ===== BODY ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: #f5f7fa;
     color: #333;
     line-height: 1.6;
-    padding: 0;
 }
 
-/* ===== HEADER ===== */
+/* Header */
 header {
-    background: #0066cc;
+    background: #2c3e50;
     color: white;
     padding: 15px;
     display: flex;
@@ -29,68 +27,95 @@ header h1 {
 }
 
 header button {
-    background: white;
-    color: #0066cc;
+    background: #27ae60;
+    color: white;
     border: none;
     padding: 8px 14px;
-    border-radius: 5px;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
 header button:hover {
-    background: #004c99;
-    color: white;
+    background: #219150;
 }
 
-/* ===== TABLE ===== */
+/* Tabel */
 .table-container {
-    max-width: 100%;
     overflow-x: auto;
-    padding: 15px;
+    padding: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
 }
 
 thead {
-    background: #0066cc;
+    background: #34495e;
     color: white;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
-tr:nth-child(even) {
-    background: #f2f2f2;
+tbody tr:hover {
+    background: #f1f1f1;
 }
 
-td {
-    font-size: 0.95rem;
+.loading {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: #888;
 }
 
-/* ===== FOOTER ===== */
+/* Status warna */
+.status-diterima {
+    color: white;
+    background: #27ae60;
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-proses {
+    color: white;
+    background: #f39c12;
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-ditolak {
+    color: white;
+    background: #e74c3c;
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Footer */
 footer {
     text-align: center;
     padding: 10px;
-    background: #eee;
     font-size: 0.85rem;
-    margin-top: 20px;
+    color: #666;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Responsif */
 @media (max-width: 600px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
     th, td {
-        font-size: 0.85rem;
-        padding: 8px;
+        padding: 10px;
+        font-size: 0.9rem;
     }
 }
