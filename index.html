@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPDB SDIT INSANI 2026/2027</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PPDB SDIT INSANI 2026/2027</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>PPDB SDIT INSANI 2026/2027</h1>
+  </header>
 
-    <header>
-        <h1>PPDB SDIT INSANI 2026/2027</h1>
-    </header>
+  <main>
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>NO. URUT</th>
+            <th>NAMA LENGKAP SISWA</th>
+            <th>ASAL TK/RA</th>
+            <th>JENIS KELAMIN</th>
+            <th>TANGGAL PENDAFTARAN</th>
+            <th>STATUS PENDAFTARAN</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p id="jumlahPendaftar"></p>
+  </main>
 
-    <main>
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>NO. URUT</th>
-                        <th>NAMA LENGKAP SISWA</th>
-                        <th>ASAL TK/RA</th>
-                        <th>JENIS KELAMIN</th>
-                        <th>TANGGAL PENDAFTARAN</th>
-                        <th>STATUS PENDAFTARAN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data dari JS -->
-                </tbody>
-            </table>
-        </div>
-        <p id="jumlahPendaftar" class="info-text"></p>
-    </main>
+  <footer>
+    <p>&copy; 2025 PPDB SDIT INSANI</p>
+  </footer>
 
-    <footer>
-        <p>&copy; 2025 PPDB SDIT INSANI</p>
-    </footer>
-
-    <script src="table.js"></script>
+  <script src="table.js"></script>
 </body>
 </html>
