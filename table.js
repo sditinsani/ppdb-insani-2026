@@ -1,40 +1,44 @@
-const SHEET_ID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ";
-const SHEET_URL = `https://script.google.com/macros/s/${SHEET_ID}/exec`;
+// ===== KONFIGURASI =====
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
-async function loadTableData() {
-  const tableBody = document.querySelector("#dataTable tbody");
-  tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Memuat data...</td></tr>`;
+// ===== AMBIL DATA =====
+async function fetchData() {
+    try {
+        const response = await fetch(SCRIPT_URL);
+        const data = await response.json();
+        
+        // Filter agar data kosong tidak ditampilkan
+        const filteredData = data.filter(row => row.nama && row.nama.trim() !== "");
 
-  try {
-    const response = await fetch(SHEET_URL);
-    const data = await response.json();
-
-    // Filter data kosong
-    const filteredData = data.filter(row => row["Nama Lengkap Siswa"]?.trim() !== "");
-
-    if (filteredData.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Tidak ada data</td></tr>`;
-      return;
+        renderTable(filteredData);
+    } catch (error) {
+        console.error("Gagal mengambil data:", error);
     }
-
-    tableBody.innerHTML = "";
-    filteredData.forEach((row, index) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${row["Nama Lengkap Siswa"]}</td>
-        <td>${row["Asal TK/RA"]}</td>
-        <td>${row["Jenis Kelamin"]}</td>
-        <td>${row["Tanggal Pendaftaran"]}</td>
-        <td>${row["Status Pendaftaran"]}</td>
-      `;
-      tableBody.appendChild(tr);
-    });
-  } catch (error) {
-    tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">Gagal memuat data</td></tr>`;
-    console.error("Error:", error);
-  }
 }
 
-// Load pertama kali
-document.addEventListener("DOMContentLoaded", loadTableData);
+// ===== TAMPILKAN DATA KE TABEL =====
+function renderTable(data) {
+    const tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    data.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${row.nama}</td>
+            <td>${row.asal}</td>
+            <td>${row.jk}</td>
+            <td>${row.tanggal}</td>
+            <td>${row.status}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+}
+
+// ===== EVENT LISTENER =====
+document.getElementById("refreshBtn").addEventListener("click", () => {
+    fetchData();
+});
+
+// ===== LOAD AWAL =====
+fetchData();
