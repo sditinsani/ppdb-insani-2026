@@ -9,10 +9,13 @@
 <body>
   <header>
     <h1>PPDB SDIT INSANI 2026/2027</h1>
+    <button id="refreshBtn" title="Muat Ulang Data">🔄 Refresh Data</button>
   </header>
 
   <main>
-    <div class="table-container">
+    <div class="loading" id="loadingIndicator">Memuat data, mohon tunggu...</div>
+
+    <div class="table-container" id="tableContainer" style="display:none;">
       <table id="dataTable">
         <thead>
           <tr>
@@ -24,10 +27,14 @@
             <th>STATUS PENDAFTARAN</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <!-- Data akan dimuat disini -->
+        </tbody>
       </table>
     </div>
+
     <p id="jumlahPendaftar"></p>
+    <p class="error" id="errorMessage" style="display:none;"></p>
   </main>
 
   <footer>
