@@ -1,43 +1,45 @@
-// URL JSON dari Google Spreadsheet (ubah dengan link JSON kamu)
-const sheetURL = "https://opensheet.elk.sh/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/tampilan_web";
+const sheetURL = "https://opensheet.elk.sh/1m_2CywYHnEoXc1U5_6u0hsL8FrfKXDYuD8I42q1fI90/tampilan_web";
 
-async function fetchData() {
-    const tableBody = document.querySelector("#dataTable tbody");
-    tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Memuat data...</td></tr>";
+async function loadData() {
+  const tbody = document.querySelector("#data-table tbody");
+  tbody.innerHTML = `<tr><td colspan="6" class="loading">Memuat data...</td></tr>`;
 
-    try {
-        const response = await fetch(sheetURL);
-        if (!response.ok) throw new Error("Gagal mengambil data");
-        const data = await response.json();
+  try {
+    const res = await fetch(sheetURL);
+    const data = await res.json();
 
-        tableBody.innerHTML = "";
+    // Filter data kosong (Nama Lengkap kosong)
+    const filteredData = data.filter(row => row["Nama Lengkap Siswa"] && row["Nama Lengkap Siswa"].trim() !== "");
 
-        if (data.length === 0) {
-            tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Tidak ada data</td></tr>";
-            return;
-        }
-
-        data.forEach(row => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${row["No. Urut"] || ""}</td>
-                <td>${row["Nama Lengkap Siswa"] || ""}</td>
-                <td>${row["Asal TK/RA"] || ""}</td>
-                <td>${row["Jenis Kelamin"] || ""}</td>
-                <td>${row["Tanggal Pendaftaran"] || ""}</td>
-                <td>${row["Status Pendaftaran"] || ""}</td>
-            `;
-            tableBody.appendChild(tr);
-        });
-
-    } catch (error) {
-        console.error(error);
-        tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:red;'>Gagal memuat data</td></tr>";
+    if (filteredData.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" class="loading">Tidak ada data</td></tr>`;
+      return;
     }
+
+    tbody.innerHTML = "";
+    filteredData.forEach((row, index) => {
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td data-label="No">${row["No. Urut"] || index + 1}</td>
+        <td data-label="Nama Lengkap">${row["Nama Lengkap Siswa"]}</td>
+        <td data-label="Asal TK/RA">${row["Asal TK/RA"] || "-"}</td>
+        <td data-label="Jenis Kelamin">${row["Jenis Kelamin"] || "-"}</td>
+        <td data-label="Tanggal Pendaftaran">${row["Tanggal Pendaftaran"] || "-"}</td>
+        <td data-label="Status">${row["Status Pendaftaran"] || "-"}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    tbody.innerHTML = `<tr><td colspan="6" class="loading">Gagal memuat data</td></tr>`;
+    console.error("Error:", error);
+  }
 }
 
 // Tombol refresh status
-document.querySelector("#refreshBtn").addEventListener("click", fetchData);
+document.getElementById("refreshBtn").addEventListener("click", () => {
+  loadData();
+});
 
-// Ambil data pertama kali saat halaman dibuka
-fetchData();
+// Load awal
+loadData();
