@@ -1,45 +1,44 @@
-const sheetURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+// ====== KONFIGURASI ======
+const WEB_APP_ID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ";
+const WEB_APP_URL = `https://script.google.com/macros/s/${WEB_APP_ID}/exec`;
 
-async function loadData() {
-  const tbody = document.querySelector("#data-table tbody");
-  tbody.innerHTML = `<tr><td colspan="6" class="loading">Memuat data...</td></tr>`;
+// ====== FUNGSI AMBIL DATA ======
+async function fetchData() {
+    const tbody = document.querySelector("#dataTable tbody");
+    tbody.innerHTML = `<tr><td colspan="6" class="loading">Memuat data...</td></tr>`;
 
-  try {
-    const res = await fetch(sheetURL);
-    const data = await res.json();
+    try {
+        const response = await fetch(WEB_APP_URL);
+        const data = await response.json();
 
-    // Filter data kosong (Nama Lengkap kosong)
-    const filteredData = data.filter(row => row["Nama Lengkap Siswa"] && row["Nama Lengkap Siswa"].trim() !== "");
+        // Filter data kosong
+        const filteredData = data.filter(row => row[0] && row[1]);
 
-    if (filteredData.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" class="loading">Tidak ada data</td></tr>`;
-      return;
+        if (filteredData.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="loading">Tidak ada data.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = "";
+        filteredData.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(cell => {
+                const td = document.createElement("td");
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+    } catch (error) {
+        console.error("Gagal memuat data:", error);
+        tbody.innerHTML = `<tr><td colspan="6" class="loading">Gagal memuat data.</td></tr>`;
     }
-
-    tbody.innerHTML = "";
-    filteredData.forEach((row, index) => {
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-        <td data-label="No">${row["No. Urut"] || index + 1}</td>
-        <td data-label="Nama Lengkap">${row["Nama Lengkap Siswa"]}</td>
-        <td data-label="Asal TK/RA">${row["Asal TK/RA"] || "-"}</td>
-        <td data-label="Jenis Kelamin">${row["Jenis Kelamin"] || "-"}</td>
-        <td data-label="Tanggal Pendaftaran">${row["Tanggal Pendaftaran"] || "-"}</td>
-        <td data-label="Status">${row["Status Pendaftaran"] || "-"}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch (error) {
-    tbody.innerHTML = `<tr><td colspan="6" class="loading">Gagal memuat data</td></tr>`;
-    console.error("Error:", error);
-  }
 }
 
-// Tombol refresh status
-document.getElementById("refreshBtn").addEventListener("click", () => {
-  loadData();
+// ====== EVENT TOMBOL REFRESH ======
+document.querySelector("#refreshBtn").addEventListener("click", () => {
+    fetchData();
 });
 
-// Load awal
-loadData();
+// ====== LOAD AWAL ======
+fetchData();
