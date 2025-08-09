@@ -1,4 +1,4 @@
-const sheetURL = "https://opensheet.elk.sh/1m_2CywYHnEoXc1U5_6u0hsL8FrfKXDYuD8I42q1fI90/tampilan_web";
+const sheetURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
 async function loadData() {
   const tbody = document.querySelector("#data-table tbody");
