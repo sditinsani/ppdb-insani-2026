@@ -2,44 +2,48 @@ const sheetID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3f
 const sheetName = "tampilan_web";
 const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 
+const tableBody = document.querySelector("#dataTable tbody");
+const jumlahPendaftar = document.getElementById("jumlahPendaftar");
+
 fetch(url)
-    .then(res => res.text())
-    .then(data => {
-        const jsonData = JSON.parse(data.substr(47).slice(0, -2));
-        const rows = jsonData.table.rows;
-        const tableBody = document.querySelector("#dataTable tbody");
+  .then(res => res.text())
+  .then(text => {
+    const json = JSON.parse(text.substr(47).slice(0, -2));
+    const rows = json.table.rows;
 
-        let count = 0;
-        tableBody.innerHTML = "";
+    tableBody.innerHTML = "";
+    let count = 0;
 
-        rows.forEach(row => {
-            // Cek jika data tidak kosong
-            if (row.c[0] && row.c[1]) {
-                const noUrut = row.c[0]?.v || "";
-                const nama = row.c[1]?.v || "";
-                const asal = row.c[2]?.v || "";
-                const jk = row.c[3]?.v || "";
-                const tgl = row.c[4]?.v || "";
-                const status = row.c[5]?.v || "";
+    rows.forEach(row => {
+      // Pastikan kolom Nama Lengkap Siswa tidak kosong
+      const nama = row.c[1]?.v?.trim() || "";
+      if (!nama) return;
 
-                const statusClass = status.toLowerCase().includes("diterima") ? "status-diterima" : "status-tidak";
+      count++;
+      const noUrut = row.c[0]?.v || count;
+      const asal = row.c[2]?.v || "";
+      const jk = row.c[3]?.v || "";
+      const tgl = row.c[4]?.v || "";
+      const status = row.c[5]?.v || "";
 
-                const tr = `
-                    <tr>
-                        <td>${noUrut}</td>
-                        <td>${nama}</td>
-                        <td>${asal}</td>
-                        <td>${jk}</td>
-                        <td>${tgl}</td>
-                        <td><span class="${statusClass}">${status}</span></td>
-                    </tr>
-                `;
+      const statusClass = status.toLowerCase().includes("diterima") ? "status-diterima" : "status-tidak";
 
-                tableBody.innerHTML += tr;
-                count++;
-            }
-        });
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${noUrut}</td>
+        <td>${nama}</td>
+        <td>${asal}</td>
+        <td>${jk}</td>
+        <td>${tgl}</td>
+        <td><span class="${statusClass}">${status}</span></td>
+      `;
 
-        document.getElementById("jumlahPendaftar").innerText = `Jumlah Pendaftar: ${count}`;
-    })
-    .catch(err => console.error("Gagal memuat data:", err));
+      tableBody.appendChild(tr);
+    });
+
+    jumlahPendaftar.textContent = `Jumlah Pendaftar: ${count}`;
+  })
+  .catch(err => {
+    tableBody.innerHTML = '<tr><td colspan="6">Gagal memuat data</td></tr>';
+    console.error("Error fetch data:", err);
+  });
