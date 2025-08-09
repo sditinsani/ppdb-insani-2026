@@ -7,36 +7,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
         <h1>PPDB SDIT INSANI 2026/2027</h1>
-        <button id="refreshBtn" title="Muat Ulang Data">🔄 Refresh</button>
+        <button id="refreshBtn" onclick="loadTable()">🔄 Refresh</button>
     </header>
 
     <main>
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>NO. URUT</th>
-                        <th>NAMA LENGKAP SISWA</th>
-                        <th>ASAL TK/RA</th>
-                        <th>JENIS KELAMIN</th>
-                        <th>TANGGAL PENDAFTARAN</th>
-                        <th>STATUS PENDAFTARAN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td colspan="6">Memuat data...</td></tr>
-                </tbody>
-            </table>
+        <div id="tableContainer">
+            <!-- Table akan dimuat dari table.html -->
         </div>
-        <p id="totalPendaftar"></p>
+        <div id="jumlahPendaftar"></div>
     </main>
 
     <footer>
-        <p>PPDB SDIT INSANI 2026/2027</p>
+        <p>&copy; 2025 PPDB SDIT INSANI</p>
     </footer>
 
-    <script src="table.js"></script>
+    <script>
+        function loadTable() {
+            fetch('table.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('tableContainer').innerHTML = html;
+
+                    // Hitung jumlah pendaftar
+                    let rowCount = document.querySelectorAll('#dataTable tbody tr').length;
+                    document.getElementById('jumlahPendaftar').innerText = "Jumlah Pendaftar: " + rowCount;
+                });
+        }
+        loadTable();
+    </script>
 </body>
 </html>
