@@ -1,84 +1,125 @@
+/* Reset dan font */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f7fa;
-    color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #4c6ef5, #15aabf);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-    background: #0066cc;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 1.5em;
-    letter-spacing: 1px;
+  background: rgba(255 255 255 / 0.15);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(0,0,0,0.3);
+  user-select: none;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  width: 95%;
 }
 
 .table-container {
-    max-width: 95%;
-    margin: 20px auto;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow-x: auto;
+  background: rgba(255 255 255 / 0.95);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow-x: auto;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
 }
 
 thead {
-    background: #0066cc;
-    color: white;
+  background: #3b5bdb;
+  color: #fff;
+  font-weight: 600;
 }
 
 th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    font-size: 0.95em;
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 1rem;
 }
 
 tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f0f5ff;
+  transition: background-color 0.3s ease;
 }
 
 .status-diterima {
-    color: white;
-    background-color: green;
-    padding: 5px 8px;
-    border-radius: 5px;
-    display: inline-block;
+  background-color: #37b24d;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-weight: 600;
+  display: inline-block;
 }
 
 .status-tidak {
-    color: white;
-    background-color: red;
-    padding: 5px 8px;
-    border-radius: 5px;
-    display: inline-block;
+  background-color: #f03e3e;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-weight: 600;
+  display: inline-block;
 }
 
-.info-text {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 15px;
+#jumlahPendaftar {
+  margin-top: 15px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+  user-select: none;
 }
 
 footer {
-    background: #0066cc;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
+  background: rgba(255 255 255 / 0.15);
+  color: white;
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  user-select: none;
+  letter-spacing: 1px;
 }
 
-@media (max-width: 600px) {
-    th, td {
-        font-size: 0.85em;
-        padding: 8px;
-    }
+@media (max-width: 768px) {
+  thead {
+    font-size: 0.9rem;
+  }
+  th, td {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    min-width: unset;
+    font-size: 0.85rem;
+  }
+  th, td {
+    padding: 8px 6px;
+  }
 }
