@@ -1,40 +1,31 @@
-const sheetID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ";
-const sheetName = "tampilan_web";
-const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
 const tableBody = document.querySelector("#dataTable tbody");
 const jumlahPendaftar = document.getElementById("jumlahPendaftar");
 
-fetch(url)
-  .then(res => res.text())
-  .then(text => {
-    const json = JSON.parse(text.substr(47).slice(0, -2));
-    const rows = json.table.rows;
+async function loadData() {
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
 
     tableBody.innerHTML = "";
     let count = 0;
 
-    rows.forEach(row => {
-      // Pastikan kolom Nama Lengkap Siswa tidak kosong
-      const nama = row.c[1]?.v?.trim() || "";
-      if (!nama) return;
+    data.forEach((row, index) => {
+      // Skip row jika "Nama Lengkap Siswa" kosong
+      if (!row["Nama Lengkap Siswa"] || row["Nama Lengkap Siswa"].trim() === "") return;
 
       count++;
-      const noUrut = row.c[0]?.v || count;
-      const asal = row.c[2]?.v || "";
-      const jk = row.c[3]?.v || "";
-      const tgl = row.c[4]?.v || "";
-      const status = row.c[5]?.v || "";
-
+      const status = row["Status Pendaftaran"] || "";
       const statusClass = status.toLowerCase().includes("diterima") ? "status-diterima" : "status-tidak";
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${noUrut}</td>
-        <td>${nama}</td>
-        <td>${asal}</td>
-        <td>${jk}</td>
-        <td>${tgl}</td>
+        <td>${index + 1}</td>
+        <td>${row["Nama Lengkap Siswa"]}</td>
+        <td>${row["Asal TK/RA"] || ""}</td>
+        <td>${row["Jenis Kelamin"] || ""}</td>
+        <td>${row["Tanggal Pendaftaran"] || ""}</td>
         <td><span class="${statusClass}">${status}</span></td>
       `;
 
@@ -42,8 +33,10 @@ fetch(url)
     });
 
     jumlahPendaftar.textContent = `Jumlah Pendaftar: ${count}`;
-  })
-  .catch(err => {
+  } catch (error) {
     tableBody.innerHTML = '<tr><td colspan="6">Gagal memuat data</td></tr>';
-    console.error("Error fetch data:", err);
-  });
+    console.error("Gagal fetch data:", error);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadData);
