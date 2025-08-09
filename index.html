@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DATA PENDAFTARAN PPDB</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data PPDB SDIT INSANI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>DATA PENDAFTARAN PPDB</h1>
-  </header>
+    <header>
+        <h1>📋 Data PPDB SDIT INSANI 2026/2027</h1>
+        <button id="refreshBtn">🔄 Refresh Status</button>
+    </header>
 
-  <main>
-    <div class="table-container">
-      <button id="refreshBtn">🔄 Refresh Status</button>
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Nama Lengkap</th>
-            <th>Asal TK/RA</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Pendaftaran</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="loading">Memuat data...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
+    <main>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>No. Urut</th>
+                    <th>Nama Lengkap Siswa</th>
+                    <th>Asal TK/RA</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Tanggal Pendaftaran</th>
+                    <th>Status Pendaftaran</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6" class="loading">Memuat data...</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 
-  <footer>
-    <p>© 2025 SDIT INSANI - PPDB 2026/2027</p>
-  </footer>
-
-  <script src="table.js"></script>
+    <script src="table.js"></script>
 </body>
 </html>
