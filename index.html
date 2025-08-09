@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PPDB SDIT INSANI 2026/2027</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB SDIT INSANI 2026/2027</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>PPDB SDIT INSANI 2026/2027</h1>
-    <button id="refresh-btn">
-      🔄 Refresh
-    </button>
-  </header>
+    <header>
+        <h1>PPDB SDIT INSANI 2026/2027</h1>
+        <button id="refreshBtn" title="Muat Ulang Data">
+            🔄 Refresh
+        </button>
+    </header>
 
-  <main>
-    <div class="table-container">
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Nama Lengkap Siswa</th>
-            <th>Asal TK/RA</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Pendaftaran</th>
-            <th>Status Pendaftaran</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data akan di-load lewat table.js -->
-        </tbody>
-      </table>
-    </div>
-    <div id="jumlah-pendaftar"></div>
-  </main>
+    <main>
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>NO. URUT</th>
+                        <th>NAMA LENGKAP SISWA</th>
+                        <th>ASAL TK/RA</th>
+                        <th>JENIS KELAMIN</th>
+                        <th>TANGGAL PENDAFTARAN</th>
+                        <th>STATUS PENDAFTARAN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="6">Memuat data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="totalPendaftar"></p>
+    </main>
 
-  <footer>
-    <p>© 2025 PPDB SDIT INSANI. Semua Hak Dilindungi.</p>
-  </footer>
+    <footer>
+        <p>PPDB SDIT INSANI 2026/2027</p>
+    </footer>
 
-  <script src="table.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
