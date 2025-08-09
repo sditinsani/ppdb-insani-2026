@@ -1,22 +1,23 @@
-const sheetURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
-const tableBody = document.querySelector("#dataTable tbody");
-const refreshButton = document.getElementById("refreshButton");
+// URL JSON dari Google Spreadsheet (ubah dengan link JSON kamu)
+const sheetURL = "https://opensheet.elk.sh/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/tampilan_web";
 
 async function fetchData() {
-    tableBody.innerHTML = `<tr><td colspan="6" class="loading">Memuat data...</td></tr>`;
+    const tableBody = document.querySelector("#dataTable tbody");
+    tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Memuat data...</td></tr>";
 
     try {
         const response = await fetch(sheetURL);
+        if (!response.ok) throw new Error("Gagal mengambil data");
         const data = await response.json();
-
-        if (!data || data.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="6" class="loading">Tidak ada data</td></tr>`;
-            return;
-        }
 
         tableBody.innerHTML = "";
 
-        data.forEach((row) => {
+        if (data.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Tidak ada data</td></tr>";
+            return;
+        }
+
+        data.forEach(row => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
                 <td>${row["No. Urut"] || ""}</td>
@@ -30,14 +31,13 @@ async function fetchData() {
         });
 
     } catch (error) {
-        console.error("Gagal memuat data:", error);
-        tableBody.innerHTML = `<tr><td colspan="6" class="loading">Gagal memuat data</td></tr>`;
+        console.error(error);
+        tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:red;'>Gagal memuat data</td></tr>";
     }
 }
 
-// Event klik tombol refresh
-refreshButton.addEventListener("click", fetchData);
+// Tombol refresh status
+document.querySelector("#refreshBtn").addEventListener("click", fetchData);
 
 // Ambil data pertama kali saat halaman dibuka
 fetchData();
-
