@@ -188,3 +188,32 @@ footer {
     padding: 8px 6px;
   }
 }
+
+/* ...style.css sebelumnya tetap ... */
+
+.loading {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #555;
+  margin: 2rem 0;
+  user-select: none;
+}
+
+.error {
+  color: #f03e3e;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 1rem;
+  user-select: none;
+}
+
+/* Tombol refresh tetap sama */
+
+#refreshBtn:disabled {
+  background: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Responsive dan style tabel tetap sama */
