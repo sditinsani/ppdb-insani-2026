@@ -1,219 +1,186 @@
-/* Reset dan font */
-* {
-  box-sizing: border-box;
-}
+/* style.css */
 
+/* Reset dan body */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Tahoma, sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, #1e2a78, #3b5998); /* navy - biru elegan */
-  color: #222;
-  min-height: 100vh;
+  padding: 0;
+  background: #e6f0ff; /* biru elegan muda */
   display: flex;
   flex-direction: column;
-}
-
-header {
-  background: rgba(255 255 255 / 0.12);
-  color: #f0f0f0;
-  padding: 25px 20px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(0,0,0,0.5);
-  user-select: none;
-  box-shadow: 0 2px 15px rgb(0 0 0 / 0.3);
-}
-
-main {
-  flex: 1;
-  padding: 25px 20px;
-  max-width: 1100px;
-  margin: auto;
-  width: 95%;
-}
-
-.table-container {
-  background: rgba(255 255 255 / 0.95);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 12px; /* beri jarak antar baris */
-  min-width: 600px;
-  font-size: 1rem;
+  min-height: 100vh;
   color: #333;
 }
 
-thead {
-  background: transparent; /* hilangkan background */
-  display: table-header-group;
-}
-
-th {
-  text-align: left;
+/* Header */
+header {
+  background: #00509e; /* biru tua elegan */
+  color: white;
+  padding: 1.5rem 2rem;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
   font-weight: 700;
-  color: #1e2a78;
-  padding: 14px 12px 6px 12px;
-  border-bottom: 2px solid #1e2a78;
-  letter-spacing: 0.06em;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+  user-select: none;
 }
 
-tbody tr {
-  background: white;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-  border-radius: 12px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-tbody tr:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgb(0 0 0 / 0.18);
-}
-
-td {
-  padding: 16px 12px;
+/* Tombol refresh */
+#refreshBtn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1a73e8; /* biru cerah */
   border: none;
-  vertical-align: middle;
-}
-
-.status-diterima {
-  background-color: #37b24d; /* hijau cerah */
-  color: #fff;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-weight: 600;
-  display: inline-block;
-  text-align: center;
-  min-width: 90px;
+  color: white;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
   user-select: none;
 }
 
-.status-tidak {
-  background-color: #f03e3e; /* merah cerah */
-  color: #fff;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-weight: 600;
-  display: inline-block;
-  text-align: center;
-  min-width: 90px;
-  user-select: none;
+#refreshBtn:hover:not(:disabled) {
+  background: #155ab6;
 }
-
-#jumlahPendaftar {
-  margin-top: 20px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  text-align: center;
-  color: #f0f0f0;
-  text-shadow: 0 0 5px rgba(0,0,0,0.6);
-  user-select: none;
-}
-
-footer {
-  background: rgba(255 255 255 / 0.12);
-  color: #e0e0e0;
-  padding: 15px 10px;
-  text-align: center;
-  font-size: 0.95rem;
-  user-select: none;
-  letter-spacing: 1px;
-  box-shadow: 0 -2px 15px rgb(0 0 0 / 0.2);
-}
-
-/* ===== Mobile UI Optimization ===== */
-
-.table-container {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (max-width: 480px) {
-  table {
-    border: 0;
-    min-width: 100%;
-  }
-  thead {
-    display: none;
-  }
-  tbody tr {
-    display: block;
-    margin-bottom: 1.25rem;
-    background: white;
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: none;
-    transform: none !important;
-  }
-  tbody tr:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  td {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: none;
-    font-size: 0.9rem;
-  }
-  td::before {
-    content: attr(data-label);
-    font-weight: 700;
-    color: #1e2a78;
-    flex-basis: 40%;
-  }
-  td:last-child {
-    border-bottom: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  th, td {
-    padding: 12px 10px;
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  th, td {
-    padding: 8px 6px;
-  }
-}
-
-/* ...style.css sebelumnya tetap ... */
-
-.loading {
-  text-align: center;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #555;
-  margin: 2rem 0;
-  user-select: none;
-}
-
-.error {
-  color: #f03e3e;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 1rem;
-  user-select: none;
-}
-
-/* Tombol refresh tetap sama */
 
 #refreshBtn:disabled {
-  background: #888;
+  background: #8a9cb7;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Responsive dan style tabel tetap sama */
+/* Main content */
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Loading indicator */
+.loading {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #555;
+  margin: 3rem 0;
+  user-select: none;
+}
+
+/* Error message */
+.error {
+  color: #d32f2f; /* merah gelap */
+  font-weight: 700;
+  text-align: center;
+  margin-top: 1.5rem;
+  user-select: none;
+}
+
+/* Table container for horizontal scroll */
+.table-container {
+  overflow-x: auto;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+}
+
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 700px;
+  font-size: 1rem;
+}
+
+thead {
+  background: #1a73e8; /* biru header */
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+th, td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Hover row */
+tbody tr:hover {
+  background: #f0f4ff;
+}
+
+/* Status badge */
+.status-diterima {
+  background-color: #388e3c; /* hijau gelap */
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-tidak {
+  background-color: #d32f2f; /* merah gelap */
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Jumlah pendaftar */
+#jumlahPendaftar {
+  margin-top: 1.8rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1a73e8;
+  text-align: right;
+  user-select: none;
+}
+
+/* Footer */
+footer {
+  background: #0d1430; /* biru sangat gelap */
+  color: #ccc;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+/* Responsive for small screens */
+@media screen and (max-width: 768px) {
+  header {
+    font-size: 1.3rem;
+    padding: 1rem 1rem;
+  }
+
+  #refreshBtn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    right: 10px;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  table {
+    min-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  #jumlahPendaftar {
+    text-align: center;
+    font-size: 1rem;
+  }
+}
