@@ -1,20 +1,13 @@
-/* Reset dasar */
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Segoe UI", Tahoma, sans-serif;
     background: #f5f7fa;
     color: #333;
-    line-height: 1.6;
 }
 
-/* Header */
 header {
-    background: #2c3e50;
+    background: #1f3c88;
     color: white;
     padding: 15px;
     display: flex;
@@ -23,24 +16,25 @@ header {
 }
 
 header h1 {
+    margin: 0;
     font-size: 1.5rem;
+    letter-spacing: 1px;
 }
 
-header button {
-    background: #27ae60;
-    color: white;
+#refreshBtn {
+    background: #ff9800;
     border: none;
     padding: 8px 14px;
-    cursor: pointer;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
 }
 
-header button:hover {
-    background: #219150;
+#refreshBtn:hover {
+    background: #e68900;
 }
 
-/* Tabel */
 .table-container {
     overflow-x: auto;
     padding: 20px;
@@ -50,72 +44,47 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 thead {
-    background: #34495e;
+    background: #1f3c88;
     color: white;
 }
 
 th, td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 tbody tr:hover {
     background: #f1f1f1;
 }
 
-.loading {
-    text-align: center;
-    padding: 20px;
-    font-style: italic;
-    color: #888;
-}
-
 /* Status warna */
 .status-diterima {
     color: white;
-    background: #27ae60;
-    padding: 5px 8px;
+    background: green;
+    padding: 4px 8px;
     border-radius: 4px;
     text-align: center;
+    display: inline-block;
 }
 
-.status-proses {
+.status-tolak {
     color: white;
-    background: #f39c12;
-    padding: 5px 8px;
+    background: red;
+    padding: 4px 8px;
     border-radius: 4px;
     text-align: center;
-}
-
-.status-ditolak {
-    color: white;
-    background: #e74c3c;
-    padding: 5px 8px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 10px;
-    font-size: 0.85rem;
-    color: #666;
+    display: inline-block;
 }
 
 /* Responsif */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.2rem;
-    }
+@media (max-width: 768px) {
     th, td {
-        padding: 10px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        padding: 8px;
     }
 }
