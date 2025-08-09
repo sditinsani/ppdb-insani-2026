@@ -1,101 +1,93 @@
-/* Reset dasar */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background: #f8f9fa;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f8f9fa;
+    color: #333;
 }
 
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  position: sticky;
-  top: 0;
+    background: linear-gradient(90deg, #0066cc, #0099ff);
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
 }
 
 header h1 {
-  margin-bottom: 10px;
+    margin: 0;
+    font-size: 1.8em;
 }
 
-#refreshBtn {
-  background: #27ae60;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#refreshBtn:hover {
-  background: #2ecc71;
-}
-
-main {
-  flex: 1;
-  padding: 20px;
+header p {
+    margin: 5px 0 0;
 }
 
 .table-container {
-  overflow-x: auto;
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 20px auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+#refreshBtn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    transition: background 0.3s ease;
+}
+
+#refreshBtn:hover {
+    background: #218838;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
 }
 
 thead {
-  background: #34495e;
-  color: white;
+    background: #0066cc;
+    color: white;
 }
 
 th, td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-tbody tr:hover {
-  background: #f1f1f1;
+tr:hover {
+    background: #f1f1f1;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
 }
 
 footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
+    text-align: center;
+    padding: 15px;
+    background: #0066cc;
+    color: white;
+    font-size: 0.85em;
+    margin-top: 20px;
 }
 
-/* Responsif untuk HP & Tablet */
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 18px;
-  }
-  
-  th, td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  #refreshBtn {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
+    th, td {
+        padding: 8px;
+        font-size: 0.85em;
+    }
+    header h1 {
+        font-size: 1.4em;
+    }
 }
