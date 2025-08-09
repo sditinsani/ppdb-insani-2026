@@ -5,7 +5,7 @@ body {
   font-family: Tahoma, sans-serif;
   margin: 0;
   padding: 0;
-  background: #e6f0ff; /* biru elegan muda */
+  background: #e6f0ff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -14,10 +14,9 @@ body {
 
 /* Header */
 header {
-  background: #00509e; /* biru tua elegan */
+  background: #00509e;
   color: white;
   padding: 1.5rem 2rem;
-  position: relative;
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
@@ -25,34 +24,6 @@ header {
   letter-spacing: 2px;
   box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
   user-select: none;
-}
-
-/* Tombol refresh */
-#refreshBtn {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #1a73e8; /* biru cerah */
-  border: none;
-  color: white;
-  padding: 10px 16px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
-  user-select: none;
-}
-
-#refreshBtn:hover:not(:disabled) {
-  background: #155ab6;
-}
-
-#refreshBtn:disabled {
-  background: #8a9cb7;
-  cursor: not-allowed;
-  box-shadow: none;
 }
 
 /* Main content */
@@ -76,7 +47,7 @@ main {
 
 /* Error message */
 .error {
-  color: #d32f2f; /* merah gelap */
+  color: #d32f2f;
   font-weight: 700;
   text-align: center;
   margin-top: 1.5rem;
@@ -101,7 +72,7 @@ table {
 }
 
 thead {
-  background: #1a73e8; /* biru header */
+  background: #1a73e8;
   color: white;
   text-transform: uppercase;
   font-weight: 600;
@@ -120,7 +91,7 @@ tbody tr:hover {
 
 /* Status badge */
 .status-diterima {
-  background-color: #388e3c; /* hijau gelap */
+  background-color: #388e3c;
   color: white;
   padding: 0.3rem 0.7rem;
   border-radius: 6px;
@@ -129,7 +100,7 @@ tbody tr:hover {
 }
 
 .status-tidak {
-  background-color: #d32f2f; /* merah gelap */
+  background-color: #d32f2f;
   color: white;
   padding: 0.3rem 0.7rem;
   border-radius: 6px;
@@ -149,7 +120,7 @@ tbody tr:hover {
 
 /* Footer */
 footer {
-  background: #0d1430; /* biru sangat gelap */
+  background: #0d1430;
   color: #ccc;
   text-align: center;
   padding: 1rem 2rem;
@@ -162,12 +133,6 @@ footer {
   header {
     font-size: 1.3rem;
     padding: 1rem 1rem;
-  }
-
-  #refreshBtn {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    right: 10px;
   }
 
   main {
