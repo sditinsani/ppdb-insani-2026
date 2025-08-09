@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data PPDB - SDIT INSANI</title>
+    <title>DATA PENDAFTARAN</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
-        <h1>📋 Data Pendaftaran PPDB</h1>
-        <button id="refreshBtn">
-            🔄 Refresh Status
+        <h1>DATA PENDAFTARAN SISWA</h1>
+        <button id="refreshBtn" title="Muat Ulang">
+            🔄 Refresh
         </button>
     </header>
-
+    
     <main>
         <div class="table-container">
             <table id="dataTable">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Nama Lengkap</th>
-                        <th>Asal TK/RA</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Tanggal Pendaftaran</th>
-                        <th>Status Pendaftaran</th>
+                        <th>NO. URUT</th>
+                        <th>NAMA LENGKAP SISWA</th>
+                        <th>ASAL TK/RA</th>
+                        <th>JENIS KELAMIN</th>
+                        <th>TANGGAL PENDAFTARAN</th>
+                        <th>STATUS PENDAFTARAN</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- Data akan dimasukkan dari table.js -->
+                    <!-- Data akan diisi lewat JavaScript -->
                 </tbody>
             </table>
         </div>
     </main>
-
-    <footer>
-        <p>© 2025 SDIT INSANI</p>
-    </footer>
 
     <script src="table.js"></script>
 </body>
