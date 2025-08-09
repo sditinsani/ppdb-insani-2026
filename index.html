@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STATUS PENDAFTARAN PPDB</title>
+    <title>DAFTAR PENDAFTARAN PPDB SDIT INSANI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>STATUS PENDAFTARAN PPDB</h1>
+        <h1>DAFTAR PENDAFTARAN PPDB SDIT INSANI</h1>
     </header>
 
     <main>
+        <div class="controls">
+            <button id="refreshBtn">🔄 Refresh Status</button>
+        </div>
         <div class="table-container">
-            <button id="refreshButton">🔄 Refresh Status</button>
             <table id="dataTable">
                 <thead>
                     <tr>
@@ -26,16 +28,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="6" class="loading">Memuat data...</td>
-                    </tr>
+                    <tr><td colspan="6" style="text-align:center;">Memuat data...</td></tr>
                 </tbody>
             </table>
         </div>
     </main>
 
     <footer>
-        <p>© 2025 SDIT INSANI — Data Pendaftaran Realtime</p>
+        <p>&copy; 2025 SDIT INSANI | Data realtime diambil dari Google Spreadsheet</p>
     </footer>
 
     <script src="table.js"></script>
