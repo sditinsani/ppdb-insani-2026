@@ -12,32 +12,31 @@
   </header>
 
   <main>
-    <div class="loading" id="loadingIndicator">Memuat data, mohon tunggu...</div>
-
-    <div class="table-container" id="tableContainer" style="display:none;">
+    <div id="tableContainer" class="table-container">
       <table id="dataTable" aria-describedby="jumlahPendaftar">
         <thead>
           <tr>
-            <th scope="col">NO. URUT</th>
-            <th scope="col">NAMA LENGKAP SISWA</th>
-            <th scope="col">ASAL TK/RA</th>
-            <th scope="col">JENIS KELAMIN</th>
-            <th scope="col">TANGGAL PENDAFTARAN</th>
-            <th scope="col">STATUS PENDAFTARAN</th>
+            <th>NO. URUT</th>
+            <th>NAMA LENGKAP SISWA</th>
+            <th>ASAL TK/RA</th>
+            <th>JENIS KELAMIN</th>
+            <th>TANGGAL PENDAFTARAN</th>
+            <th>STATUS PENDAFTARAN</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Data akan dimuat di sini -->
+          <tr><td colspan="6" class="loading">Memuat data...</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p id="jumlahPendaftar" tabindex="0" aria-live="polite" aria-atomic="true"></p>
-    <p class="error" id="errorMessage" style="display:none;" role="alert"></p>
+    <p id="jumlahPendaftar" role="status" aria-live="polite"></p>
+    <p id="errorMessage" class="error" style="display:none;"></p>
+    <p id="loadingIndicator" class="loading" style="display:none;">Memuat data...</p>
   </main>
 
   <footer>
-    <p>&copy; 2025 PPDB SDIT INSANI</p>
+    <p>PPDB SDIT INSANI 2026/2027</p>
   </footer>
 
   <script src="table.js"></script>
