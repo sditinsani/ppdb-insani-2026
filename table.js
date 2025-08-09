@@ -2,10 +2,27 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T2
 
 const tableBody = document.querySelector("#dataTable tbody");
 const jumlahPendaftar = document.getElementById("jumlahPendaftar");
+const refreshBtn = document.getElementById("refreshBtn");
+const loadingIndicator = document.getElementById("loadingIndicator");
+const tableContainer = document.getElementById("tableContainer");
+const errorMessage = document.getElementById("errorMessage");
 
 async function loadData() {
+  // Reset tampilan
+  errorMessage.style.display = "none";
+  tableContainer.style.display = "none";
+  jumlahPendaftar.textContent = "";
+  loadingIndicator.style.display = "block";
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = "⏳ Memuat...";
+
   try {
     const res = await fetch(API_URL);
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
     const data = await res.json();
 
     tableBody.innerHTML = "";
@@ -30,11 +47,23 @@ async function loadData() {
       tableBody.appendChild(tr);
     });
 
+    if (count === 0) {
+      tableBody.innerHTML = '<tr><td colspan="6" class="loading-text">Tidak ada data pendaftar.</td></tr>';
+    }
+
     jumlahPendaftar.textContent = `Jumlah Pendaftar: ${count}`;
+    tableContainer.style.display = "block";
+
   } catch (error) {
-    tableBody.innerHTML = '<tr><td colspan="6">Gagal memuat data</td></tr>';
+    errorMessage.textContent = "Gagal memuat data. Silakan coba lagi.";
+    errorMessage.style.display = "block";
     console.error("Gagal fetch data:", error);
+  } finally {
+    loadingIndicator.style.display = "none";
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = "🔄 Refresh Data";
   }
 }
 
+refreshBtn.addEventListener("click", loadData);
 window.addEventListener("DOMContentLoaded", loadData);
