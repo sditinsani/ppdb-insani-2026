@@ -1,66 +1,82 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f8f9fa;
 }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #2a5298;
+  color: white;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+header h1 {
+  margin: 0;
+  font-size: 1.4rem;
 }
 
-.refresh-btn {
-    display: block;
-    margin: 0 auto 20px;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
+header button {
+  background: white;
+  color: #2a5298;
+  border: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.refresh-btn:hover {
-    background-color: #218838;
+header button:hover {
+  background: #e9ecef;
 }
 
 .table-container {
-    overflow-x: auto;
+  padding: 20px;
+  overflow-x: auto;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 thead {
-    background-color: #007bff;
-    color: white;
+  background: #2a5298;
+  color: white;
 }
 
 th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
-tbody tr:hover {
-    background-color: #f1f1f1;
+tr:hover {
+  background: #f1f1f1;
 }
 
-@media screen and (max-width: 768px) {
-    th, td {
-        font-size: 14px;
-    }
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+  }
+  td {
+    padding-left: 50%;
+    position: relative;
+  }
+  td::before {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
 }
