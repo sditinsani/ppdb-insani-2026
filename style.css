@@ -2,94 +2,79 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: #f8f9fa;
 }
 
 header {
-    background: #007bff;
-    color: white;
-    padding: 1rem;
     text-align: center;
-    position: relative;
+    background-color: #004085;
+    color: white;
+    padding: 15px;
 }
 
 header h1 {
-    font-size: 1.5rem;
     margin: 0;
+    font-size: 24px;
 }
 
 #refreshBtn {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
+    margin-top: 10px;
+    padding: 6px 12px;
     border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    background-color: #ffc107;
     cursor: pointer;
+    font-size: 14px;
     border-radius: 5px;
 }
 
 main {
-    flex: 1;
-    padding: 1rem;
-}
-
-.table-container {
-    overflow-x: auto;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
-    min-width: 600px;
-}
-
-thead {
-    background: #007bff;
-    color: white;
+    background: white;
+    overflow-x: auto;
 }
 
 th, td {
-    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-    background: #f1f1f1;
+th {
+    background-color: #007bff;
+    color: white;
 }
 
 .status-diterima {
+    background-color: #28a745;
     color: white;
-    background: green;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
 }
 
 .status-tidak {
+    background-color: #dc3545;
     color: white;
-    background: red;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
 }
 
-#totalPendaftar {
-    margin-top: 1rem;
+#jumlahPendaftar {
+    margin-top: 10px;
     font-weight: bold;
 }
 
 footer {
-    background: #343a40;
-    color: white;
     text-align: center;
-    padding: 0.75rem;
+    padding: 10px;
+    background-color: #004085;
+    color: white;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    th, td {
+        font-size: 12px;
+        padding: 6px;
+    }
 }
