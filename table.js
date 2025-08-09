@@ -13,18 +13,19 @@ async function loadData() {
   loadingIndicator.style.display = "block";
 
   try {
-    const res = await fetch(API_URL);
+    const response = await fetch(API_URL);
 
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await res.json();
+    const data = await response.json();
 
     tableBody.innerHTML = "";
     let count = 0;
 
     data.forEach((row, index) => {
+      // Skip rows with empty Nama Lengkap Siswa
       if (!row["Nama Lengkap Siswa"] || row["Nama Lengkap Siswa"].trim() === "") return;
 
       count++;
@@ -33,7 +34,7 @@ async function loadData() {
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td data-label="No. Urut">${index + 1}</td>
+        <td data-label="No. Urut">${count}</td>
         <td data-label="Nama Lengkap Siswa">${row["Nama Lengkap Siswa"]}</td>
         <td data-label="Asal TK/RA">${row["Asal TK/RA"] || ""}</td>
         <td data-label="Jenis Kelamin">${row["Jenis Kelamin"] || ""}</td>
