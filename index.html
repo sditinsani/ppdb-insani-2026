@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status Pendaftaran PPDB</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPDB SDIT INSANI 2026/2027</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Status Pendaftaran PPDB</h1>
-        <button id="refreshBtn" class="refresh-btn">
-            🔄 Refresh
-        </button>
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>No. Urut</th>
-                        <th>Nama Lengkap</th>
-                        <th>Asal TK/RA</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Tanggal Pendaftaran</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data dari Spreadsheet akan dimasukkan di sini -->
-                </tbody>
-            </table>
-        </div>
+
+  <header>
+    <h1>Data Pendaftaran</h1>
+    <button id="refreshBtn" title="Muat Ulang Data">
+      🔄 Refresh
+    </button>
+  </header>
+
+  <main>
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Nama Lengkap</th>
+            <th>Asal TK/RA</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Pendaftaran</th>
+            <th>Status Pendaftaran</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" style="text-align:center;">Memuat data...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </main>
+
+  <script src="table.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
