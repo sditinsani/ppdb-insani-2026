@@ -1,4 +1,4 @@
-/* Font Import handled via Google Fonts link in HTML */
+/* Font Import via Google Fonts link in HTML */
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -9,26 +9,26 @@ body {
   flex-direction: column;
   min-height: 100vh;
   color: #333;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 15px; /* sedikit lebih kecil */
+  line-height: 1.4;
 }
 
 header {
   background: #00509e;
   color: white;
-  padding: 1.8rem 2rem;
+  padding: 1.5rem 2rem;
   text-align: center;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 2.2rem;
-  letter-spacing: 3px;
+  font-size: 1.8rem; /* kecil dari sebelumnya */
+  letter-spacing: 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   user-select: none;
 }
 
 main {
   flex: 1;
-  padding: 2.5rem 2rem;
+  padding: 2rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -38,7 +38,7 @@ main {
 .loading {
   text-align: center;
   font-style: italic;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #555;
   margin: 3rem 0;
   user-select: none;
@@ -75,7 +75,7 @@ thead {
 }
 
 th, td {
-  padding: 1rem 1.2rem;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
@@ -88,27 +88,27 @@ tbody tr:hover {
 .status-diterima {
   background-color: #388e3c;
   color: white;
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   display: inline-block;
 }
 
 .status-tidak {
   background-color: #d32f2f;
   color: white;
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   display: inline-block;
 }
 
 #jumlahPendaftar {
-  margin-top: 2rem;
+  margin-top: 1.8rem;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: #1a73e8;
   text-align: right;
   user-select: none;
@@ -131,31 +131,76 @@ footer {
 /* Responsive */
 @media screen and (max-width: 768px) {
   header {
-    font-size: 1.6rem;
-    padding: 1.25rem 1rem;
+    font-size: 1.4rem;
+    padding: 1rem 1rem;
   }
 
   main {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 
-  table {
-    min-width: 100%;
-    font-size: 0.95rem;
-  }
-
-  th, td {
-    padding: 0.8rem 0.6rem;
+  /* Hide table on mobile */
+  .table-container {
+    display: none;
   }
 
   #jumlahPendaftar {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-top: 1.5rem;
   }
 
   footer {
     font-size: 0.9rem;
     padding: 1.25rem 1rem;
+  }
+
+  /* Card view container */
+  #cardContainer {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+  }
+
+  /* Card styles */
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: #1a73e8;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .card p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .card .status {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    color: white;
+    display: inline-block;
+    font-size: 0.95rem;
+  }
+
+  .card .status.diterima {
+    background-color: #388e3c;
+  }
+
+  .card .status.tidak {
+    background-color: #d32f2f;
   }
 }
