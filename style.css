@@ -1,5 +1,4 @@
 /* style.css */
-
 body {
   font-family: Tahoma, sans-serif;
   margin: 0;
@@ -9,6 +8,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   color: #333;
+  font-size: 16px; /* dasar font size */
 }
 
 header {
@@ -18,7 +18,7 @@ header {
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 2rem; /* ukuran judul lebih besar */
   letter-spacing: 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   user-select: none;
@@ -30,6 +30,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  font-size: 1rem;
 }
 
 .loading {
@@ -81,28 +82,31 @@ tbody tr:hover {
   background: #f0f4ff;
 }
 
+/* Status pendaftaran dengan warna dan ukuran font lebih baik */
 .status-diterima {
   background-color: #388e3c;
   color: white;
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
   display: inline-block;
 }
 
 .status-tidak {
   background-color: #d32f2f;
   color: white;
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
   display: inline-block;
 }
 
 #jumlahPendaftar {
   margin-top: 1.8rem;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #1a73e8;
   text-align: right;
   user-select: none;
@@ -120,7 +124,7 @@ footer {
 /* Responsive */
 @media screen and (max-width: 768px) {
   header {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     padding: 1rem 1rem;
   }
 
@@ -135,6 +139,6 @@ footer {
 
   #jumlahPendaftar {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
