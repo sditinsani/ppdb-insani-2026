@@ -15,8 +15,8 @@ async function loadData() {
       if (!row["Nama Lengkap Siswa"] || row["Nama Lengkap Siswa"].trim() === "") return;
 
       count++;
-      const status = row["Status Pendaftaran"] || "";
-      const statusClass = status.toLowerCase().includes("diterima") ? "status-diterima" : "status-tidak";
+      const status = (row["Status Pendaftaran"] || "").toLowerCase();
+      const statusClass = status.includes("diterima") ? "status-diterima" : "status-tidak";
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -25,7 +25,7 @@ async function loadData() {
         <td data-label="Asal TK/RA">${row["Asal TK/RA"] || ""}</td>
         <td data-label="Jenis Kelamin">${row["Jenis Kelamin"] || ""}</td>
         <td data-label="Tanggal Pendaftaran">${row["Tanggal Pendaftaran"] || ""}</td>
-        <td data-label="Status Pendaftaran"><span class="${statusClass}">${status}</span></td>
+        <td data-label="Status Pendaftaran"><span class="${statusClass}">${row["Status Pendaftaran"] || ""}</span></td>
       `;
       tableBody.appendChild(tr);
     });
