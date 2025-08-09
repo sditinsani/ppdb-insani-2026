@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PPDB SDIT INSANI</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPDB SDIT INSANI 2026/2027</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>DAFTAR PENDAFTAR PPDB SDIT INSANI</h1>
+    <h1>DATA PENDAFTARAN PPDB SDIT INSANI 2026/2027</h1>
+    <button id="refreshBtn">🔄 Refresh Status</button>
   </header>
 
   <main>
-    <button id="refreshButton">🔄 Refresh Status</button>
-    <div class="table-container">
-      <table id="pendaftarTable">
-        <thead>
-          <tr>
-            <th>No. Urut</th>
-            <th>Nama Lengkap</th>
-            <th>Asal TK/RA</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Pendaftaran</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <p>Total Pendaftar: <strong id="totalCount">0</strong></p>
-    </div>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Lengkap Siswa</th>
+          <th>Asal TK/RA</th>
+          <th>Jenis Kelamin</th>
+          <th>Tanggal Pendaftaran</th>
+          <th>Status Pendaftaran</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </main>
 
   <footer>
-    &copy; 2025 SDIT INSANI. Semua Hak Dilindungi.
+    <p>© 2025 PPDB SDIT INSANI | Data Terhubung Realtime</p>
   </footer>
 
   <script src="table.js"></script>
