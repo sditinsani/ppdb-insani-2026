@@ -1,105 +1,95 @@
-/* Reset dan font */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f8f9fa;
-  color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
-  background: #2c3e50;
-  color: #fff;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
 }
 
 header h1 {
-  font-size: 1.5rem;
-  margin: 0;
-  text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 0;
 }
 
-#refresh-btn {
-  background: #27ae60;
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
+#refreshBtn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-#refresh-btn:hover {
-  background: #1e8449;
+main {
+    flex: 1;
+    padding: 1rem;
 }
 
 .table-container {
-  overflow-x: auto;
-  padding: 15px;
+    overflow-x: auto;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px;
 }
 
 thead {
-  background: #34495e;
-  color: white;
+    background: #007bff;
+    color: white;
 }
 
 th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 tr:hover {
-  background: #f1f1f1;
+    background: #f1f1f1;
 }
 
-/* Status warna */
 .status-diterima {
-  color: white;
-  background: #27ae60;
-  padding: 5px 10px;
-  border-radius: 4px;
-  display: inline-block;
+    color: white;
+    background: green;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
 }
 
 .status-tidak {
-  color: white;
-  background: #c0392b;
-  padding: 5px 10px;
-  border-radius: 4px;
-  display: inline-block;
+    color: white;
+    background: red;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
 }
 
-/* Jumlah pendaftar */
-#jumlah-pendaftar {
-  margin: 10px 15px;
-  font-weight: bold;
+#totalPendaftar {
+    margin-top: 1rem;
+    font-weight: bold;
 }
 
-/* Footer */
 footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 1.2rem;
-  }
-  th, td {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
+    background: #343a40;
+    color: white;
+    text-align: center;
+    padding: 0.75rem;
 }
