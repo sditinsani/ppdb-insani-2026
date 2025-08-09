@@ -40,6 +40,7 @@ main {
   padding: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll iOS */
 }
 
 table {
@@ -104,6 +105,49 @@ footer {
   letter-spacing: 1px;
 }
 
+/* ===== Mobile UI Optimization ===== */
+
+/* Scroll horizontal halus di container tabel */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Untuk layar sangat kecil (<480px) ubah tabel jadi card */
+@media (max-width: 480px) {
+  table {
+    border: 0;
+    min-width: 100%;
+  }
+  thead {
+    display: none; /* sembunyikan header */
+  }
+  tr {
+    display: block;
+    margin-bottom: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: none;
+    font-size: 0.9rem;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #3b5bdb;
+    flex-basis: 40%;
+  }
+  td:last-child {
+    border-bottom: 0;
+  }
+}
+
 @media (max-width: 768px) {
   thead {
     font-size: 0.9rem;
@@ -115,10 +159,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-  table {
-    min-width: unset;
-    font-size: 0.85rem;
-  }
   th, td {
     padding: 8px 6px;
   }
