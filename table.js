@@ -1,44 +1,45 @@
-// ====== KONFIGURASI ======
-const WEB_APP_ID = "AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ";
-const WEB_APP_URL = `https://script.google.com/macros/s/${WEB_APP_ID}/exec`;
+const scriptURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+const tableBody = document.getElementById("tableBody");
+const refreshBtn = document.getElementById("refreshBtn");
 
-// ====== FUNGSI AMBIL DATA ======
-async function fetchData() {
-    const tbody = document.querySelector("#dataTable tbody");
-    tbody.innerHTML = `<tr><td colspan="6" class="loading">Memuat data...</td></tr>`;
+async function loadData() {
+  tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Memuat data...</td></tr>";
+  
+  try {
+    const res = await fetch(scriptURL);
+    const data = await res.json();
 
-    try {
-        const response = await fetch(WEB_APP_URL);
-        const data = await response.json();
+    tableBody.innerHTML = "";
 
-        // Filter data kosong
-        const filteredData = data.filter(row => row[0] && row[1]);
+    // Filter data kosong
+    const filteredData = data.filter(row => row["Nama Lengkap Siswa"] && row["Nama Lengkap Siswa"].trim() !== "");
 
-        if (filteredData.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" class="loading">Tidak ada data.</td></tr>`;
-            return;
-        }
-
-        tbody.innerHTML = "";
-        filteredData.forEach(row => {
-            const tr = document.createElement("tr");
-            row.forEach(cell => {
-                const td = document.createElement("td");
-                td.textContent = cell;
-                tr.appendChild(td);
-            });
-            tbody.appendChild(tr);
-        });
-    } catch (error) {
-        console.error("Gagal memuat data:", error);
-        tbody.innerHTML = `<tr><td colspan="6" class="loading">Gagal memuat data.</td></tr>`;
+    if (filteredData.length === 0) {
+      tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Tidak ada data</td></tr>";
+      return;
     }
+
+    filteredData.forEach((row, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${row["Nama Lengkap Siswa"]}</td>
+        <td>${row["Asal TK/RA"] || "-"}</td>
+        <td>${row["Jenis Kelamin"] || "-"}</td>
+        <td>${row["Tanggal Pendaftaran"] || "-"}</td>
+        <td>${row["Status Pendaftaran"] || "-"}</td>
+      `;
+      tableBody.appendChild(tr);
+    });
+
+  } catch (error) {
+    console.error("Gagal memuat data", error);
+    tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:red;'>Gagal memuat data</td></tr>";
+  }
 }
 
-// ====== EVENT TOMBOL REFRESH ======
-document.querySelector("#refreshBtn").addEventListener("click", () => {
-    fetchData();
-});
+// Event klik tombol refresh
+refreshBtn.addEventListener("click", loadData);
 
-// ====== LOAD AWAL ======
-fetchData();
+// Load data pertama kali
+loadData();
