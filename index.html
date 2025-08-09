@@ -15,15 +15,15 @@
     <div class="loading" id="loadingIndicator">Memuat data, mohon tunggu...</div>
 
     <div class="table-container" id="tableContainer" style="display:none;">
-      <table id="dataTable">
+      <table id="dataTable" aria-describedby="jumlahPendaftar">
         <thead>
           <tr>
-            <th>NO. URUT</th>
-            <th>NAMA LENGKAP SISWA</th>
-            <th>ASAL TK/RA</th>
-            <th>JENIS KELAMIN</th>
-            <th>TANGGAL PENDAFTARAN</th>
-            <th>STATUS PENDAFTARAN</th>
+            <th scope="col">NO. URUT</th>
+            <th scope="col">NAMA LENGKAP SISWA</th>
+            <th scope="col">ASAL TK/RA</th>
+            <th scope="col">JENIS KELAMIN</th>
+            <th scope="col">TANGGAL PENDAFTARAN</th>
+            <th scope="col">STATUS PENDAFTARAN</th>
           </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
       </table>
     </div>
 
-    <p id="jumlahPendaftar"></p>
-    <p class="error" id="errorMessage" style="display:none;"></p>
+    <p id="jumlahPendaftar" tabindex="0" aria-live="polite" aria-atomic="true"></p>
+    <p class="error" id="errorMessage" style="display:none;" role="alert"></p>
   </main>
 
   <footer>
