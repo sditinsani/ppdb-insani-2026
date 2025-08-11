@@ -12,28 +12,34 @@
   </header>
 
   <main>
-    <div class="table-container">
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>No. Urut</th>
-            <th>Nama Lengkap Siswa</th>
-            <th>Asal TK/RA</th>
-            <th>Jenis Kelamin</th>
-            <th>Tanggal Pendaftaran</th>
-            <th>Status Pendaftaran</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="loading">⏳ Memuat data...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="main-content">
+      <button id="refresh-button" class="refresh-button">
+        <span class="button-icon">🔄</span> Refresh Data
+      </button>
 
-    <div class="card-container" id="card-view">
-        <p class="loading-card">⏳ Memuat data...</p>
+      <div class="table-container">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>No. Urut</th>
+              <th>Nama Lengkap Siswa</th>
+              <th>Asal TK/RA</th>
+              <th>Jenis Kelamin</th>
+              <th>Tanggal Pendaftaran</th>
+              <th>Status Pendaftaran</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="loading">⏳ Memuat data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-container" id="card-view">
+          <p class="loading-card">⏳ Memuat data...</p>
+      </div>
     </div>
   </main>
 
