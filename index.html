@@ -70,15 +70,26 @@
         /* Responsive untuk dashboard */
         @media (max-width: 768px) {
             .dashboard-stats {
+                /* Perbaikan untuk tampilan mobile */
                 grid-template-columns: 1fr;
+                gap: 15px; /* Mengurangi jarak antar kartu */
+                padding: 0 15px; /* Menambahkan padding agar tidak menempel ke pinggir */
             }
             .dashboard-nav {
                 flex-direction: column;
                 align-items: center;
+                padding: 0 15px;
             }
             .dashboard-nav a {
                 width: 100%;
                 text-align: center;
+                margin-top: 10px; /* Jarak antar tombol */
+            }
+            .stat-card {
+                padding: 20px;
+            }
+            .stat-card .stat-number {
+                font-size: 2rem; /* Ukuran font lebih kecil di mobile */
             }
         }
     </style>
