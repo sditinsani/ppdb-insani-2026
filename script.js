@@ -1,54 +1,82 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const tableBody = document.querySelector("#data-table tbody");
-  const cardsContainer = document.querySelector("#data-cards");
-  const loading = document.getElementById("loading");
-  const errorDiv = document.getElementById("error");
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9fafb;
+    color: #333;
+}
 
-  // ID Deployment Web Apps Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+header {
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.2rem;
+}
 
-  fetch(scriptURL)
-    .then(res => res.json())
-    .then(data => {
-      loading.classList.add("hidden");
+#loading, #error {
+    text-align: center;
+    padding: 15px;
+    font-size: 1rem;
+}
 
-      if (!data || data.length === 0) {
-        errorDiv.textContent = "Tidak ada data pendaftaran.";
-        return;
-      }
+.hidden {
+    display: none;
+}
 
-      document.querySelector(".desktop-view").classList.remove("hidden");
-      document.querySelector(".mobile-view").classList.remove("hidden");
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
 
-      data.forEach(row => {
-        // Desktop table
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${row.no}</td>
-          <td>${row.nama}</td>
-          <td>${row.asal}</td>
-          <td>${row.jk}</td>
-          <td>${row.tanggal}</td>
-          <td><span class="${row.status === 'Diterima' ? 'status-diterima' : 'status-tidak'}">${row.status}</span></td>
-        `;
-        tableBody.appendChild(tr);
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
 
-        // Mobile card
-        const card = document.createElement("div");
-        card.classList.add("card");
-        card.innerHTML = `
-          <h3>${row.nama}</h3>
-          <p><strong>Asal TK/RA:</strong> ${row.asal}</p>
-          <p><strong>Jenis Kelamin:</strong> ${row.jk}</p>
-          <p><strong>Tanggal Pendaftaran:</strong> ${row.tanggal}</p>
-          <span class="status ${row.status === 'Diterima' ? 'status-diterima' : 'status-tidak'}">${row.status}</span>
-        `;
-        cardsContainer.appendChild(card);
-      });
-    })
-    .catch(err => {
-      loading.classList.add("hidden");
-      errorDiv.textContent = "Terjadi kesalahan saat memuat data.";
-      console.error(err);
-    });
-});
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: #111;
+}
+
+.card p {
+    margin: 3px 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.status.diterima {
+    background-color: #16a34a;
+}
+
+.status.tidak {
+    background-color: #dc2626;
+}
+
+footer {
+    background: #1e293b;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.85rem;
+    margin-top: 20px;
+}
