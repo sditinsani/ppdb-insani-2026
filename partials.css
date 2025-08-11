@@ -1,6 +1,6 @@
 /* Global style & Font */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif; /* Mengganti font menjadi Montserrat */
     margin: 0;
     padding: 0;
     background: #f0f2f5;
@@ -37,7 +37,7 @@ h1 {
     background-color: #0056b3;
     color: white;
     border: none;
-    padding: 8px 12px; /* Ukuran lebih kecil */
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
@@ -160,7 +160,7 @@ th:nth-child(6), td:nth-child(6) {
     padding: 30px;
 }
 
-/* Status colors */
+/* Status colors (HANYA TEKS BERWARNA, TANPA KOTAK) */
 .status-diterima {
     color: #28a745;
     font-weight: 600;
@@ -218,23 +218,27 @@ th:nth-child(6), td:nth-child(6) {
     .card-container {
         display: block;
     }
-    .toolbar {
-      flex-direction: column;
-      gap: 15px;
-      align-items: flex-start;
-      padding: 0 15px;
-    }
-    .search-container {
-        width: 100%;
-        justify-content: space-between;
-    }
-    #search-input {
-        width: 100%;
-    }
     h1 {
         font-size: 1.5rem;
     }
     body {
         font-size: 14px;
+    }
+    .toolbar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 0 15px;
+      /* Tambahkan tata letak untuk mobile */
+      margin-top: 20px;
+    }
+    .search-container {
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #search-input {
+        width: calc(100% - 24px); /* Mengisi lebar penuh */
     }
 }
