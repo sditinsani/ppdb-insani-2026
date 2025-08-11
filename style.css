@@ -1,206 +1,132 @@
-/* Font Import via Google Fonts link in HTML */
-
-body {
-  font-family: 'Poppins', sans-serif;
+* {
   margin: 0;
   padding: 0;
-  background: #e6f0ff;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f5f6fa;
   color: #333;
-  font-size: 15px; /* sedikit lebih kecil */
-  line-height: 1.4;
 }
 
 header {
-  background: #00509e;
+  background: #0066cc;
   color: white;
-  padding: 1.5rem 2rem;
+  padding: 15px;
   text-align: center;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 1.8rem; /* kecil dari sebelumnya */
-  letter-spacing: 2px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  user-select: none;
 }
 
-main {
-  flex: 1;
-  padding: 2rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  font-size: 1rem;
+header h1 {
+  font-size: 1.6rem;
 }
 
-.loading {
+.loading, .error {
   text-align: center;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #555;
-  margin: 3rem 0;
-  user-select: none;
+  padding: 15px;
 }
 
 .error {
-  color: #d32f2f;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 1.5rem;
-  user-select: none;
+  color: red;
 }
 
-.table-container {
-  overflow-x: auto;
-  background: white;
-  padding: 1.25rem;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
+/* Desktop Table View */
 table {
+  width: 90%;
+  margin: 20px auto;
   border-collapse: collapse;
-  width: 100%;
-  min-width: 700px;
-  font-size: 1rem;
-}
-
-thead {
-  background: #1a73e8;
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 th, td {
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid #ddd;
+  padding: 12px;
   text-align: left;
 }
 
-tbody tr:hover {
-  background: #f0f4ff;
+th {
+  background: #007bff;
+  color: white;
 }
 
-/* Status Pendaftaran */
+tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
 .status-diterima {
-  background-color: #388e3c;
   color: white;
-  padding: 0.35rem 0.9rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  display: inline-block;
+  background: #28a745;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
 }
 
 .status-tidak {
-  background-color: #d32f2f;
   color: white;
-  padding: 0.35rem 0.9rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  display: inline-block;
+  background: #dc3545;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
 }
 
-#jumlahPendaftar {
-  margin-top: 1.8rem;
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: #1a73e8;
-  text-align: right;
-  user-select: none;
+/* Mobile Card View */
+.mobile-view {
+  display: none;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.card .status {
+  display: inline-block;
+  margin-top: 8px;
 }
 
 /* Footer */
 footer {
-  background: #0d1430;
-  color: #ccc;
+  background: #0066cc;
+  color: white;
   text-align: center;
-  padding: 2rem 2rem;
-  font-size: 1rem;
-  user-select: none;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 0.85rem;
 }
 
-.footer-content p {
-  margin: 0.25rem 0;
+.hidden {
+  display: none;
 }
 
 /* Responsive */
-@media screen and (max-width: 768px) {
-  header {
-    font-size: 1.4rem;
-    padding: 1rem 1rem;
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none !important;
   }
-
-  main {
-    padding: 1.25rem 1rem;
-  }
-
-  /* Hide table on mobile */
-  .table-container {
-    display: none;
-  }
-
-  #jumlahPendaftar {
-    text-align: center;
-    font-size: 1.1rem;
-    margin-top: 1.5rem;
-  }
-
-  footer {
-    font-size: 0.9rem;
-    padding: 1.25rem 1rem;
-  }
-
-  /* Card view container */
-  #cardContainer {
+  .mobile-view {
     display: block;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 0.5rem;
   }
+}
 
-  /* Card styles */
-  .card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    padding: 1rem 1.2rem;
-    margin-bottom: 1.2rem;
+@media (min-width: 769px) {
+  .desktop-view {
+    display: table;
   }
-
-  .card h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-    color: #1a73e8;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .card p {
-    margin: 0.3rem 0;
-    font-size: 1rem;
-    color: #333;
-  }
-
-  .card .status {
-    margin-top: 0.5rem;
-    font-weight: 700;
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px;
-    color: white;
-    display: inline-block;
-    font-size: 0.95rem;
-  }
-
-  .card .status.diterima {
-    background-color: #388e3c;
-  }
-
-  .card .status.tidak {
-    background-color: #d32f2f;
+  .mobile-view {
+    display: none !important;
   }
 }
