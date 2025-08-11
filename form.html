@@ -14,75 +14,52 @@
             background: #fff;
             border-radius: 12px;
             box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
         }
         .form-container h2 {
             text-align: center;
             color: #003366;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        .form-container p {
+            font-size: 1.1rem;
+            color: #555;
             margin-bottom: 25px;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-        }
-        .form-submit-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
+        .form-link-button {
+            display: inline-block;
+            padding: 15px 30px;
             background-color: var(--secondary-color);
             color: white;
-            border: none;
+            text-decoration: none;
             border-radius: 8px;
             font-size: 18px;
             font-weight: 600;
-            cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-top: 20px;
         }
-        .form-submit-button:hover {
+        .form-link-button:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-        .form-submit-button.is-loading {
-            background-color: #555;
-            cursor: not-allowed;
-            animation: pulse 1.5s infinite;
-        }
-        .form-feedback {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-        .form-feedback.success {
-            color: #28a745;
-        }
-        .form-feedback.error {
-            color: #dc3545;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+            .form-container p {
+                font-size: 1rem;
+            }
+            .form-link-button {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
         }
     </style>
 </head>
@@ -97,27 +74,11 @@
     <main>
         <div class="main-content">
             <div class="form-container">
-                <h2>Isi Data Pendaftaran</h2>
-                <form id="registration-form">
-                    <div class="form-group">
-                        <label for="nama-siswa">Nama Lengkap Siswa</label>
-                        <input type="text" id="nama-siswa" name="Nama Lengkap Siswa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="asal-tk">Asal TK/RA</label>
-                        <input type="text" id="asal-tk" name="Asal TK/RA" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="jenis-kelamin">Jenis Kelamin</label>
-                        <select id="jenis-kelamin" name="Jenis Kelamin" required>
-                            <option value="">-- Pilih --</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="form-submit-button" id="submit-button"><i class="fas fa-paper-plane"></i> Kirim Pendaftaran</button>
-                    <p class="form-feedback" id="form-feedback"></p>
-                </form>
+                <h2>Isi Formulir Pendaftaran</h2>
+                <p>Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran lengkap. Anda akan diarahkan ke Google Form untuk proses pengisian data dan pengunggahan berkas.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpJm2w9m6Jd3P6U7y_r2gJ-Jd7J6k8Yw0XQ/viewform?usp=sf_link" target="_blank" class="form-link-button">
+                    <i class="fas fa-edit"></i> Isi Formulir Sekarang
+                </a>
             </div>
         </div>
     </main>
@@ -134,56 +95,5 @@
             <p class="copyright">&copy; 2024 PPDB SDIT INSANI. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
-
-        document.getElementById('registration-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitButton = document.getElementById('submit-button');
-            const feedbackMessage = document.getElementById('form-feedback');
-            
-            submitButton.classList.add('is-loading');
-            submitButton.disabled = true;
-            feedbackMessage.textContent = 'Mengirim data...';
-            feedbackMessage.className = 'form-feedback';
-
-            const formData = new FormData(this);
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                const result = await response.json();
-                
-                if (result.status === 'success') {
-                    feedbackMessage.textContent = '✅ Pendaftaran berhasil! Silakan cek status Anda di halaman pendaftar.';
-                    feedbackMessage.className = 'form-feedback success';
-                    this.reset();
-                } else {
-                    feedbackMessage.textContent = '❌ Terjadi kesalahan: ' + result.message;
-                    feedbackMessage.className = 'form-feedback error';
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                feedbackMessage.textContent = '❌ Terjadi kesalahan jaringan. Coba lagi.';
-                feedbackMessage.className = 'form-feedback error';
-            } finally {
-                submitButton.classList.remove('is-loading');
-                submitButton.disabled = false;
-            }
-        });
-    </script>
 </body>
 </html>
