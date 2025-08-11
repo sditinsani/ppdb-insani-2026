@@ -1,47 +1,45 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
-async function fetchData() {
-    const loadingEl = document.getElementById("loading");
-    const errorEl = document.getElementById("error");
-    const container = document.getElementById("data-container");
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("cards-container");
+  const loading = document.getElementById("loading");
+  const errorMsg = document.getElementById("error");
 
-    loadingEl.classList.remove("hidden");
-    errorEl.classList.add("hidden");
+  async function fetchData() {
+    try {
+      const response = await fetch(SHEET_URL);
+      if (!response.ok) throw new Error("Gagal mengambil data");
+      const data = await response.json();
+
+      loading.style.display = "none";
+      renderCards(data);
+    } catch (error) {
+      loading.style.display = "none";
+      errorMsg.textContent = "Terjadi kesalahan saat memuat data.";
+    }
+  }
+
+  function renderCards(data) {
     container.innerHTML = "";
 
-    try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error("Gagal fetch");
-        const data = await res.json();
+    data.forEach(row => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-        loadingEl.classList.add("hidden");
+      const statusClass = row["Status Pendaftaran"] === "Diterima" ? "status-diterima" : "status-tidak";
+      const statusText = `<span class="status ${statusClass}">${row["Status Pendaftaran"]}</span>`;
 
-        if (data.length === 0) {
-            container.innerHTML = "<p style='text-align:center;'>Tidak ada data pendaftar.</p>";
-            return;
-        }
+      card.innerHTML = `
+        <h2>${row["Nama Lengkap Siswa"]}</h2>
+        <p><strong>Asal TK/RA:</strong> ${row["Asal TK/RA"]}</p>
+        <p><strong>Jenis Kelamin:</strong> ${row["Jenis Kelamin"]}</p>
+        <p><strong>Tanggal Pendaftaran:</strong> ${row["Tanggal Pendaftaran"]}</p>
+        <p>${statusText}</p>
+      `;
 
-        data.forEach(item => {
-            const card = document.createElement("div");
-            card.classList.add("card");
+      container.appendChild(card);
+    });
+  }
 
-            card.innerHTML = `
-                <h3>${item["Nama Lengkap Siswa"]}</h3>
-                <p><strong>Asal TK/RA:</strong> ${item["Asal TK/RA"]}</p>
-                <p><strong>Jenis Kelamin:</strong> ${item["Jenis Kelamin"]}</p>
-                <p><strong>Tanggal Pendaftaran:</strong> ${item["Tanggal Pendaftaran"]}</p>
-                <p><span class="status ${item["Status Pendaftaran"] === "Diterima" ? "diterima" : "tidak"}">
-                    ${item["Status Pendaftaran"]}
-                </span></p>
-            `;
-
-            container.appendChild(card);
-        });
-
-    } catch (err) {
-        loadingEl.classList.add("hidden");
-        errorEl.classList.remove("hidden");
-    }
-}
-
-document.addEventListener("DOMContentLoaded", fetchData);
+  fetchData();
+});
