@@ -1,29 +1,40 @@
+/* Global style */
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
   margin: 0;
   padding: 0;
+  background: #f4f6f9;
+  color: #333;
 }
 
 header {
-  background: #4a90e2;
+  background: #007BFF;
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 1rem;
 }
 
 h1 {
+  font-size: 1.5rem;
   margin: 0;
-  font-size: 1.8rem;
 }
 
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Table container */
 .table-container {
+  margin: 20px auto;
+  padding: 15px;
   max-width: 1000px;
-  margin: 30px auto;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
   overflow-x: auto;
 }
 
@@ -34,48 +45,37 @@ table {
 }
 
 th, td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background: #f0f2f5;
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: left;
 }
 
-.status-diterima {
-  color: green;
-  font-weight: bold;
+th {
+  background: #f0f0f0;
 }
 
-.status-tidak {
-  color: red;
-  font-weight: bold;
-}
-
-footer {
+.loading, .error, .no-data {
   text-align: center;
-  background: #4a90e2;
-  color: white;
-  padding: 12px;
-  margin-top: 40px;
+  font-style: italic;
+  color: gray;
 }
 
-/* Responsif Mobile */
+/* Status colors */
+.status-accepted {
+  color: white;
+  background-color: #28a745;
+  text-align: center;
+}
+
+.status-rejected {
+  color: white;
+  background-color: #dc3545;
+  text-align: center;
+}
+
+/* Mobile view */
 @media (max-width: 768px) {
-  .table-container {
-    padding: 10px;
-    box-shadow: none;
-  }
-
   table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  th, td {
     font-size: 0.85rem;
-    padding: 8px;
   }
 }
