@@ -1,82 +1,47 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f9fafb;
-    color: #333;
+const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+
+async function fetchData() {
+    const loadingEl = document.getElementById("loading");
+    const errorEl = document.getElementById("error");
+    const container = document.getElementById("data-container");
+
+    loadingEl.classList.remove("hidden");
+    errorEl.classList.add("hidden");
+    container.innerHTML = "";
+
+    try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error("Gagal fetch");
+        const data = await res.json();
+
+        loadingEl.classList.add("hidden");
+
+        if (data.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>Tidak ada data pendaftar.</p>";
+            return;
+        }
+
+        data.forEach(item => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            card.innerHTML = `
+                <h3>${item["Nama Lengkap Siswa"]}</h3>
+                <p><strong>Asal TK/RA:</strong> ${item["Asal TK/RA"]}</p>
+                <p><strong>Jenis Kelamin:</strong> ${item["Jenis Kelamin"]}</p>
+                <p><strong>Tanggal Pendaftaran:</strong> ${item["Tanggal Pendaftaran"]}</p>
+                <p><span class="status ${item["Status Pendaftaran"] === "Diterima" ? "diterima" : "tidak"}">
+                    ${item["Status Pendaftaran"]}
+                </span></p>
+            `;
+
+            container.appendChild(card);
+        });
+
+    } catch (err) {
+        loadingEl.classList.add("hidden");
+        errorEl.classList.remove("hidden");
+    }
 }
 
-header {
-    background: #2563eb;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 1.2rem;
-}
-
-#loading, #error {
-    text-align: center;
-    padding: 15px;
-    font-size: 1rem;
-}
-
-.hidden {
-    display: none;
-}
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-    padding: 15px;
-}
-
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-.card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 6px;
-    color: #111;
-}
-
-.card p {
-    margin: 3px 0;
-    font-size: 0.9rem;
-    color: #444;
-}
-
-.status {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    font-size: 0.85rem;
-}
-
-.status.diterima {
-    background-color: #16a34a;
-}
-
-.status.tidak {
-    background-color: #dc2626;
-}
-
-footer {
-    background: #1e293b;
-    color: white;
-    text-align: center;
-    padding: 12px;
-    font-size: 0.85rem;
-    margin-top: 20px;
-}
+document.addEventListener("DOMContentLoaded", fetchData);
