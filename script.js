@@ -33,7 +33,7 @@ async function fetchData() {
                 <td>${row["Asal TK/RA"] || ""}</td>
                 <td>${row["Jenis Kelamin"] || ""}</td>
                 <td>${row["Tanggal Pendaftaran"] || ""}</td>
-                <td class="${statusClass}"><div class="status-content">${row["Status Pendaftaran"] || ""}</div></td>
+                <td class="${statusClass}">${row["Status Pendaftaran"] || ""}</td>
             `;
             tableBody.appendChild(tr);
         });
@@ -69,7 +69,7 @@ async function fetchData() {
                 </div>
                 <div class="card-item">
                     <span class="card-label">Status:</span>
-                    <span class="card-value"><div class="${statusClass}">${row["Status Pendaftaran"] || ""}</div></span>
+                    <span class="card-value"><span class="${statusClass}">${row["Status Pendaftaran"] || ""}</span></span>
                 </div>
             `;
             cardContainer.appendChild(card);
@@ -82,9 +82,8 @@ async function fetchData() {
     }
 }
 
-// Tambahkan event listener untuk tombol refresh
 document.addEventListener('DOMContentLoaded', () => {
-    fetchData(); // Panggil saat halaman dimuat
+    fetchData();
     
     const refreshButton = document.getElementById('refresh-button');
     if (refreshButton) {
