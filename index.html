@@ -66,14 +66,11 @@
         .dashboard-nav a:hover {
             background-color: #004284;
         }
-
-        /* Responsive untuk dashboard */
         @media (max-width: 768px) {
             .dashboard-stats {
-                /* Perbaikan untuk tampilan mobile */
                 grid-template-columns: 1fr;
-                gap: 15px; /* Mengurangi jarak antar kartu */
-                padding: 0 15px; /* Menambahkan padding agar tidak menempel ke pinggir */
+                gap: 15px;
+                padding: 0 15px;
             }
             .dashboard-nav {
                 flex-direction: column;
@@ -83,19 +80,20 @@
             .dashboard-nav a {
                 width: 100%;
                 text-align: center;
-                margin-top: 10px; /* Jarak antar tombol */
+                margin-top: 10px;
             }
             .stat-card {
                 padding: 20px;
             }
             .stat-card .stat-number {
-                font-size: 2rem; /* Ukuran font lebih kecil di mobile */
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
+        <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
         <h1>Dashboard PPDB SDIT INSANI</h1>
     </header>
 
