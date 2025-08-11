@@ -90,14 +90,6 @@
                         <h3>Total Pendaftar</h3>
                         <p class="stat-number" id="total-pendaftar-dashboard">0</p>
                     </div>
-                    <div class="stat-card">
-                        <h3>Pendaftar Diterima</h3>
-                        <p class="stat-number" id="pendaftar-diterima">0</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Pendaftar Ditolak</h3>
-                        <p class="stat-number" id="pendaftar-ditolak">0</p>
-                    </div>
                 </div>
                 <div class="dashboard-nav">
                     <a href="form.html"><i class="fas fa-edit"></i> Daftar Sekarang</a>
@@ -133,18 +125,11 @@
                 );
 
                 const total = filteredData.length;
-                const diterima = filteredData.filter(row => row["Status Pendaftaran"] === "Diterima").length;
-                const ditolak = filteredData.filter(row => row["Status Pendaftaran"] === "Ditolak").length;
-
                 document.getElementById('total-pendaftar-dashboard').textContent = total;
-                document.getElementById('pendaftar-diterima').textContent = diterima;
-                document.getElementById('pendaftar-ditolak').textContent = ditolak;
 
             } catch (error) {
                 console.error("Gagal memuat data dashboard:", error);
                 document.getElementById('total-pendaftar-dashboard').textContent = "Error";
-                document.getElementById('pendaftar-diterima').textContent = "Error";
-                document.getElementById('pendaftar-ditolak').textContent = "Error";
             }
         }
 
