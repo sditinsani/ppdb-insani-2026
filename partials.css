@@ -10,7 +10,7 @@ body {
 }
 
 header {
-    background: #003366;
+    background: #2c3e50; /* Warna header diubah agar sama dengan footer */
     color: white;
     text-align: center;
     padding: 2.5rem 1rem;
