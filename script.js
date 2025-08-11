@@ -7,10 +7,16 @@ async function fetchData() {
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
     const refreshButton = document.getElementById('refresh-data-button');
+    const updateMessage = document.getElementById('update-message');
 
     if (refreshButton) {
         refreshButton.classList.add('is-loading');
         refreshButton.disabled = true;
+    }
+
+    // Sembunyikan pesan update saat memuat
+    if (updateMessage) {
+        updateMessage.classList.remove('visible');
     }
     
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
@@ -32,6 +38,14 @@ async function fetchData() {
         }
 
         renderData(allData);
+
+        // Tampilkan pesan sukses setelah data berhasil diperbarui
+        if (updateMessage) {
+            updateMessage.classList.add('visible');
+            setTimeout(() => {
+                updateMessage.classList.remove('visible');
+            }, 3000); // Pesan akan hilang setelah 3 detik
+        }
 
     } catch (error) {
         console.error("Gagal memuat data:", error);
