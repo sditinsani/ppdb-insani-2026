@@ -6,11 +6,12 @@ async function fetchData() {
     const tableBody = document.querySelector("#data-table tbody");
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
-    const refreshButton = document.getElementById('refresh-button');
+    const refreshButton = document.getElementById('refresh-data-button');
 
-    // ... sisa kode tetap sama ...
-    refreshButton.classList.add('is-loading');
-    refreshButton.disabled = true;
+    if (refreshButton) {
+        refreshButton.classList.add('is-loading');
+        refreshButton.disabled = true;
+    }
     
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
     cardContainer.innerHTML = `<p class="loading-card">⏳ Memuat data...</p>`;
@@ -37,8 +38,10 @@ async function fetchData() {
         tableBody.innerHTML = `<tr><td colspan="6" class="error">⚠️ Gagal memuat data</td></tr>`;
         cardContainer.innerHTML = `<p class="error-card">⚠️ Gagal memuat data</p>`;
     } finally {
-        refreshButton.classList.remove('is-loading');
-        refreshButton.disabled = false;
+        if (refreshButton) {
+            refreshButton.classList.remove('is-loading');
+            refreshButton.disabled = false;
+        }
     }
 }
 
@@ -120,7 +123,7 @@ function renderData(dataToRender) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
     
-    const refreshButton = document.getElementById('refresh-button');
+    const refreshButton = document.getElementById('refresh-data-button');
     if (refreshButton) {
         refreshButton.addEventListener('click', fetchData);
     }
