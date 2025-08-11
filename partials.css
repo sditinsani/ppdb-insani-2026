@@ -1,55 +1,66 @@
 /* Global style & Font */
 body {
-    font-family: 'Poppins', sans-serif; /* Menggunakan font modern */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: #eef2f6; /* Warna latar belakang yang lebih terang */
+    background: #f0f2f5; /* Latar belakang abu-abu terang */
     color: #333;
     line-height: 1.6;
     font-size: 16px;
 }
 
 header {
-    background: #000080; /* Navy */
+    background: #003366; /* Biru tua profesional */
     color: white;
     text-align: center;
-    padding: 2rem 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    font-size: 1.8rem; /* Mengurangi ukuran font untuk judul */
+    font-size: 2rem;
     margin: 0;
-    font-weight: 500; /* Menghilangkan efek bold */
+    font-weight: 600;
 }
 
+/* Footer */
 footer {
-    background: #111; /* Warna footer yang sangat gelap */
-    color: #ccc;
+    background: #2c3e50; /* Warna footer lebih gelap */
+    color: #ecf0f1; /* Warna teks lebih cerah */
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem;
     font-size: 0.9rem;
     margin-top: 30px;
 }
 
-.footer-content p {
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-info-block, .footer-social-block {
+    margin: 0;
+}
+
+.footer-info-block p {
     margin: 5px 0;
 }
 
-.footer-social a {
-    color: #fff;
+.footer-social-block a {
+    color: #f1c40f; /* Warna link kuning cerah */
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
 }
 
-.footer-social a:hover {
-    color: #4a90e2; /* Warna link hover yang cerah */
+.footer-social-block a:hover {
+    color: #fff;
 }
 
 /* Table container (for desktop) */
 .table-container {
-    margin: 25px auto;
+    margin: 30px auto;
     padding: 20px;
     max-width: 1100px;
     background: white;
@@ -61,23 +72,23 @@ footer {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 14px 10px;
+    border: 1px solid #e0e0e0;
+    padding: 12px 10px;
 }
 
 th {
-    background: #f0f4f7;
+    background: #f8f9fa;
     color: #555;
-    font-weight: normal; /* Menghapus font bold */
+    font-weight: normal;
     text-align: left;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f9f9f9;
 }
 
 tbody tr:hover {
@@ -101,19 +112,21 @@ th:nth-child(6), td:nth-child(6) {
 .status-diterima {
     color: white;
     background-color: #28a745;
-    padding: 6px 12px;
-    border-radius: 4px; /* Menyesuaikan border-radius */
+    padding: 4px 10px; /* Mengurangi padding */
+    border-radius: 4px;
     font-weight: normal;
     display: inline-block;
+    font-size: 0.85rem; /* Ukuran font lebih kecil */
 }
 
 .status-ditolak {
     color: white;
     background-color: #dc3545;
-    padding: 6px 12px;
-    border-radius: 4px; /* Menyesuaikan border-radius */
+    padding: 4px 10px; /* Mengurangi padding */
+    border-radius: 4px;
     font-weight: normal;
     display: inline-block;
+    font-size: 0.85rem; /* Ukuran font lebih kecil */
 }
 
 /* Card View Styles (for mobile) */
@@ -130,7 +143,7 @@ th:nth-child(6), td:nth-child(6) {
     box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 20px;
     padding: 20px;
-    border-left: 5px solid #000080;
+    border-left: 5px solid #003366;
 }
 
 .card-item {
@@ -169,10 +182,7 @@ th:nth-child(6), td:nth-child(6) {
     body {
         font-size: 14px;
     }
-}
-
-@media (min-width: 769px) {
-    .card-container {
-        display: none;
+    .footer-content {
+        flex-direction: column;
     }
 }
