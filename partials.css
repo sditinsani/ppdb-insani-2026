@@ -1,19 +1,345 @@
-/* Revisi pada bagian media query di file partials.css */
-@media (max-width: 768px) {
-    /* ... kode lain tetap sama ... */
+/* Import Google Fonts & Font Awesome */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Variabel Warna */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #007bff;
+    --accent-color: #ffc107;
+    --background-color: #f8f9fa;
+    --text-color: #34495e;
+    --border-color: #e9ecef;
+}
+
+/* Global style & Font */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+/* Toolbar (Refresh Button & Search) */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 30px auto 15px;
+    padding: 0 20px;
+}
+
+.toolbar-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.refresh-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.button-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.refresh-button.is-loading .button-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#search-input {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    width: 250px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.total-pendaftar {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background: var(--primary-color);
+    color: #ecf0f1;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    margin-top: 30px;
+}
+
+.footer-simple p {
+    margin: 5px 0;
+}
+
+.footer-social-block a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 8px;
+    transition: color 0.3s;
+}
+
+.footer-social-block a:hover {
+    color: white;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #a0a0a0;
+}
+
+/* Table container (for desktop) */
+.table-container {
+    margin: 15px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 15px 12px;
+}
+
+th {
+    background: var(--background-color);
+    color: var(--text-color);
+    font-weight: 600;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+th:nth-child(6), td:nth-child(6) {
+    text-align: center;
+}
+
+.loading, .error, .no-data, .loading-card, .error-card, .no-data-card {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 30px;
+}
+
+/* Status colors */
+.status-diterima {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-ditolak {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* Card View Styles (for mobile) */
+.card-container {
+    display: none;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 550px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-left: 5px solid var(--secondary-color);
+}
+
+.card-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.card-item:last-child {
+    border-bottom: none;
+}
+
+.card-label {
+    font-weight: 600;
+    color: #555;
+    flex-basis: 45%;
+}
+
+.card-value {
+    text-align: right;
+    flex-basis: 55%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table-container {
+        display: none;
+    }
+    .card-container {
+        display: block;
+    }
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        gap: 10px;
+    }
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .logo {
+        width: 50px;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
+    /* Mobile-specific toolbar adjustments */
+    .toolbar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 0 15px;
+      margin-top: 20px;
+    }
+    .toolbar-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .search-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #search-input {
+        width: calc(100% - 24px);
+    }
+    .total-pendaftar {
+        text-align: left;
+    }
+    /* Mobile-specific dashboard adjustments */
+    .dashboard-container {
+        padding: 20px 15px;
+        margin: 20px auto;
+    }
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0;
+    }
     .dashboard-nav {
-        flex-direction: row; /* Mengubah arah menjadi horizontal */
-        justify-content: center; /* Tombol berada di tengah */
-        flex-wrap: wrap; /* Memungkinkan tombol untuk pindah ke baris baru jika tidak muat */
-        gap: 10px; /* Memberikan jarak antar tombol */
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
         margin-top: 20px;
     }
     .dashboard-nav a {
-        padding: 10px 20px; /* Ukuran tombol diperkecil */
-        font-size: 14px; /* Ukuran font lebih kecil */
-        width: auto; /* Lebar tombol menyesuaikan konten */
+        padding: 10px 20px;
+        font-size: 14px;
+        width: auto;
     }
-
-    /* ... kode lain tetap sama ... */
+    .stat-card {
+        padding: 20px;
+    }
+    .stat-card .stat-number {
+        font-size: 2rem;
+    }
+    /* Mobile-specific form adjustments */
+    .form-container {
+        padding: 20px;
+    }
 }
