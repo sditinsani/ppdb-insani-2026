@@ -4,7 +4,6 @@ async function fetchData() {
     const tableBody = document.querySelector("#data-table tbody");
     const cardContainer = document.getElementById("card-view");
 
-    // Tampilkan loading state untuk kedua tampilan
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
     cardContainer.innerHTML = `<p class="loading-card">⏳ Memuat data...</p>`;
 
@@ -12,7 +11,6 @@ async function fetchData() {
         const res = await fetch(API_URL);
         const data = await res.json();
 
-        // Filter data kosong
         const filteredData = data.filter(row =>
             row["No. Urut"] && row["Nama Lengkap Siswa"]
         );
@@ -23,33 +21,31 @@ async function fetchData() {
             return;
         }
 
-        // --- Mengisi Tabel (untuk desktop) ---
-        tableBody.innerHTML = ""; // Bersihkan loading state
+        tableBody.innerHTML = "";
         filteredData.forEach(row => {
             const tr = document.createElement("tr");
             const statusText = row["Status Pendaftaran"]?.toLowerCase();
             const statusClass = statusText === "diterima" ? "status-diterima" : "status-ditolak";
-
+            
             tr.innerHTML = `
                 <td>${row["No. Urut"] || ""}</td>
                 <td>${row["Nama Lengkap Siswa"] || ""}</td>
                 <td>${row["Asal TK/RA"] || ""}</td>
                 <td>${row["Jenis Kelamin"] || ""}</td>
                 <td>${row["Tanggal Pendaftaran"] || ""}</td>
-                <td class="${statusClass}">${row["Status Pendaftaran"] || ""}</td>
+                <td class="${statusClass}"><div class="status-content">${row["Status Pendaftaran"] || ""}</div></td>
             `;
             tableBody.appendChild(tr);
         });
 
-        // --- Mengisi Card View (untuk mobile) ---
-        cardContainer.innerHTML = ""; // Bersihkan loading state
+        cardContainer.innerHTML = "";
         filteredData.forEach(row => {
             const card = document.createElement("div");
             card.classList.add("card");
-
+            
             const statusText = row["Status Pendaftaran"]?.toLowerCase();
             const statusClass = statusText === "diterima" ? "status-diterima" : "status-ditolak";
-
+            
             card.innerHTML = `
                 <div class="card-item">
                     <span class="card-label">No. Urut:</span>
@@ -73,7 +69,7 @@ async function fetchData() {
                 </div>
                 <div class="card-item">
                     <span class="card-label">Status:</span>
-                    <span class="card-value"><span class="${statusClass}">${row["Status Pendaftaran"] || ""}</span></span>
+                    <span class="card-value"><div class="${statusClass}">${row["Status Pendaftaran"] || ""}</div></span>
                 </div>
             `;
             cardContainer.appendChild(card);
@@ -86,4 +82,12 @@ async function fetchData() {
     }
 }
 
-fetchData();
+// Tambahkan event listener untuk tombol refresh
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData(); // Panggil saat halaman dimuat
+    
+    const refreshButton = document.getElementById('refresh-button');
+    if (refreshButton) {
+        refreshButton.addEventListener('click', fetchData);
+    }
+});
