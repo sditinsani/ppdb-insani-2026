@@ -175,13 +175,13 @@ th:nth-child(6), td:nth-child(6) {
 .status-diterima {
     color: #28a745;
     font-weight: 600;
-    text-shadow: 0px 0px 1px rgba(40, 167, 69, 0.5); /* Teks berbayang halus */
+    text-shadow: 0px 0px 1px rgba(40, 167, 69, 0.5);
 }
 
 .status-ditolak {
     color: #dc3545;
     font-weight: 600;
-    text-shadow: 0px 0px 1px rgba(220, 53, 69, 0.5); /* Teks berbayang halus */
+    text-shadow: 0px 0px 1px rgba(220, 53, 69, 0.5);
 }
 
 /* Card View Styles (for mobile) */
