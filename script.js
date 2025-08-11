@@ -47,13 +47,16 @@ function renderData(dataToRender) {
     const tableBody = document.querySelector("#data-table tbody");
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
+    const searchInput = document.getElementById('search-input');
 
     totalPendaftar.textContent = `Total: ${dataToRender.length}`;
 
     // Render Table
     tableBody.innerHTML = "";
     if (dataToRender.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="6" class="no-data">❌ Tidak ada data</td></tr>`;
+        const searchTerm = searchInput.value;
+        const noDataMessage = searchTerm ? `❌ Tidak ada data dengan nama '${searchTerm}'` : `❌ Tidak ada data`;
+        tableBody.innerHTML = `<tr><td colspan="6" class="no-data">${noDataMessage}</td></tr>`;
     } else {
         dataToRender.forEach(row => {
             const tr = document.createElement("tr");
@@ -75,7 +78,9 @@ function renderData(dataToRender) {
     // Render Card View
     cardContainer.innerHTML = "";
     if (dataToRender.length === 0) {
-        cardContainer.innerHTML = `<p class="no-data-card">❌ Tidak ada data</p>`;
+        const searchTerm = searchInput.value;
+        const noDataMessage = searchTerm ? `❌ Tidak ada data dengan nama '${searchTerm}'` : `❌ Tidak ada data`;
+        cardContainer.innerHTML = `<p class="no-data-card">${noDataMessage}</p>`;
     } else {
         dataToRender.forEach(row => {
             const card = document.createElement("div");
