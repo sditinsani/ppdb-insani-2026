@@ -6,7 +6,6 @@
     <title>Dashboard PPDB SDIT INSANI</title>
     <link rel="stylesheet" href="partials.css">
     <style>
-        /* Gaya khusus untuk halaman dashboard */
         .dashboard-container {
             max-width: 1100px;
             margin: 30px auto;
@@ -46,25 +45,27 @@
         .stat-card .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #0056b3;
+            color: var(--secondary-color);
         }
         .dashboard-nav {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* agar tombol tidak tumpang tindih di layar kecil */
             gap: 20px;
             margin-top: 30px;
         }
         .dashboard-nav a {
             padding: 12px 25px;
-            background-color: #0056b3;
+            background-color: var(--secondary-color);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .dashboard-nav a:hover {
-            background-color: #004284;
+            background-color: #0056b3;
         }
         @media (max-width: 768px) {
             .dashboard-stats {
@@ -116,9 +117,9 @@
                     </div>
                 </div>
                 <div class="dashboard-nav">
-    <a href="form.html">Daftar Sekarang</a>
-    <a href="daftar.html">Lihat Status Pendaftar</a>
-</div>
+                    <a href="form.html">Daftar Sekarang</a>
+                    <a href="daftar.html">Lihat Status Pendaftar</a>
+                </div>
             </div>
         </div>
     </main>
@@ -128,8 +129,8 @@
             <p>Alamat : Jl. Karamat No. 55 Gunung Puyuh Kota Sukabumi</p>
             <p>HP. 081563180071</p>
             <div class="footer-social-block">
-                <a href="http://www.sditinsani.net" target="_blank">www.sditinsani.net</a> | 
-                <a href="https://www.facebook.com/sditinsanisukabumi" target="_blank">FB : sditinsanisukabumi</a> | 
+                <a href="http://www.sditinsani.net" target="_blank">www.sditinsani.net</a> |
+                <a href="https://www.facebook.com/sditinsanisukabumi" target="_blank">FB : sditinsanisukabumi</a> |
                 <a href="https://www.instagram.com/sditinsani" target="_blank">IG : sditinsani</a>
             </div>
             <p class="copyright">&copy; 2024 PPDB SDIT INSANI. All Rights Reserved.</p>
@@ -137,7 +138,7 @@
     </footer>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
 
         async function fetchDashboardData() {
             try {
