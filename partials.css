@@ -1,133 +1,70 @@
-/* Global style & Font */
-body {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
-    font-size: 16px;
-}
+/* ... kode CSS lainnya ... */
 
-header {
-    background: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 2.5rem 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-    /* Tambahan untuk menata logo dan judul */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-/* Gaya untuk logo */
-.logo {
-    width: 80px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-h1 {
-    font-size: 2rem;
-    margin: 0;
-    font-weight: 600;
-}
-
-/* Toolbar (Refresh Button & Search) */
-.toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1100px;
-    margin: 30px auto 15px;
-    padding: 0 20px;
-}
-
-.refresh-button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-}
-
-.refresh-button:hover {
-    background-color: #004284;
-}
-
-.button-icon {
-    font-size: 1.2rem;
-    line-height: 1;
-}
-
-/* Animasi refresh button */
-.refresh-button.is-loading .button-icon {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-#search-input {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    width: 250px;
-    transition: border-color 0.3s ease;
-}
-
-#search-input:focus {
-    outline: none;
-    border-color: #0056b3;
-}
-
-.total-pendaftar {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-}
-
-/* Footer */
+/* Footer Baru */
 footer {
     background: #2c3e50;
     color: #ecf0f1;
-    text-align: center;
-    padding: 2rem;
+    text-align: left; /* Teks sekarang rata kiri */
+    padding: 30px 20px 10px;
     font-size: 0.9rem;
     margin-top: 30px;
 }
 
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.footer-content-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    padding: 0 10px;
+    border-bottom: 1px solid #4a5d72;
+    padding-bottom: 20px;
 }
 
-.footer-info-block p {
-    margin: 5px 0;
+.footer-section h4 {
+    color: #f1c40f;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.footer-brand .logo {
+    margin-bottom: 10px;
+    box-shadow: none; /* Hilangkan bayangan pada logo footer */
+}
+
+.footer-brand p {
+    line-height: 1.5;
+    margin-top: 0;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 0;
+}
+
+.footer-links li a:hover {
+    color: #f1c40f;
+}
+
+.footer-contact p {
+    margin: 0 0 10px;
 }
 
 .footer-social-block a {
     color: #f1c40f;
     text-decoration: none;
+    margin-right: 15px;
     font-weight: 500;
     transition: color 0.3s;
 }
@@ -136,137 +73,23 @@ footer {
     color: #fff;
 }
 
-/* Table container (for desktop) */
-.table-container {
-    margin: 15px auto;
-    padding: 20px;
+.footer-bottom {
+    text-align: center;
     max-width: 1100px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-    overflow-x: auto;
+    margin: 0 auto;
+    padding-top: 10px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
+.footer-bottom p {
+    margin: 0;
 }
 
-th, td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 10px;
-}
-
-th {
-    background: #f8f9fa;
-    color: #555;
-    font-weight: normal;
-    text-align: left;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tbody tr:hover {
-    background-color: #e9ecef;
-}
-
-th:nth-child(6), td:nth-child(6) {
-    text-align: center;
-}
-
-/* Loading, error, no data styles */
-.loading, .error, .no-data, .loading-card, .error-card, .no-data-card {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    padding: 30px;
-}
-
-/* Status colors (HANYA TEKS BERWARNA, TANPA KOTAK) */
-.status-diterima {
-    color: #28a745;
-    font-weight: 600;
-    text-shadow: 0px 0px 1px rgba(40, 167, 69, 0.5);
-}
-
-.status-ditolak {
-    color: #dc3545;
-    font-weight: 600;
-    text-shadow: 0px 0px 1px rgba(220, 53, 69, 0.5);
-}
-
-/* Card View Styles (for mobile) */
-.card-container {
-    display: none;
-    padding: 15px;
-    margin: 10px auto;
-    max-width: 550px;
-}
-
-.card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-    border-left: 5px solid #003366;
-}
-
-.card-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.card-item:last-child {
-    border-bottom: none;
-}
-
-.card-label {
-    font-weight: 600;
-    color: #555;
-    flex-basis: 45%;
-}
-
-.card-value {
-    text-align: right;
-    flex-basis: 55%;
-}
+/* ... kode CSS lainnya ... */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .table-container {
-        display: none;
-    }
-    .card-container {
-        display: block;
-    }
-    h1 {
-        font-size: 1.5rem;
-    }
-    body {
-        font-size: 14px;
-    }
-    .toolbar {
-      flex-direction: column;
-      gap: 15px;
-      align-items: flex-start;
-      padding: 0 15px;
-      margin-top: 20px;
-    }
-    .search-container {
-        width: 100%;
-        justify-content: space-between;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    #search-input {
-        width: calc(100% - 24px);
-    }
+    /* ... kode media query lainnya ... */
+    
     header {
         padding: 2rem 1rem;
     }
@@ -275,5 +98,15 @@ th:nth-child(6), td:nth-child(6) {
     }
     h1 {
         font-size: 1.5rem;
+    }
+
+    footer {
+        text-align: center;
+    }
+    .footer-content-main {
+        grid-template-columns: 1fr;
+    }
+    .footer-section {
+        margin-bottom: 20px;
     }
 }
