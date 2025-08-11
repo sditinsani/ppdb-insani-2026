@@ -6,7 +6,12 @@ async function fetchData() {
     const tableBody = document.querySelector("#data-table tbody");
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
+    const refreshButton = document.getElementById('refresh-button');
 
+    // Tampilkan loading state dan disable tombol refresh
+    refreshButton.classList.add('is-loading');
+    refreshButton.disabled = true;
+    
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
     cardContainer.innerHTML = `<p class="loading-card">⏳ Memuat data...</p>`;
     totalPendaftar.textContent = "";
@@ -31,6 +36,10 @@ async function fetchData() {
         console.error("Gagal memuat data:", error);
         tableBody.innerHTML = `<tr><td colspan="6" class="error">⚠️ Gagal memuat data</td></tr>`;
         cardContainer.innerHTML = `<p class="error-card">⚠️ Gagal memuat data</p>`;
+    } finally {
+        // Hapus loading state dan aktifkan kembali tombol refresh
+        refreshButton.classList.remove('is-loading');
+        refreshButton.disabled = false;
     }
 }
 
@@ -39,7 +48,6 @@ function renderData(dataToRender) {
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
 
-    // Update total pendaftar
     totalPendaftar.textContent = `Total: ${dataToRender.length}`;
 
     // Render Table
@@ -120,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('keyup', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             const filteredData = allData.filter(row => {
-                // Cari berdasarkan nama siswa
                 return row["Nama Lengkap Siswa"]?.toLowerCase().includes(searchTerm);
             });
             renderData(filteredData);
