@@ -60,7 +60,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Lebar lebih besar untuk desktop */
+    max-width: 1200px;
     margin: 30px auto 15px;
     padding: 0 20px;
 }
@@ -172,7 +172,7 @@ footer {
 .table-container {
     margin: 15px auto;
     padding: 20px;
-    max-width: 1200px; /* Lebar lebih besar untuk desktop */
+    max-width: 1200px;
     background: white;
     border-radius: 12px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -182,12 +182,12 @@ footer {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem; /* Ukuran font lebih besar untuk desktop */
+    font-size: 1rem;
 }
 
 th, td {
     border: 1px solid var(--border-color);
-    padding: 15px 12px; /* Padding lebih besar untuk desktop */
+    padding: 15px 12px;
 }
 
 th {
@@ -291,6 +291,7 @@ th:nth-child(6), td:nth-child(6) {
     h1 {
         font-size: 1.5rem;
     }
+    /* Mobile-specific toolbar adjustments */
     .toolbar {
       flex-direction: column;
       gap: 15px;
@@ -304,11 +305,44 @@ th:nth-child(6), td:nth-child(6) {
     }
     .search-container {
         width: 100%;
-        justify-content: space-between;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
     #search-input {
-        width: calc(100% - 24px);
+        width: calc(100% - 24px); /* Penuhi lebar penuh */
+    }
+    .total-pendaftar {
+        text-align: left;
+    }
+    /* Mobile-specific dashboard adjustments */
+    .dashboard-container {
+        padding: 20px;
+    }
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0;
+    }
+    .dashboard-nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 15px;
+    }
+    .dashboard-nav a {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        justify-content: center;
+    }
+    .stat-card {
+        padding: 20px;
+    }
+    .stat-card .stat-number {
+        font-size: 2rem;
+    }
+    /* Mobile-specific form adjustments */
+    .form-container {
+        padding: 20px;
     }
 }
