@@ -5,19 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Status Pendaftaran SDIT INSANI</title>
   <link rel="stylesheet" href="partials.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
   <header>
-    <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
-    <h1>Status Pendaftaran PPDB</h1>
+      <div class="header-content">
+          <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
+          <h1>Status Pendaftaran PPDB</h1>
+      </div>
   </header>
 
   <main>
     <div class="main-content">
       <div class="toolbar">
-        <a href="index.html" class="refresh-button">
-          <span class="button-icon">🏠</span>
-        </a>
+        <div class="toolbar-buttons">
+          <a href="index.html" class="refresh-button">
+            <i class="fas fa-home button-icon"></i>
+          </a>
+          <button class="refresh-button" id="refresh-data-button" onclick="fetchData()">
+            <i class="fas fa-sync-alt button-icon"></i>
+          </button>
+        </div>
         <div class="search-container">
           <input type="text" id="search-input" placeholder="Cari Nama Siswa...">
           <span id="total-pendaftar" class="total-pendaftar"></span>
