@@ -131,6 +131,28 @@ h1 {
     font-weight: 500;
 }
 
+/* Pesan Update */
+.update-message {
+    text-align: center;
+    font-weight: 600;
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 20px auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.update-message.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
 /* Footer */
 footer {
     background: var(--primary-color);
@@ -321,18 +343,18 @@ th:nth-child(6), td:nth-child(6) {
         padding: 0;
     }
     .dashboard-nav {
-        flex-direction: column; /* Tombol menumpuk secara vertikal */
-        align-items: center; /* Tombol berada di tengah */
-        gap: 10px; /* Jarak antar tombol */
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
         margin-top: 20px;
     }
     .dashboard-nav a {
-        width: 80%; /* Lebar tombol menjadi 80% dari container */
-        max-width: 300px; /* Batasi lebar maksimal agar tidak terlalu besar di tablet */
+        width: 80%;
+        max-width: 300px;
         text-align: center;
         justify-content: center;
-        padding: 10px 20px; /* Ukuran padding diperkecil */
-        font-size: 14px; /* Ukuran font diperkecil */
+        padding: 10px 20px;
+        font-size: 14px;
     }
     .stat-card {
         padding: 20px;
