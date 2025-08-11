@@ -8,6 +8,7 @@ async function fetchData() {
     const totalPendaftar = document.getElementById("total-pendaftar");
     const refreshButton = document.getElementById('refresh-button');
 
+    // ... sisa kode tetap sama ...
     refreshButton.classList.add('is-loading');
     refreshButton.disabled = true;
     
