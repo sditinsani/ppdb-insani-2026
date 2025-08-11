@@ -321,16 +321,17 @@ th:nth-child(6), td:nth-child(6) {
         padding: 0;
     }
     .dashboard-nav {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-direction: column; /* Tombol akan menumpuk secara vertikal */
+        align-items: center; /* Tombol berada di tengah */
+        gap: 15px; /* Jarak antar tombol */
         margin-top: 20px;
     }
     .dashboard-nav a {
-        padding: 10px 20px;
-        font-size: 14px;
-        width: auto;
+        max-width: 300px; /* Batasi lebar tombol */
+        width: 100%; /* Tombol menyesuaikan lebar maksimal */
+        text-align: center;
+        justify-content: center;
+        padding: 12px 20px;
     }
     .stat-card {
         padding: 20px;
