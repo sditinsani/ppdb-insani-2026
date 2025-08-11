@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPDB SDIT INSANI 2026/2027</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPDB SDIT INSANI 2026/2027</title>
+  <link rel="stylesheet" href="partials.css">
 </head>
 <body>
+  <header>
+    <h1>Daftar Pendaftaran Siswa</h1>
+  </header>
 
-    <header>
-        <h1>📋 Data Pendaftaran PPDB</h1>
-    </header>
+  <main>
+    <div id="loading" class="loading">Memuat data...</div>
+    <div id="error" class="error"></div>
+    <div id="cards-container" class="cards-container"></div>
+  </main>
 
-    <main id="content">
-        <div id="loading">⏳ Memuat data...</div>
-        <div id="error" class="hidden">❌ Gagal memuat data. Silakan coba lagi.</div>
-        <div id="data-container" class="card-container"></div>
-    </main>
+  <footer>
+    <p>© 2025 SDIT INSANI - Sistem PPDB Online</p>
+  </footer>
 
-    <footer>
-        <p>© 2025 SDIT INSANI | PPDB 2026/2027</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
