@@ -8,7 +8,6 @@ async function fetchData() {
     const totalPendaftar = document.getElementById("total-pendaftar");
     const refreshButton = document.getElementById('refresh-button');
 
-    // Tampilkan loading state dan disable tombol refresh
     refreshButton.classList.add('is-loading');
     refreshButton.disabled = true;
     
@@ -37,7 +36,6 @@ async function fetchData() {
         tableBody.innerHTML = `<tr><td colspan="6" class="error">⚠️ Gagal memuat data</td></tr>`;
         cardContainer.innerHTML = `<p class="error-card">⚠️ Gagal memuat data</p>`;
     } finally {
-        // Hapus loading state dan aktifkan kembali tombol refresh
         refreshButton.classList.remove('is-loading');
         refreshButton.disabled = false;
     }
@@ -51,7 +49,6 @@ function renderData(dataToRender) {
 
     totalPendaftar.textContent = `Total: ${dataToRender.length}`;
 
-    // Render Table
     tableBody.innerHTML = "";
     if (dataToRender.length === 0) {
         const searchTerm = searchInput.value;
@@ -75,7 +72,6 @@ function renderData(dataToRender) {
         });
     }
 
-    // Render Card View
     cardContainer.innerHTML = "";
     if (dataToRender.length === 0) {
         const searchTerm = searchInput.value;
