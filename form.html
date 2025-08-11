@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran SDIT INSANI</title>
     <link rel="stylesheet" href="partials.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .form-container {
             max-width: 600px;
@@ -87,8 +88,10 @@
 </head>
 <body>
     <header>
-        <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
-        <h1>Formulir Pendaftaran PPDB</h1>
+        <div class="header-content">
+            <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
+            <h1>Formulir Pendaftaran PPDB</h1>
+        </div>
     </header>
 
     <main>
@@ -112,7 +115,7 @@
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
-                    <button type="submit" class="form-submit-button" id="submit-button">Kirim Pendaftaran</button>
+                    <button type="submit" class="form-submit-button" id="submit-button"><i class="fas fa-paper-plane"></i> Kirim Pendaftaran</button>
                     <p class="form-feedback" id="form-feedback"></p>
                 </form>
             </div>
