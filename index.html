@@ -2,49 +2,44 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PPDB SDIT INSANI 2026/2027</title>
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPDB SDIT INSANI</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>PPDB SDIT INSANI 2026/2027</h1>
+    <h1>📋 Data Pendaftaran PPDB</h1>
   </header>
 
   <main>
-    <div id="tableContainer" class="table-container">
-      <table id="dataTable" aria-describedby="jumlahPendaftar">
-        <thead>
-          <tr>
-            <th>NO. URUT</th>
-            <th>NAMA LENGKAP SISWA</th>
-            <th>ASAL TK/RA</th>
-            <th>JENIS KELAMIN</th>
-            <th>TANGGAL PENDAFTARAN</th>
-            <th>STATUS PENDAFTARAN</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td colspan="6" class="loading">Memuat data...</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div id="loading" class="loading">Memuat data...</div>
+    <div id="error" class="error"></div>
 
-    <p id="jumlahPendaftar" role="status" aria-live="polite"></p>
-    <p id="errorMessage" class="error" style="display:none;"></p>
-    <p id="loadingIndicator" class="loading" style="display:none;">Memuat data...</p>
+    <!-- Tampilan Desktop -->
+    <table id="data-table" class="desktop-view hidden">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Siswa</th>
+          <th>Asal TK/RA</th>
+          <th>Jenis Kelamin</th>
+          <th>Tanggal Pendaftaran</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Tampilan Mobile -->
+    <div id="data-cards" class="mobile-view hidden"></div>
   </main>
 
   <footer>
-    <div class="footer-content">
-      <p>© 2025 SDIT INSANI - Semua Hak Dilindungi</p>
-      <p>Jl. Pendidikan No.123, Jakarta - Telp: (021) 12345678</p>
-      <p>Email: info@sditinsani.sch.id | Website: www.sditinsani.sch.id</p>
-    </div>
+    <p>© 2025 SDIT INSANI | Sistem PPDB Online</p>
+    <p>Dikembangkan dengan ❤️ untuk kemudahan pendaftaran</p>
   </footer>
 
-  <script src="table.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
