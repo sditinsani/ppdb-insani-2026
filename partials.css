@@ -25,10 +25,10 @@ h1 {
 
 /* Tombol Refresh */
 .refresh-button {
-    background-color: #007BFF;
+    background-color: #0056b3; /* Biru gelap yang lebih elegan */
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px; /* Ukuran lebih besar */
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
@@ -42,7 +42,7 @@ h1 {
 }
 
 .refresh-button:hover {
-    background-color: #0056b3;
+    background-color: #004284; /* Warna hover yang lebih gelap */
 }
 
 .button-icon {
@@ -135,27 +135,15 @@ th:nth-child(6), td:nth-child(6) {
     padding: 30px;
 }
 
-/* Status colors */
+/* Status colors (HANYA TEKS BERWARNA, TANPA KOTAK) */
 .status-diterima {
-    color: white;
-    background-color: #28a745;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-weight: normal;
-    display: inline-block;
-    font-size: 0.85rem;
-    width: 80px; /* Ukuran fixed agar seragam */
+    color: #28a745; /* Hanya teksnya yang hijau */
+    font-weight: 600;
 }
 
 .status-ditolak {
-    color: white;
-    background-color: #dc3545;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-weight: normal;
-    display: inline-block;
-    font-size: 0.85rem;
-    width: 80px; /* Ukuran fixed agar seragam */
+    color: #dc3545; /* Hanya teksnya yang merah */
+    font-weight: 600;
 }
 
 /* Card View Styles (for mobile) */
