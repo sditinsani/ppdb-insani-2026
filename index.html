@@ -3,22 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PPDB SDIT INSANI 2026/2027</title>
+  <title>Data Pendaftaran PPDB</title>
   <link rel="stylesheet" href="partials.css">
 </head>
 <body>
   <header>
-    <h1>Daftar Pendaftaran Siswa</h1>
+    <h1>Data Pendaftaran PPDB</h1>
   </header>
 
   <main>
-    <div id="loading" class="loading">Memuat data...</div>
-    <div id="error" class="error"></div>
-    <div id="cards-container" class="cards-container"></div>
+    <div class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>No. Urut</th>
+            <th>Nama Lengkap Siswa</th>
+            <th>Asal TK/RA</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Pendaftaran</th>
+            <th>Status Pendaftaran</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" style="text-align:center;">Memuat data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 
   <footer>
-    <p>© 2025 SDIT INSANI - Sistem PPDB Online</p>
+    <p>&copy; 2025 SDIT INSANI | Data Pendaftaran PPDB</p>
   </footer>
 
   <script src="script.js"></script>
