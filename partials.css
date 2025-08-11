@@ -145,11 +145,6 @@ footer {
     margin: 5px 0;
 }
 
-.footer-social-block {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .footer-social-block a {
     color: var(--accent-color);
     text-decoration: none;
@@ -277,8 +272,8 @@ th:nth-child(6), td:nth-child(6) {
     header {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem 1rem;
-        gap: 15px;
+        padding: 1rem;
+        gap: 10px;
     }
     .header-content {
         flex-direction: column;
@@ -286,10 +281,10 @@ th:nth-child(6), td:nth-child(6) {
         gap: 10px;
     }
     .logo {
-        width: 60px;
+        width: 50px; /* Ukuran logo lebih kecil di mobile */
     }
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.3rem; /* Ukuran font judul lebih kecil */
     }
     /* Mobile-specific toolbar adjustments */
     .toolbar {
@@ -310,14 +305,15 @@ th:nth-child(6), td:nth-child(6) {
         align-items: stretch;
     }
     #search-input {
-        width: calc(100% - 24px); /* Penuhi lebar penuh */
+        width: calc(100% - 24px);
     }
     .total-pendaftar {
         text-align: left;
     }
     /* Mobile-specific dashboard adjustments */
     .dashboard-container {
-        padding: 20px;
+        padding: 20px 15px;
+        margin: 20px auto;
     }
     .dashboard-stats {
         grid-template-columns: 1fr;
@@ -327,7 +323,7 @@ th:nth-child(6), td:nth-child(6) {
     .dashboard-nav {
         flex-direction: column;
         align-items: center;
-        padding: 0 15px;
+        padding: 0;
     }
     .dashboard-nav a {
         width: 100%;
