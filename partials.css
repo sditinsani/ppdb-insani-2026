@@ -324,12 +324,12 @@ th:nth-child(6), td:nth-child(6) {
         flex-direction: column;
         align-items: center;
         padding: 0;
-        margin-top: 20px; /* Jarak atas untuk mobile */
+        margin-top: 20px;
     }
     .dashboard-nav a {
         width: 100%;
         text-align: center;
-        margin-top: 10px; /* Memberi jarak antar tombol */
+        margin-top: 10px;
         justify-content: center;
     }
     .stat-card {
