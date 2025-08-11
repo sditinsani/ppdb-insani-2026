@@ -23,37 +23,67 @@ h1 {
     font-weight: 600;
 }
 
-/* Tombol Refresh */
+/* Toolbar (Refresh Button & Search) */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 30px auto 15px;
+    padding: 0 20px;
+}
+
 .refresh-button {
-    background-color: #0056b3; /* Biru gelap yang lebih elegan */
+    background-color: #0056b3;
     color: white;
     border: none;
-    padding: 12px 24px; /* Ukuran lebih besar */
+    padding: 8px 12px; /* Ukuran lebih kecil */
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 500;
+    transition: background-color 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease;
-    margin: 20px auto 0;
-    width: fit-content;
 }
 
 .refresh-button:hover {
-    background-color: #004284; /* Warna hover yang lebih gelap */
+    background-color: #004284;
 }
 
 .button-icon {
     font-size: 1.2rem;
-    line-height: 1;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 250px;
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+.total-pendaftar {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
 }
 
 /* Footer */
 footer {
-    background: #2c3e50; /* Warna footer lebih gelap */
-    color: #ecf0f1; /* Warna teks lebih cerah */
+    background: #2c3e50;
+    color: #ecf0f1;
     text-align: center;
     padding: 2rem;
     font-size: 0.9rem;
@@ -66,16 +96,12 @@ footer {
     gap: 10px;
 }
 
-.footer-info-block, .footer-social-block {
-    margin: 0;
-}
-
 .footer-info-block p {
     margin: 5px 0;
 }
 
 .footer-social-block a {
-    color: #f1c40f; /* Warna link kuning cerah */
+    color: #f1c40f;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
@@ -87,7 +113,7 @@ footer {
 
 /* Table container (for desktop) */
 .table-container {
-    margin: 30px auto;
+    margin: 15px auto;
     padding: 20px;
     max-width: 1100px;
     background: white;
@@ -122,7 +148,6 @@ tbody tr:hover {
     background-color: #e9ecef;
 }
 
-/* Penyesuaian khusus untuk kolom 'Status Pendaftaran' */
 th:nth-child(6), td:nth-child(6) {
     text-align: center;
 }
@@ -135,14 +160,14 @@ th:nth-child(6), td:nth-child(6) {
     padding: 30px;
 }
 
-/* Status colors (HANYA TEKS BERWARNA, TANPA KOTAK) */
+/* Status colors */
 .status-diterima {
-    color: #28a745; /* Hanya teksnya yang hijau */
+    color: #28a745;
     font-weight: 600;
 }
 
 .status-ditolak {
-    color: #dc3545; /* Hanya teksnya yang merah */
+    color: #dc3545;
     font-weight: 600;
 }
 
@@ -193,13 +218,23 @@ th:nth-child(6), td:nth-child(6) {
     .card-container {
         display: block;
     }
+    .toolbar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 0 15px;
+    }
+    .search-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+    #search-input {
+        width: 100%;
+    }
     h1 {
         font-size: 1.5rem;
     }
     body {
         font-size: 14px;
-    }
-    .footer-content {
-        flex-direction: column;
     }
 }
