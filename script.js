@@ -1,45 +1,36 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzQsYJ_clOLKVOaA_kcW6T271aBwxNETVhOqWEYLIH8LB_X0gl6KxqnA3feR1uhJAyIzQ/exec";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("cards-container");
-  const loading = document.getElementById("loading");
-  const errorMsg = document.getElementById("error");
+async function loadData() {
+  const tableBody = document.querySelector("#dataTable tbody");
+  tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Memuat data...</td></tr>`;
 
-  async function fetchData() {
-    try {
-      const response = await fetch(SHEET_URL);
-      if (!response.ok) throw new Error("Gagal mengambil data");
-      const data = await response.json();
+  try {
+    const response = await fetch(SHEET_URL);
+    const data = await response.json();
 
-      loading.style.display = "none";
-      renderCards(data);
-    } catch (error) {
-      loading.style.display = "none";
-      errorMsg.textContent = "Terjadi kesalahan saat memuat data.";
-    }
-  }
-
-  function renderCards(data) {
-    container.innerHTML = "";
+    tableBody.innerHTML = "";
 
     data.forEach(row => {
-      const card = document.createElement("div");
-      card.className = "card";
+      const tr = document.createElement("tr");
 
-      const statusClass = row["Status Pendaftaran"] === "Diterima" ? "status-diterima" : "status-tidak";
-      const statusText = `<span class="status ${statusClass}">${row["Status Pendaftaran"]}</span>`;
-
-      card.innerHTML = `
-        <h2>${row["Nama Lengkap Siswa"]}</h2>
-        <p><strong>Asal TK/RA:</strong> ${row["Asal TK/RA"]}</p>
-        <p><strong>Jenis Kelamin:</strong> ${row["Jenis Kelamin"]}</p>
-        <p><strong>Tanggal Pendaftaran:</strong> ${row["Tanggal Pendaftaran"]}</p>
-        <p>${statusText}</p>
+      tr.innerHTML = `
+        <td>${row["No. Urut"]}</td>
+        <td>${row["Nama Lengkap Siswa"]}</td>
+        <td>${row["Asal TK/RA"]}</td>
+        <td>${row["Jenis Kelamin"]}</td>
+        <td>${row["Tanggal Pendaftaran"]}</td>
+        <td class="${row["Status Pendaftaran"] === 'Diterima' ? 'status-diterima' : 'status-tidak'}">
+          ${row["Status Pendaftaran"]}
+        </td>
       `;
 
-      container.appendChild(card);
+      tableBody.appendChild(tr);
     });
-  }
 
-  fetchData();
-});
+  } catch (error) {
+    console.error("Gagal memuat data:", error);
+    tableBody.innerHTML = `<tr><td colspan="6" style="color:red;text-align:center;">Gagal memuat data!</td></tr>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadData);
