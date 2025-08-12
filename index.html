@@ -6,16 +6,32 @@
     <title>Dashboard PPDB SDIT INSANI</title>
     <link rel="stylesheet" href="partials.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Gaya CSS dari respons sebelumnya */
-    </style>
 </head>
 <body>
     <header>
-        </header>
+        <div class="header-content">
+            <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
+            <h1>Dashboard PPDB SDIT INSANI</h1>
+        </div>
+    </header>
 
     <main>
-        </main>
+        <div class="main-content">
+            <div class="dashboard-container">
+                <h2>Ringkasan Pendaftaran</h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>Total Pendaftar</h3>
+                        <p class="stat-number" id="total-pendaftar-dashboard">0</p>
+                    </div>
+                </div>
+                <div class="dashboard-nav">
+                    <a href="form.html"><i class="fas fa-edit"></i> Daftar Sekarang</a>
+                    <a href="daftar.html"><i class="fas fa-list-alt"></i> Lihat Status Pendaftar</a>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <div id="footer-placeholder"></div>
 
@@ -23,13 +39,22 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
 
         async function fetchDashboardData() {
-            // Logika untuk mengambil data
-        }
+            try {
+                const res = await fetch(API_URL);
+                const data = await res.json();
+                
+                const filteredData = data.filter(row =>
+                    row["No. Urut"] && row["Nama Lengkap Siswa"]
+                );
 
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchDashboardData();
-            loadFooter();
-        });
+                const total = filteredData.length;
+                document.getElementById('total-pendaftar-dashboard').textContent = total;
+
+            } catch (error) {
+                console.error("Gagal memuat data dashboard:", error);
+                document.getElementById('total-pendaftar-dashboard').textContent = "Error";
+            }
+        }
         
         async function loadFooter() {
             try {
@@ -40,6 +65,11 @@
                 console.error('Gagal memuat footer:', error);
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDashboardData();
+            loadFooter();
+        });
     </script>
 </body>
 </html>
