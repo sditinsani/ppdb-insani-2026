@@ -1,81 +1,56 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Status Pendaftaran SDIT INSANI</title>
-  <link rel="stylesheet" href="partials.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Pendaftaran SDIT INSANI</title>
+    <link rel="stylesheet" href="partials.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <header>
-      <div class="header-content">
-          <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
-          <h1>Status Pendaftaran PPDB</h1>
-      </div>
-  </header>
+    <header>
+        </header>
 
-  <main>
-    <div class="main-content">
-      <div class="toolbar">
-        <div class="toolbar-buttons">
-          <a href="index.html" class="refresh-button">
-            <i class="fas fa-home button-icon"></i>
-          </a>
-          <button class="refresh-button" id="refresh-data-button">
-            <i class="fas fa-sync-alt button-icon"></i>
-          </button>
+    <main>
+        </main>
+    
+    <div id="toast-message" class="toast">
         </div>
-        <div class="search-container">
-          <input type="text" id="search-input" placeholder="Cari Nama Siswa...">
-          <span id="total-pendaftar" class="total-pendaftar"></span>
-        </div>
-      </div>
-      
-      <div class="table-container">
-        <table id="data-table">
-          <thead>
-            <tr>
-              <th>No. Urut</th>
-              <th>Nama Lengkap Siswa</th>
-              <th>Asal TK/RA</th>
-              <th>Jenis Kelamin</th>
-              <th>Tanggal Pendaftaran</th>
-              <th>Status Pendaftaran</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="6" class="loading">⏳ Memuat data...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-container" id="card-view">
-        <p class="loading-card">⏳ Memuat data...</p>
-      </div>
-    </div>
-  </main>
-  
-  <div id="toast-message" class="toast">
-    <div class="toast-content">
-      <span class="toast-icon">✅</span>
-      <p>Data berhasil diperbarui!</p>
-    </div>
-  </div>
-  
-  <footer>
-    <div class="footer-simple">
-        <p>Alamat : Jl. Karamat No. 55 Gunung Puyuh Kota Sukabumi</p>
-        <p>HP. 081563180071</p>
-        <div class="footer-social-block">
-            <a href="http://www.sditinsani.net" target="_blank">www.sditinsani.net</a> |
-            <a href="https://www.facebook.com/sditinsanisukabumi" target="_blank">FB : sditinsanisukabumi</a> |
-            <a href="https://www.instagram.com/sditinsani" target="_blank">IG : sditinsani</a>
-        </div>
-        <p class="copyright">&copy; 2024 PPDB SDIT INSANI. All Rights Reserved.</p>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchData();
+            loadFooter();
+            
+            const refreshButton = document.getElementById('refresh-data-button');
+            if (refreshButton) {
+                refreshButton.addEventListener('click', fetchData);
+            }
+            
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('keyup', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filteredData = allData.filter(row => {
+                        return row["Nama Lengkap Siswa"]?.toLowerCase().includes(searchTerm);
+                    });
+                    renderData(filteredData);
+                });
+            }
+        });
+
+        async function loadFooter() {
+            try {
+                const response = await fetch('footer.html');
+                const footerHtml = await response.text();
+                document.getElementById('footer-placeholder').innerHTML = footerHtml;
+            } catch (error) {
+                console.error('Gagal memuat footer:', error);
+            }
+        }
+    </script>
 </body>
 </html>
