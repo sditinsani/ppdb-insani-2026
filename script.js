@@ -7,16 +7,15 @@ async function fetchData() {
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
     const refreshButton = document.getElementById('refresh-data-button');
-    const updateMessage = document.getElementById('update-message');
+    const updateMessage = document.getElementById('modal-message');
 
     if (refreshButton) {
         refreshButton.classList.add('is-loading');
         refreshButton.disabled = true;
     }
 
-    // Sembunyikan pesan update saat memuat
     if (updateMessage) {
-        updateMessage.classList.remove('visible');
+        updateMessage.style.display = 'none'; // Sembunyikan pesan saat memuat
     }
     
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
@@ -41,10 +40,10 @@ async function fetchData() {
 
         // Tampilkan pesan sukses setelah data berhasil diperbarui
         if (updateMessage) {
-            updateMessage.classList.add('visible');
+            updateMessage.style.display = 'flex'; // Tampilkan modal
             setTimeout(() => {
-                updateMessage.classList.remove('visible');
-            }, 3000); // Pesan akan hilang setelah 3 detik
+                updateMessage.style.display = 'none'; // Sembunyikan setelah 3 detik
+            }, 3000); 
         }
 
     } catch (error) {
