@@ -6,22 +6,30 @@
     <title>Formulir Pendaftaran SDIT INSANI</title>
     <link rel="stylesheet" href="partials.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Gaya CSS dari respons sebelumnya */
-    </style>
 </head>
 <body>
     <header>
-        </header>
+        <div class="header-content">
+            <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
+            <h1>Formulir Pendaftaran PPDB</h1>
+        </div>
+    </header>
 
     <main>
-        </main>
+        <div class="main-content">
+            <div class="form-container">
+                <h2>Isi Formulir Pendaftaran</h2>
+                <p>Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran lengkap. Anda akan diarahkan ke Google Form untuk proses pengisian data dan pengunggahan berkas.</p>
+                <a href="https://forms.gle/5RyqCmDr19vLc7YXA" target="_blank" class="form-link-button">
+                    <i class="fas fa-edit"></i> Isi Formulir Sekarang
+                </a>
+            </div>
+        </div>
+    </main>
 
     <div id="footer-placeholder"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', loadFooter);
-
         async function loadFooter() {
             try {
                 const response = await fetch('footer.html');
@@ -31,6 +39,7 @@
                 console.error('Gagal memuat footer:', error);
             }
         }
+        document.addEventListener('DOMContentLoaded', loadFooter);
     </script>
 </body>
 </html>
