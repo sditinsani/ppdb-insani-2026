@@ -7,15 +7,17 @@ async function fetchData() {
     const cardContainer = document.getElementById("card-view");
     const totalPendaftar = document.getElementById("total-pendaftar");
     const refreshButton = document.getElementById('refresh-data-button');
-    const updateMessage = document.getElementById('modal-message');
+    const toastMessage = document.getElementById('toast-message');
 
     if (refreshButton) {
         refreshButton.classList.add('is-loading');
         refreshButton.disabled = true;
     }
-
-    if (updateMessage) {
-        updateMessage.style.display = 'none'; // Sembunyikan pesan saat memuat
+    
+    // Pastikan toast tersembunyi sebelum memuat data
+    if (toastMessage) {
+        toastMessage.style.display = 'none';
+        toastMessage.classList.add('hidden');
     }
     
     tableBody.innerHTML = `<tr><td colspan="6" class="loading">⏳ Memuat data...</td></tr>`;
@@ -38,12 +40,18 @@ async function fetchData() {
 
         renderData(allData);
 
-        // Tampilkan pesan sukses setelah data berhasil diperbarui
-        if (updateMessage) {
-            updateMessage.style.display = 'flex'; // Tampilkan modal
+        // Tampilkan toast setelah data berhasil diperbarui
+        if (toastMessage) {
+            toastMessage.style.display = 'block';
+            toastMessage.classList.remove('hidden');
+            
             setTimeout(() => {
-                updateMessage.style.display = 'none'; // Sembunyikan setelah 3 detik
+                toastMessage.classList.add('hidden');
             }, 3000); 
+
+            setTimeout(() => {
+                toastMessage.style.display = 'none';
+            }, 3500); // Sembunyikan setelah animasi slideOut selesai
         }
 
     } catch (error) {
