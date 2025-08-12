@@ -39,6 +39,22 @@ header {
     gap: 20px;
 }
 
+/* Tombol Home */
+.home-button {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px;
+}
+
+.home-button:hover {
+    color: var(--accent-color);
+}
+
 .logo {
     width: 60px;
     height: auto;
@@ -231,19 +247,30 @@ th:nth-child(6), td:nth-child(6) { text-align: center; }
 .toast-icon { font-size: 1.2em; }
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+/* --- Tampilan Form (Kode Perbaikan) --- */
 .form-container {
-    max-width: 700px; margin: 30px auto; padding: 30px; background: #fff;
-    border-radius: 12px; box-shadow: 0px 4px 20px rgba(0,0,0,0.1); text-align: center;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    text-align: center;
 }
-.form-container h2 { text-align: center; color: #003366; margin-bottom: 15px; font-size: 1.8rem; }
-.form-container p { font-size: 1.1rem; color: #555; margin-bottom: 25px; }
-.form-link-button {
-    display: inline-block; padding: 15px 30px; background-color: var(--secondary-color);
-    color: white; text-decoration: none; border-radius: 8px; font-size: 18px;
-    font-weight: 600; transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-top: 20px;
+.form-title {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
-.form-link-button:hover { background-color: #0056b3; transform: translateY(-2px); }
+.form-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
 
 /* Footer */
 footer {
@@ -260,6 +287,8 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .header-content { flex-direction: column; text-align: center; gap: 10px; }
+    .home-button { display: none; } /* Sembunyikan tombol home di HP agar header lebih rapi */
     .dashboard-container { padding: 20px 15px; margin: 20px auto; }
     .dashboard-title { font-size: 1.5rem; }
     .stats-container { margin-bottom: 30px; }
@@ -272,7 +301,6 @@ footer {
     .table-container { display: none; }
     .card-container { display: block; }
     header { flex-direction: column; text-align: center; padding: 1rem; gap: 10px; }
-    .header-content { flex-direction: column; text-align: center; gap: 10px; }
     .logo { width: 50px; } h1 { font-size: 1.3rem; }
     .toolbar { flex-direction: column; gap: 15px; align-items: flex-start; padding: 0 15px; margin-top: 20px; }
     .toolbar-buttons { width: 100%; justify-content: space-between; }
