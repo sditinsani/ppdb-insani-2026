@@ -9,18 +9,75 @@
 </head>
 <body>
     <header>
-        </header>
+        <div class="header-content">
+            <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
+            <h1>Status Pendaftaran PPDB</h1>
+        </div>
+    </header>
 
     <main>
-        </main>
-    
-    <div id="toast-message" class="toast">
+        <div class="main-content">
+            <div class="toolbar">
+                <div class="toolbar-buttons">
+                    <a href="index.html" class="refresh-button">
+                        <i class="fas fa-home button-icon"></i>
+                    </a>
+                    <button class="refresh-button" id="refresh-data-button">
+                        <i class="fas fa-sync-alt button-icon"></i>
+                    </button>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Cari Nama Siswa...">
+                    <span id="total-pendaftar" class="total-pendaftar"></span>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>No. Urut</th>
+                            <th>Nama Lengkap Siswa</th>
+                            <th>Asal TK/RA</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Tanggal Pendaftaran</th>
+                            <th>Status Pendaftaran</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="loading">⏳ Memuat data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-container" id="card-view">
+                <p class="loading-card">⏳ Memuat data...</p>
+            </div>
         </div>
+    </main>
+
+    <div id="toast-message" class="toast">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <p>Data berhasil diperbarui!</p>
+        </div>
+    </div>
     
     <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
     <script>
+        async function loadFooter() {
+            try {
+                const response = await fetch('footer.html');
+                const footerHtml = await response.text();
+                document.getElementById('footer-placeholder').innerHTML = footerHtml;
+            } catch (error) {
+                console.error('Gagal memuat footer:', error);
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', () => {
             fetchData();
             loadFooter();
@@ -41,16 +98,6 @@
                 });
             }
         });
-
-        async function loadFooter() {
-            try {
-                const response = await fetch('footer.html');
-                const footerHtml = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = footerHtml;
-            } catch (error) {
-                console.error('Gagal memuat footer:', error);
-            }
-        }
     </script>
 </body>
 </html>
