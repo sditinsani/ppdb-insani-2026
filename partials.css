@@ -131,51 +131,58 @@ h1 {
     font-weight: 500;
 }
 
-/* Modal Message Box Styles */
-.modal {
+/* Toast Message Styles */
+.toast {
     display: none; /* Sembunyikan secara default */
     position: fixed; /* Tampil di depan halaman */
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    backdrop-filter: blur(2px);
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s;
+    animation: slideIn 0.5s forwards;
 }
 
-.modal-content {
+.toast.hidden {
+    animation: slideOut 0.5s forwards;
+}
+
+.toast-content {
     background-color: #d4edda;
     color: #155724;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    text-align: center;
-    font-size: 1.2rem;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-align: left;
+    font-size: 1rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 15px;
-    transform: scale(0.9);
-    animation: popUp 0.3s forwards;
+    gap: 10px;
 }
 
-.modal-icon {
-    font-size: 1.5em;
+.toast-icon {
+    font-size: 1.2em;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-@keyframes popUp {
-    from { transform: scale(0.9); }
-    to { transform: scale(1); }
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
 /* Footer */
