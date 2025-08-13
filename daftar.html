@@ -28,19 +28,7 @@
 
     <main>
         <div class="main-content">
-            <div class="toolbar">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Cari berdasarkan nama atau no. urut...">
-                </div>
-                <div class="toolbar-buttons">
-                    <span class="total-pendaftar" id="total-pendaftar">0 Pendaftar</span>
-                    <button class="refresh-button" id="refresh-button">
-                        <i class="fas fa-sync-alt button-icon"></i> Refresh
-                    </button>
-                </div>
-            </div>
-
-            <div class="table-container">
+            <div class="table-container card">
                 <table>
                     <thead>
                         <tr>
@@ -48,7 +36,6 @@
                             <th>Nama Siswa</th>
                             <th>Asal Sekolah</th>
                             <th>Tanggal Daftar</th>
-                            <th>Nama Ayah</th>
                             <th>Status Pembayaran</th>
                         </tr>
                     </thead>
@@ -59,19 +46,6 @@
                 <p class="error" id="error-table" style="display:none;">Gagal memuat data. Silakan coba refresh.</p>
                 <p class="no-data" id="no-data-table" style="display:none;">Tidak ada data pendaftar ditemukan.</p>
             </div>
-
-            <div class="card-container" id="card-view-container" style="display:none;">
-                <p class="loading-card" id="loading-card">Memuat data...</p>
-                <p class="error-card" id="error-card" style="display:none;">Gagal memuat data. Silakan coba refresh.</p>
-                <p class="no-data-card" id="no-data-card" style="display:none;">Tidak ada data pendaftar ditemukan.</p>
-            </div>
-            
-            <div id="toast" class="toast">
-                <div class="toast-content">
-                    <i class="fas fa-check-circle toast-icon"></i>
-                    Data berhasil diperbarui!
-                </div>
-            </div>
         </div>
     </main>
 
@@ -80,111 +54,54 @@
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
         const tableBody = document.getElementById('data-table-body');
-        const cardViewContainer = document.getElementById('card-view-container');
         const loadingTable = document.getElementById('loading-table');
         const errorTable = document.getElementById('error-table');
         const noDataTable = document.getElementById('no-data-table');
-        const loadingCard = document.getElementById('loading-card');
-        const errorCard = document.getElementById('error-card');
-        const noDataCard = document.getElementById('no-data-card');
-        const searchInput = document.getElementById('search-input');
-        const refreshButton = document.getElementById('refresh-button');
-        const totalPendaftarSpan = document.getElementById('total-pendaftar');
-        let allData = [];
-
+        
         async function fetchData() {
             try {
                 loadingTable.style.display = 'block';
-                loadingCard.style.display = 'block';
                 errorTable.style.display = 'none';
-                errorCard.style.display = 'none';
                 noDataTable.style.display = 'none';
-                noDataCard.style.display = 'none';
-                refreshButton.classList.add('is-loading');
 
                 const res = await fetch(API_URL);
                 if (!res.ok) throw new Error("Network response was not ok");
                 const data = await res.json();
                 
-                allData = data.filter(row =>
+                const allData = data.filter(row =>
                     row["No. Urut"] && row["Nama Lengkap Siswa"]
                 );
                 
                 renderData(allData);
-                showToast();
+
             } catch (error) {
                 console.error("Gagal memuat data:", error);
                 loadingTable.style.display = 'none';
-                loadingCard.style.display = 'none';
                 errorTable.style.display = 'block';
-                errorCard.style.display = 'block';
-            } finally {
-                refreshButton.classList.remove('is-loading');
             }
         }
 
         function renderData(data) {
             tableBody.innerHTML = '';
-            cardViewContainer.innerHTML = '';
             
-            totalPendaftarSpan.textContent = `${data.length} Pendaftar`;
-
             loadingTable.style.display = 'none';
-            loadingCard.style.display = 'none';
 
             if (data.length === 0) {
                 noDataTable.style.display = 'block';
-                noDataCard.style.display = 'block';
                 return;
             }
 
             data.forEach(row => {
-                // Render table row
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${row["No. Urut"]}</td>
                     <td>${row["Nama Lengkap Siswa"]}</td>
                     <td>${row["Asal Sekolah"]}</td>
                     <td>${row["Tanggal Pendaftaran"]}</td>
-                    <td>${row["Nama Lengkap Ayah"]}</td>
                     <td><span class="${row["Status Pembayaran"] === 'LUNAS' ? 'status-diterima' : 'status-ditolak'}">${row["Status Pembayaran"]}</span></td>
                 `;
                 tableBody.appendChild(tr);
-
-                // Render card view
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card-item"><div class="card-label">No. Urut</div><div class="card-value">${row["No. Urut"]}</div></div>
-                    <div class="card-item"><div class="card-label">Nama Siswa</div><div class="card-value">${row["Nama Lengkap Siswa"]}</div></div>
-                    <div class="card-item"><div class="card-label">Asal Sekolah</div><div class="card-value">${row["Asal Sekolah"]}</div></div>
-                    <div class="card-item"><div class="card-label">Tanggal Daftar</div><div class="card-value">${row["Tanggal Pendaftaran"]}</div></div>
-                    <div class="card-item"><div class="card-label">Nama Ayah</div><div class="card-value">${row["Nama Lengkap Ayah"]}</div></div>
-                    <div class="card-item"><div class="card-label">Status Pembayaran</div><div class="card-value"><span class="${row["Status Pembayaran"] === 'LUNAS' ? 'status-diterima' : 'status-ditolak'}">${row["Status Pembayaran"]}</span></div></div>
-                `;
-                cardViewContainer.appendChild(card);
             });
-        }
-
-        function filterData() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredData = allData.filter(row =>
-                row["Nama Lengkap Siswa"].toLowerCase().includes(searchTerm) ||
-                row["No. Urut"].toString().toLowerCase().includes(searchTerm)
-            );
-            renderData(filteredData);
-        }
-
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
-            setTimeout(() => {
-                toast.style.display = 'none';
-                toast.classList.remove('hidden');
-            }, 3500);
         }
 
         async function loadFooter() {
@@ -196,11 +113,7 @@
                 console.error('Gagal memuat footer:', error);
             }
         }
-
-        // Event listeners
-        searchInput.addEventListener('input', filterData);
-        refreshButton.addEventListener('click', fetchData);
-
+        
         const openNavBtn = document.getElementById('open-nav-btn');
         const closeNavBtn = document.getElementById('close-nav-btn');
         const sideNav = document.getElementById('side-nav');
