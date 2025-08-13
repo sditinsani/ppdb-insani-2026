@@ -129,13 +129,11 @@
             }
 
             data.forEach(row => {
-                let statusColorClass = '';
+                let statusColorClass = 'bg-warning text-dark'; // Default
                 if (row["Status Pendaftaran"] === 'DITERIMA') {
                     statusColorClass = 'bg-success text-white';
                 } else if (row["Status Pendaftaran"] === 'DITOLAK') {
                     statusColorClass = 'bg-danger text-white';
-                } else {
-                    statusColorClass = 'bg-warning text-dark';
                 }
                 
                 // Render table row
