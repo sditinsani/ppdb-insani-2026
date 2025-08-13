@@ -343,9 +343,20 @@ th, td { border: 1px solid var(--border-color); padding: 15px 12px; }
 th { background: var(--background-color); color: var(--text-color); font-weight: 600; text-align: left; }
 tbody tr:nth-child(even) { background-color: #f9f9f9; }
 tbody tr:hover { background-color: #e9ecef; }
-.status-diterima { color: #28a745; font-weight: 600; }
-.status-ditolak { color: #dc3545; font-weight: 600; }
-.status-pending { color: #ffc107; font-weight: 600; }
+
+/* Gaya baru untuk status pendaftaran */
+.status-label {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+}
+.status-diterima { background-color: #e6f7eb; color: #28a745; }
+.status-ditolak { background-color: #fcebeb; color: #dc3545; }
+.status-pending { background-color: #fff3e0; color: #ff9800; }
+
 .loading, .error, .no-data, .loading-card, .error-card, .no-data-card {
     text-align: center; font-style: italic; color: #888; padding: 30px;
 }
