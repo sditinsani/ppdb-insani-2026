@@ -130,9 +130,11 @@
 
             data.forEach(row => {
                 let statusColorClass = 'bg-warning text-dark'; // Default
-                if (row["Status Pendaftaran"] === 'DITERIMA') {
+                const status = row["Status Pendaftaran"] ? row["Status Pendaftaran"].trim().toUpperCase() : '';
+                
+                if (status === 'DITERIMA') {
                     statusColorClass = 'bg-success text-white';
-                } else if (row["Status Pendaftaran"] === 'DITOLAK') {
+                } else if (status === 'DITOLAK') {
                     statusColorClass = 'bg-danger text-white';
                 }
                 
