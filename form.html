@@ -13,16 +13,22 @@
             <img src="LOGO_SDIT_INSANI.png" alt="Logo SDIT INSANI" class="logo">
             <h1>Formulir Pendaftaran PPDB</h1>
         </div>
-        <div class="header-nav">
-            <a href="index.html" class="home-button">
-                <i class="fas fa-home button-icon"></i>
-            </a>
-        </div>
+        <button id="open-nav-btn" class="hamburger-btn"><i class="fas fa-bars"></i></button>
     </header>
+
+    <nav class="side-nav" id="side-nav">
+        <button id="close-nav-btn" class="close-btn"><i class="fas fa-times"></i></button>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="daftar.html" class="nav-link"><i class="fas fa-list-alt"></i> Status Pendaftar</a>
+            <a href="form.html" class="nav-link nav-link-active"><i class="fas fa-edit"></i> Isi Formulir</a>
+        </div>
+    </nav>
+    <div id="overlay"></div>
 
     <main>
         <div class="main-content">
-            <div class="form-container">
+            <div class="form-container card">
                 <h2 class="form-title">Isi Formulir Pendaftaran</h2>
                 <p class="form-description">Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran lengkap. Anda akan diarahkan ke Google Form untuk proses pengisian data dan pengunggahan berkas.</p>
                 <a href="https://forms.gle/5RyqCmDr19vLc7YXA" target="_blank" class="action-button primary-button">
@@ -35,6 +41,26 @@
     <div id="footer-placeholder"></div>
 
     <script>
+        const openNavBtn = document.getElementById('open-nav-btn');
+        const closeNavBtn = document.getElementById('close-nav-btn');
+        const sideNav = document.getElementById('side-nav');
+        const overlay = document.getElementById('overlay');
+
+        openNavBtn.addEventListener('click', () => {
+            sideNav.classList.add('is-open');
+            overlay.style.display = 'block';
+        });
+
+        closeNavBtn.addEventListener('click', () => {
+            sideNav.classList.remove('is-open');
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            sideNav.classList.remove('is-open');
+            overlay.style.display = 'none';
+        });
+
         async function loadFooter() {
             try {
                 const response = await fetch('footer.html');
@@ -44,7 +70,9 @@
                 console.error('Gagal memuat footer:', error);
             }
         }
-        document.addEventListener('DOMContentLoaded', loadFooter);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFooter();
+        });
     </script>
 </body>
 </html>
