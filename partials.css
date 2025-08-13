@@ -29,14 +29,33 @@ header {
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Menempatkan elemen di kiri dan kanan */
     align-items: center;
 }
 
-.header-content {
+.header-brand {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
 }
 
 /* Tombol Home */
@@ -53,19 +72,6 @@ header {
 
 .home-button:hover {
     color: var(--accent-color);
-}
-
-.logo {
-    width: 60px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-h1 {
-    font-size: 1.8rem;
-    margin: 0;
-    font-weight: 600;
 }
 
 .main-content {
@@ -287,8 +293,9 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .header-content { flex-direction: column; text-align: center; gap: 10px; }
-    .home-button { display: none; }
+    header { padding: 1rem; flex-direction: column; text-align: center; }
+    .header-brand { justify-content: center; }
+    .header-nav { display: none; } /* Sembunyikan tombol home di HP agar header lebih rapi */
     .dashboard-container { padding: 20px 15px; margin: 20px auto; }
     .dashboard-title { font-size: 1.5rem; }
     .stats-container { margin-bottom: 30px; }
@@ -300,7 +307,6 @@ footer {
     .action-button { font-size: 1rem; padding: 12px 25px; }
     .table-container { display: none; }
     .card-container { display: block; }
-    header { flex-direction: column; text-align: center; padding: 1rem; gap: 10px; }
     .logo { width: 50px; } h1 { font-size: 1.3rem; }
     .toolbar { flex-direction: column; gap: 15px; align-items: flex-start; padding: 0 15px; margin-top: 20px; }
     .toolbar-buttons { width: 100%; justify-content: space-between; }
