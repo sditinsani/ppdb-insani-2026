@@ -88,6 +88,23 @@ p {
     color: #888;
 }
 
+/* --- Tambahan untuk Warna Status Pendaftaran --- */
+.status-diterima {
+    background-color: #28a745; /* Hijau */
+    color: white;
+}
+
+.status-ditolak {
+    background-color: #dc3545; /* Merah */
+    color: white;
+}
+
+.status-pending {
+    background-color: #ffc107; /* Kuning */
+    color: black;
+}
+
+
 @media (max-width: 991.98px) {
     .nav-link.active {
         border-bottom: none;
