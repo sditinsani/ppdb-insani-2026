@@ -120,6 +120,8 @@
             }
 
             data.forEach(row => {
+                const statusClass = row["Status Pendaftaran"] === 'DITERIMA' ? 'status-diterima' : (row["Status Pendaftaran"] === 'DITOLAK' ? 'status-ditolak' : 'status-pending');
+                
                 // Render table row
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -128,7 +130,7 @@
                     <td>${row["Asal TK/RA"]}</td>
                     <td>${row["Jenis Kelamin"]}</td>
                     <td>${row["Tanggal Pendaftaran"]}</td>
-                    <td><span class="${row["Status Pendaftaran"] === 'DITERIMA' ? 'status-diterima' : (row["Status Pendaftaran"] === 'DITOLAK' ? 'status-ditolak' : 'status-pending')}">${row["Status Pendaftaran"]}</span></td>
+                    <td><span class="${statusClass}">${row["Status Pendaftaran"]}</span></td>
                 `;
                 tableBody.appendChild(tr);
 
@@ -141,7 +143,7 @@
                     <div class="card-item"><div class="card-label">Asal TK/RA</div><div class="card-value">${row["Asal TK/RA"]}</div></div>
                     <div class="card-item"><div class="card-label">Jenis Kelamin</div><div class="card-value">${row["Jenis Kelamin"]}</div></div>
                     <div class="card-item"><div class="card-label">Tanggal Daftar</div><div class="card-value">${row["Tanggal Pendaftaran"]}</div></div>
-                    <div class="card-item"><div class="card-label">Status Pendaftaran</div><div class="card-value"><span class="${row["Status Pendaftaran"] === 'DITERIMA' ? 'status-diterima' : (row["Status Pendaftaran"] === 'DITOLAK' ? 'status-ditolak' : 'status-pending')}">${row["Status Pendaftaran"]}</span></div></div>
+                    <div class="card-item"><div class="card-label">Status Pendaftaran</div><div class="card-value"><span class="${statusClass}">${row["Status Pendaftaran"]}</span></div></div>
                 `;
                 cardViewContainer.appendChild(card);
             });
