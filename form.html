@@ -3,21 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pendaftaran SDIT INSANI</title>
+    <title>Formulir Pendaftaran PPDB</title>
     <link rel="stylesheet" href="partials.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
+    <div id="nav-placeholder"></div>
 
     <main>
         <div class="main-content">
-            <div class="form-container card">
-                <h2 class="form-title">Isi Formulir Pendaftaran</h2>
-                <p class="form-description">Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran lengkap. Anda akan diarahkan ke Google Form untuk proses pengisian data dan pengunggahan berkas.</p>
-                <a href="https://forms.gle/5RyqCmDr19vLc7YXA" target="_blank" class="action-button primary-button">
-                    <i class="fas fa-edit"></i> Isi Formulir Sekarang
-                </a>
+            <div class="form-container">
+                <h2 class="dashboard-title">Isi Formulir Pendaftaran Siswa Baru</h2>
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="nama_siswa">Nama Lengkap Siswa</label>
+                        <input type="text" id="nama_siswa" name="Nama Lengkap Siswa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="asal_tk">Asal TK/RA</label>
+                        <input type="text" id="asal_tk" name="Asal TK/RA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                        <select id="jenis_kelamin" name="Jenis Kelamin" required>
+                            <option value="">Pilih</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_ayah">Nama Ayah</label>
+                        <input type="text" id="nama_ayah" name="Nama Ayah" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_hp_ortu">No. HP Orang Tua</label>
+                        <input type="tel" id="no_hp_ortu" name="No. HP Orang Tua" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="reset-button">Reset</button>
+                        <button type="submit" class="submit-button">Kirim</button>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
@@ -25,28 +53,24 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Logika memuat header dan footer
-        async function loadHeader() {
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec';
+        
+        async function loadPartials() {
             try {
-                const response = await fetch('header.html');
-                const headerHtml = await response.text();
-                document.getElementById('header-placeholder').innerHTML = headerHtml;
+                const headerResponse = await fetch('header.html');
+                const navResponse = await fetch('nav.html');
+                const footerResponse = await fetch('footer.html');
+
+                document.getElementById('header-placeholder').innerHTML = await headerResponse.text();
+                document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
+                document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
+                
                 initSideNav();
             } catch (error) {
-                console.error('Gagal memuat header:', error);
-            }
-        }
-        async function loadFooter() {
-            try {
-                const response = await fetch('footer.html');
-                const footerHtml = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = footerHtml;
-            } catch (error) {
-                console.error('Gagal memuat footer:', error);
+                console.error('Gagal memuat partials:', error);
             }
         }
 
-        // Logika untuk navigasi geser (sidebar)
         function initSideNav() {
             const openNavBtn = document.getElementById('open-nav-btn');
             const closeNavBtn = document.getElementById('close-nav-btn');
@@ -74,9 +98,33 @@
                 }
             });
         }
+        
         document.addEventListener('DOMContentLoaded', () => {
-            loadHeader();
-            loadFooter();
+            loadPartials();
+        });
+
+        document.getElementById('registration-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    alert('Data pendaftaran berhasil dikirim!');
+                    form.reset();
+                } else {
+                    alert('Gagal mengirim data. Silakan coba lagi.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
         });
     </script>
 </body>
