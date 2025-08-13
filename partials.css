@@ -63,6 +63,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
+    transition: color 0.3s ease; /* Transisi untuk judul */
+}
+
+.site-title:hover {
+    color: var(--secondary-color);
 }
 
 .desktop-nav {
@@ -322,7 +327,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: flex; align-items: center; box-shadow: 0 2px 5px var(--shadow-light);
 }
-.refresh-button:hover { background-color: #0056b3; transform: translateY(-2px); }
+.refresh-button:hover { background-color: #0056b3; transform: translateY(-2px); box-shadow: 0 4px 10px var(--shadow-light); }
 .button-icon { font-size: 1.2rem; line-height: 1; }
 .refresh-button.is-loading .button-icon { animation: spin 1s linear infinite; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
