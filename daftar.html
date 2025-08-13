@@ -129,13 +129,13 @@
             }
 
             data.forEach(row => {
-                let statusColorClass = 'bg-warning text-dark'; // Default
+                let statusClass = 'status-pending'; // Default
                 const status = row["Status Pendaftaran"] ? row["Status Pendaftaran"].trim().toUpperCase() : '';
                 
                 if (status === 'DITERIMA') {
-                    statusColorClass = 'bg-success text-white';
+                    statusClass = 'status-diterima';
                 } else if (status === 'DITOLAK') {
-                    statusColorClass = 'bg-danger text-white';
+                    statusClass = 'status-ditolak';
                 }
                 
                 // Render table row
@@ -146,7 +146,7 @@
                     <td>${row["Asal TK/RA"]}</td>
                     <td>${row["Jenis Kelamin"]}</td>
                     <td>${row["Tanggal Pendaftaran"]}</td>
-                    <td><span class="badge ${statusColorClass}">${row["Status Pendaftaran"]}</span></td>
+                    <td><span class="badge ${statusClass}">${row["Status Pendaftaran"]}</span></td>
                 `;
                 tableBody.appendChild(tr);
 
@@ -167,7 +167,7 @@
                                 Tanggal Pendaftaran: <span class="fw-bold">${row["Tanggal Pendaftaran"]}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Status: <span class="badge ${statusColorClass} fw-bold">${row["Status Pendaftaran"]}</span>
+                                Status: <span class="badge ${statusClass} fw-bold">${row["Status Pendaftaran"]}</span>
                             </li>
                         </ul>
                     </div>
