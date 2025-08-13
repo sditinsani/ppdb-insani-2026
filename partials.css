@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    transition: color 0.3s ease; /* Transisi untuk judul */
+    transition: color 0.3s ease;
 }
 
 .site-title:hover {
@@ -437,19 +437,9 @@ tbody tr:hover { background-color: #e9ecef; }
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.form-actions .submit-button {
-    background-color: #28a745;
-    color: white;
-}
-
 .form-actions .submit-button:hover {
     background-color: #218838;
     transform: translateY(-2px);
-}
-
-.form-actions .reset-button {
-    background-color: #6c757d;
-    color: white;
 }
 
 .form-actions .reset-button:hover {
@@ -459,16 +449,59 @@ tbody tr:hover { background-color: #e9ecef; }
 
 /* --- Footer --- */
 .footer-simple {
-    background: var(--primary-color); color: #ecf0f1; text-align: center;
-    padding: 2rem; font-size: 0.9rem; margin-top: 30px;
+    background: var(--primary-color);
+    color: #ecf0f1;
+    padding: 2rem;
+    font-size: 0.9rem;
+    margin-top: 30px;
 }
-.footer-social-block a {
-    color: var(--accent-color); text-decoration: none; font-weight: 500;
-    margin: 0 8px; transition: color 0.3s;
-}
-.footer-social-block a:hover { color: white; }
-.copyright { margin-top: 20px; font-size: 0.85rem; color: #a0a0a0; }
 
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    margin-bottom: 1rem;
+}
+
+.footer-section h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-social-block a {
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #3d5167;
+    padding-top: 20px;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+}
 
 /* --- Responsive (Tampilan Seluler) --- */
 @media (max-width: 768px) {
@@ -504,4 +537,10 @@ tbody tr:hover { background-color: #e9ecef; }
     .card-container { display: block; }
 
     .form-container { padding: 20px; }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-social-block a { margin: 0 8px; }
 }
