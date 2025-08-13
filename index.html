@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="header-placeholder"></div>
+    <div id="nav-placeholder"></div>
 
     <main>
         <div class="main-content">
@@ -34,28 +35,25 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Logika memuat header dan footer
-        async function loadHeader() {
+        async function loadPartials() {
             try {
-                const response = await fetch('header.html');
-                const headerHtml = await response.text();
-                document.getElementById('header-placeholder').innerHTML = headerHtml;
+                // Memuat Header dan Navigasi secara bersamaan
+                const headerResponse = await fetch('header.html');
+                const navResponse = await fetch('nav.html');
+                const footerResponse = await fetch('footer.html');
+
+                document.getElementById('header-placeholder').innerHTML = await headerResponse.text();
+                document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
+                document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
+                
+                // Inisialisasi navigasi setelah semua elemen dimuat
                 initSideNav();
+
             } catch (error) {
-                console.error('Gagal memuat header:', error);
-            }
-        }
-        async function loadFooter() {
-            try {
-                const response = await fetch('footer.html');
-                const footerHtml = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = footerHtml;
-            } catch (error) {
-                console.error('Gagal memuat footer:', error);
+                console.error('Gagal memuat partials:', error);
             }
         }
 
-        // Logika untuk navigasi geser (sidebar)
         function initSideNav() {
             const openNavBtn = document.getElementById('open-nav-btn');
             const closeNavBtn = document.getElementById('close-nav-btn');
@@ -84,7 +82,6 @@
             });
         }
         
-        // Logika untuk memuat data dashboard
         const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
         async function fetchDashboardData() {
             try {
@@ -98,9 +95,9 @@
                 document.getElementById('total-pendaftar-dashboard').textContent = "Error";
             }
         }
+
         document.addEventListener('DOMContentLoaded', () => {
-            loadHeader();
-            loadFooter();
+            loadPartials();
             fetchDashboardData();
         });
     </script>
