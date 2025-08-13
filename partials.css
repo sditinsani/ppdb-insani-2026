@@ -1,8 +1,7 @@
-/* Import Google Fonts & Font Awesome */
+/* --- Global Styles --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-/* Variabel Warna */
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #007bff;
@@ -10,9 +9,9 @@
     --background-color: #f8f9fa;
     --text-color: #34495e;
     --border-color: #e9ecef;
+    --card-bg: #fff;
 }
 
-/* Global style & Font */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -21,8 +20,16 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #003366;
+    font-weight: 700;
+}
+
+/* --- Header & Navigasi Geser --- */
 header {
     background: var(--primary-color);
     color: white;
@@ -52,18 +59,12 @@ h1 {
     font-weight: 600;
 }
 
-.main-content {
-    padding: 20px;
-}
-
-/* --- Menu Navigasi Geser --- */
 .hamburger-btn {
     background: none;
     border: none;
     color: white;
     font-size: 1.8rem;
     cursor: pointer;
-    display: none; /* Sembunyikan secara default */
 }
 
 .side-nav {
@@ -72,12 +73,14 @@ h1 {
     left: 0;
     width: 280px;
     height: 100%;
-    background-color: #fff;
+    background-color: var(--card-bg);
     box-shadow: 4px 0 15px rgba(0,0,0,0.1);
     transform: translateX(-100%);
     transition: transform 0.4s ease-in-out;
     z-index: 1001;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .side-nav.is-open {
@@ -104,11 +107,11 @@ h1 {
 .nav-link {
     text-decoration: none;
     color: var(--text-color);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
     padding: 15px 10px;
     border-radius: 8px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -119,7 +122,18 @@ h1 {
 }
 
 .nav-link:hover {
-    background-color: #f0f4f8;
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+}
+
+.nav-link-active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.nav-link-active:hover {
+    background-color: #0056b3;
+    color: white;
 }
 
 #overlay {
@@ -133,23 +147,28 @@ h1 {
     display: none;
 }
 
+/* --- Tata Letak Konten Utama --- */
+.main-content {
+    padding: 20px;
+}
 
-/* --- Tampilan Dashboard --- */
-.dashboard-container {
+.card {
     max-width: 800px;
     margin: 30px auto;
     padding: 30px;
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+/* --- Tampilan Dashboard --- */
+.dashboard-container {
     text-align: center;
 }
 
 .dashboard-title {
     font-size: 1.8rem;
-    color: #003366;
     margin-bottom: 30px;
-    font-weight: 700;
 }
 
 .stats-container {
@@ -211,6 +230,7 @@ h1 {
     gap: 15px;
 }
 
+/* --- Tombol Aksi --- */
 .action-button {
     padding: 15px 30px;
     color: white;
@@ -244,8 +264,7 @@ h1 {
     transform: translateY(-2px);
 }
 
-
-/* --- Tampilan Status Pendaftaran & Form --- */
+/* --- Tampilan Status Pendaftar --- */
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -274,7 +293,7 @@ h1 {
 #search-input:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); }
 .total-pendaftar { font-size: 1rem; color: #555; font-weight: 500; }
 .table-container {
-    margin: 15px auto; padding: 20px; max-width: 1200px; background: white;
+    margin: 15px auto; padding: 20px; max-width: 1200px; background: var(--card-bg);
     border-radius: 12px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); overflow-x: auto;
 }
 table { width: 100%; border-collapse: collapse; font-size: 1rem; }
@@ -282,17 +301,14 @@ th, td { border: 1px solid var(--border-color); padding: 15px 12px; }
 th { background: var(--background-color); color: var(--text-color); font-weight: 600; text-align: left; }
 tbody tr:nth-child(even) { background-color: #f9f9f9; }
 tbody tr:hover { background-color: #e9ecef; }
-th:nth-child(6), td:nth-child(6) { text-align: center; }
+.status-diterima { color: #28a745; font-weight: 600; }
+.status-ditolak { color: #dc3545; font-weight: 600; }
 .loading, .error, .no-data, .loading-card, .error-card, .no-data-card {
     text-align: center; font-style: italic; color: #888; padding: 30px;
 }
-.status-diterima { color: #28a745; font-weight: 600; }
-.status-ditolak { color: #dc3545; font-weight: 600; }
+
+/* Card view for mobile */
 .card-container { display: none; padding: 15px; margin: 10px auto; max-width: 550px; }
-.card {
-    background: white; border-radius: 12px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 20px; padding: 20px; border-left: 5px solid var(--secondary-color);
-}
 .card-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
 .card-item:last-child { border-bottom: none; }
 .card-label { font-weight: 600; color: #555; flex-basis: 45%; }
@@ -310,17 +326,10 @@ th:nth-child(6), td:nth-child(6) { text-align: center; }
 
 /* --- Tampilan Form --- */
 .form-container {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 40px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     text-align: center;
 }
 .form-title {
     text-align: center;
-    color: #003366;
     margin-bottom: 15px;
     font-size: 1.8rem;
     font-weight: 700;
@@ -332,12 +341,11 @@ th:nth-child(6), td:nth-child(6) { text-align: center; }
     line-height: 1.5;
 }
 
-/* Footer */
+/* --- Footer --- */
 footer {
     background: var(--primary-color); color: #ecf0f1; text-align: center;
     padding: 2rem; font-size: 0.9rem; margin-top: 30px;
 }
-.footer-simple p { margin: 5px 0; }
 .footer-social-block a {
     color: var(--accent-color); text-decoration: none; font-weight: 500;
     margin: 0 8px; transition: color 0.3s;
@@ -346,13 +354,16 @@ footer {
 .copyright { margin-top: 20px; font-size: 0.85rem; color: #a0a0a0; }
 
 
-/* --- Media Queries (untuk tampilan responsive) --- */
+/* --- Responsive (Tampilan Seluler) --- */
 @media (max-width: 768px) {
     header { padding: 1rem; flex-direction: row; }
     .header-brand { justify-content: flex-start; }
-    .hamburger-btn { display: block; }
-    
-    .dashboard-container { padding: 20px 15px; margin: 20px auto; }
+    h1 { font-size: 1.3rem; }
+    .logo { width: 50px; }
+
+    .main-content { padding: 10px; }
+    .card { padding: 20px; margin: 20px auto; }
+
     .dashboard-title { font-size: 1.5rem; }
     .stats-container { margin-bottom: 30px; }
     .stat-card { flex-direction: row; align-items: center; gap: 15px; padding: 15px; }
@@ -361,13 +372,12 @@ footer {
     .stat-label { font-size: 1rem; }
     .dashboard-actions { flex-direction: column; gap: 10px; }
     .action-button { font-size: 1rem; padding: 12px 25px; }
-    .table-container { display: none; }
-    .card-container { display: block; }
-    .logo { width: 50px; } h1 { font-size: 1.3rem; }
+
     .toolbar { flex-direction: column; gap: 15px; align-items: flex-start; padding: 0 15px; margin-top: 20px; }
     .toolbar-buttons { width: 100%; justify-content: space-between; }
-    .search-container { width: 100%; display: flex; flex-direction: column; align-items: stretch; }
+    .search-container { width: 100%; }
     #search-input { width: calc(100% - 24px); }
-    .total-pendaftar { text-align: left; }
+    .table-container { display: none; }
+    .card-container { display: block; }
     .form-container { padding: 20px; }
 }
