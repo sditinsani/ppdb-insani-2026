@@ -8,53 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+
     <div id="header-placeholder"></div>
     <div id="nav-placeholder"></div>
 
     <main>
         <div class="main-content">
-            <div class="form-container">
-                <h2 class="dashboard-title">Isi Formulir Pendaftaran Siswa Baru</h2>
-                <form id="registration-form">
-                    <div class="form-group">
-                        <label for="nama_siswa">Nama Lengkap Siswa</label>
-                        <input type="text" id="nama_siswa" name="Nama Lengkap Siswa" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="asal_tk">Asal TK/RA</label>
-                        <input type="text" id="asal_tk" name="Asal TK/RA" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="jenis_kelamin">Jenis Kelamin</label>
-                        <select id="jenis_kelamin" name="Jenis Kelamin" required>
-                            <option value="">Pilih</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_ayah">Nama Ayah</label>
-                        <input type="text" id="nama_ayah" name="Nama Ayah" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="no_hp_ortu">No. HP Orang Tua</label>
-                        <input type="tel" id="no_hp_ortu" name="No. HP Orang Tua" required>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="reset" class="reset-button">Reset</button>
-                        <button type="submit" class="submit-button">Kirim</button>
-                    </div>
-                </form>
+            <div class="card" style="text-align: center;">
+                <h2 class="dashboard-title">Formulir Pendaftaran Siswa Baru</h2>
+                <p>Silakan klik tombol di bawah ini untuk mengisi formulir pendaftaran siswa baru.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJ2hK6iJg_H4C6eM8eG6iW-C6u7G8K2z3x_g/viewform" target="_blank" class="action-button primary-button" style="margin-top: 20px;">
+                    <i class="fas fa-external-link-alt"></i> Menuju Formulir Pendaftaran
+                </a>
             </div>
         </div>
     </main>
-
+    
     <div id="footer-placeholder"></div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec';
-        
         async function loadPartials() {
             try {
                 const headerResponse = await fetch('header.html');
@@ -101,30 +73,6 @@
         
         document.addEventListener('DOMContentLoaded', () => {
             loadPartials();
-        });
-
-        document.getElementById('registration-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (response.ok) {
-                    alert('Data pendaftaran berhasil dikirim!');
-                    form.reset();
-                } else {
-                    alert('Gagal mengirim data. Silakan coba lagi.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan. Silakan coba lagi.');
-            }
         });
     </script>
 </body>
