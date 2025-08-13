@@ -37,7 +37,6 @@
     <script>
         async function loadPartials() {
             try {
-                // Memuat Header dan Navigasi secara bersamaan
                 const headerResponse = await fetch('header.html');
                 const navResponse = await fetch('nav.html');
                 const footerResponse = await fetch('footer.html');
@@ -46,7 +45,6 @@
                 document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
                 document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
                 
-                // Inisialisasi navigasi setelah semua elemen dimuat
                 initSideNav();
 
             } catch (error) {
