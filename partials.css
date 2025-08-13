@@ -29,17 +29,11 @@ header {
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: space-between; /* Menempatkan elemen di kiri dan kanan */
+    justify-content: space-between;
     align-items: center;
 }
 
 .header-brand {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.header-nav {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -58,25 +52,87 @@ h1 {
     font-weight: 600;
 }
 
-/* Tombol Home */
-.home-button {
-    background-color: transparent;
-    color: white;
-    text-decoration: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 5px;
-}
-
-.home-button:hover {
-    color: var(--accent-color);
-}
-
 .main-content {
     padding: 20px;
 }
+
+/* --- Menu Navigasi Geser --- */
+.hamburger-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none; /* Sembunyikan secara default */
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1001;
+    padding: 20px;
+}
+
+.side-nav.is-open {
+    transform: translateX(0);
+}
+
+.side-nav .close-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 15px 10px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link i {
+    font-size: 1.3rem;
+}
+
+.nav-link:hover {
+    background-color: #f0f4f8;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+}
+
 
 /* --- Tampilan Dashboard --- */
 .dashboard-container {
@@ -190,8 +246,6 @@ h1 {
 
 
 /* --- Tampilan Status Pendaftaran & Form --- */
-
-/* Toolbar (Refresh Button & Search) */
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -254,7 +308,7 @@ th:nth-child(6), td:nth-child(6) { text-align: center; }
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
 
-/* --- Tampilan Form (Kode Perbaikan) --- */
+/* --- Tampilan Form --- */
 .form-container {
     max-width: 700px;
     margin: 30px auto;
@@ -291,11 +345,13 @@ footer {
 .footer-social-block a:hover { color: white; }
 .copyright { margin-top: 20px; font-size: 0.85rem; color: #a0a0a0; }
 
-/* Responsive adjustments */
+
+/* --- Media Queries (untuk tampilan responsive) --- */
 @media (max-width: 768px) {
-    header { padding: 1rem; flex-direction: column; text-align: center; }
-    .header-brand { justify-content: center; }
-    .header-nav { display: none; } /* Sembunyikan tombol home di HP agar header lebih rapi */
+    header { padding: 1rem; flex-direction: row; }
+    .header-brand { justify-content: flex-start; }
+    .hamburger-btn { display: block; }
+    
     .dashboard-container { padding: 20px 15px; margin: 20px auto; }
     .dashboard-title { font-size: 1.5rem; }
     .stats-container { margin-bottom: 30px; }
