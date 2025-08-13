@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="header-placeholder"></div>
+    <div id="nav-placeholder"></div>
 
     <main>
         <div class="main-content">
@@ -130,7 +131,7 @@
                     <td>${row["Asal TK/RA"]}</td>
                     <td>${row["Jenis Kelamin"]}</td>
                     <td>${row["Tanggal Pendaftaran"]}</td>
-                    <td><span class="${statusClass}">${row["Status Pendaftaran"]}</span></td>
+                    <td><span class="status-label ${statusClass}">${row["Status Pendaftaran"]}</span></td>
                 `;
                 tableBody.appendChild(tr);
 
@@ -143,7 +144,7 @@
                     <div class="card-item"><div class="card-label">Asal TK/RA</div><div class="card-value">${row["Asal TK/RA"]}</div></div>
                     <div class="card-item"><div class="card-label">Jenis Kelamin</div><div class="card-value">${row["Jenis Kelamin"]}</div></div>
                     <div class="card-item"><div class="card-label">Tanggal Daftar</div><div class="card-value">${row["Tanggal Pendaftaran"]}</div></div>
-                    <div class="card-item"><div class="card-label">Status Pendaftaran</div><div class="card-value"><span class="${statusClass}">${row["Status Pendaftaran"]}</span></div></div>
+                    <div class="card-item"><div class="card-label">Status Pendaftaran</div><div class="card-value"><span class="status-label ${statusClass}">${row["Status Pendaftaran"]}</span></div></div>
                 `;
                 cardViewContainer.appendChild(card);
             });
@@ -170,24 +171,19 @@
             }, 3500);
         }
 
-        // Logika memuat header dan footer
-        async function loadHeader() {
+        async function loadPartials() {
             try {
-                const response = await fetch('header.html');
-                const headerHtml = await response.text();
-                document.getElementById('header-placeholder').innerHTML = headerHtml;
+                const headerResponse = await fetch('header.html');
+                const navResponse = await fetch('nav.html');
+                const footerResponse = await fetch('footer.html');
+
+                document.getElementById('header-placeholder').innerHTML = await headerResponse.text();
+                document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
+                document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
+                
                 initSideNav();
             } catch (error) {
-                console.error('Gagal memuat header:', error);
-            }
-        }
-        async function loadFooter() {
-            try {
-                const response = await fetch('footer.html');
-                const footerHtml = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = footerHtml;
-            } catch (error) {
-                console.error('Gagal memuat footer:', error);
+                console.error('Gagal memuat partials:', error);
             }
         }
         function initSideNav() {
@@ -218,13 +214,11 @@
             });
         }
 
-        // Event listeners
         searchInput.addEventListener('input', filterData);
         refreshButton.addEventListener('click', fetchData);
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadHeader();
-            loadFooter();
+            loadPartials();
             fetchData();
         });
     </script>
