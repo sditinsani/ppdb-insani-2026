@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Pendaftaran PPDB</title>
-    <link rel="stylesheet" href="partials.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="custom.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
-    <div id="nav-placeholder"></div>
 
-    <main>
-        <div class="main-content">
-            <div class="toolbar">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Cari...">
+    <main class="py-5">
+        <div class="container">
+            <div class="row align-items-center mb-3">
+                <div class="col-md-6 mb-2 mb-md-0">
+                    <div class="input-group">
+                        <input type="text" id="search-input" class="form-control" placeholder="Cari...">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
                 </div>
-                <div class="toolbar-buttons">
-                    <span class="total-pendaftar" id="total-pendaftar">0 Pendaftar</span>
-                    <button class="refresh-button" id="refresh-button">
-                        <i class="fas fa-sync-alt button-icon"></i> Refresh
+                <div class="col-md-6 text-md-end">
+                    <span class="text-muted me-3" id="total-pendaftar">0 Pendaftar</span>
+                    <button class="btn btn-primary" id="refresh-button">
+                        <i class="fas fa-sync-alt me-2 button-icon"></i> Refresh
                     </button>
                 </div>
             </div>
 
-            <div class="table-container">
-                <table>
+            <div class="card shadow-sm table-responsive d-none d-md-block">
+                <table class="table table-hover table-striped mb-0">
                     <thead>
                         <tr>
                             <th>No. Urut</th>
@@ -40,21 +43,23 @@
                     <tbody id="data-table-body">
                         </tbody>
                 </table>
-                <p class="loading" id="loading-table">Memuat data...</p>
-                <p class="error" id="error-table" style="display:none;">Gagal memuat data. Silakan coba refresh.</p>
-                <p class="no-data" id="no-data-table" style="display:none;">Tidak ada data pendaftar ditemukan.</p>
+                <div class="p-3 text-center" id="loading-table">Memuat data...</div>
+                <div class="p-3 text-center text-danger" id="error-table" style="display:none;">Gagal memuat data. Silakan coba refresh.</div>
+                <div class="p-3 text-center text-muted" id="no-data-table" style="display:none;">Tidak ada data pendaftar ditemukan.</div>
             </div>
 
-            <div class="card-container" id="card-view-container">
-                <p class="loading-card" id="loading-card">Memuat data...</p>
-                <p class="error-card" id="error-card" style="display:none;">Gagal memuat data. Silakan coba refresh.</p>
-                <p class="no-data-card" id="no-data-card" style="display:none;">Tidak ada data pendaftar ditemukan.</p>
+            <div class="d-md-none" id="card-view-container">
+                <div class="p-3 text-center" id="loading-card">Memuat data...</div>
+                <div class="p-3 text-center text-danger" id="error-card" style="display:none;">Gagal memuat data. Silakan coba refresh.</div>
+                <div class="p-3 text-center text-muted" id="no-data-card" style="display:none;">Tidak ada data pendaftar ditemukan.</div>
             </div>
             
-            <div id="toast" class="toast">
-                <div class="toast-content">
-                    <i class="fas fa-check-circle toast-icon"></i>
-                    Data berhasil diperbarui!
+            <div id="toast" class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas fa-check-circle me-2"></i> Data berhasil diperbarui!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>
         </div>
@@ -62,6 +67,7 @@
 
     <div id="footer-placeholder"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbxy-Ph9RIQMnDDtsOhW8eFj03DK6gmbG1lupGDCYSZ7VBuf69FjvC810xL2U0hRoGfI0A/exec";
         const tableBody = document.getElementById('data-table-body');
@@ -85,7 +91,8 @@
                 errorCard.style.display = 'none';
                 noDataTable.style.display = 'none';
                 noDataCard.style.display = 'none';
-                refreshButton.classList.add('is-loading');
+                refreshButton.disabled = true;
+                refreshButton.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...`;
 
                 const res = await fetch(API_URL);
                 if (!res.ok) throw new Error("Network response was not ok");
@@ -102,7 +109,8 @@
                 errorTable.style.display = 'block';
                 errorCard.style.display = 'block';
             } finally {
-                refreshButton.classList.remove('is-loading');
+                refreshButton.disabled = false;
+                refreshButton.innerHTML = `<i class="fas fa-sync-alt me-2"></i> Refresh`;
             }
         }
 
@@ -121,7 +129,7 @@
             }
 
             data.forEach(row => {
-                const statusClass = row["Status Pendaftaran"] === 'DITERIMA' ? 'status-diterima' : (row["Status Pendaftaran"] === 'DITOLAK' ? 'status-ditolak' : 'status-pending');
+                const statusClass = row["Status Pendaftaran"] === 'DITERIMA' ? 'bg-success text-white' : (row["Status Pendaftaran"] === 'DITOLAK' ? 'bg-danger text-white' : 'bg-warning text-dark');
                 
                 // Render table row
                 const tr = document.createElement('tr');
@@ -131,20 +139,31 @@
                     <td>${row["Asal TK/RA"]}</td>
                     <td>${row["Jenis Kelamin"]}</td>
                     <td>${row["Tanggal Pendaftaran"]}</td>
-                    <td><span class="status-label ${statusClass}">${row["Status Pendaftaran"]}</span></td>
+                    <td><span class="badge ${statusClass}">${row["Status Pendaftaran"]}</span></td>
                 `;
                 tableBody.appendChild(tr);
 
                 // Render card view
                 const card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'card shadow-sm mb-3';
                 card.innerHTML = `
-                    <div class="card-item"><div class="card-label">No. Urut</div><div class="card-value">${row["No. Urut"]}</div></div>
-                    <div class="card-item"><div class="card-label">Nama Siswa</div><div class="card-value">${row["Nama Lengkap Siswa"]}</div></div>
-                    <div class="card-item"><div class="card-label">Asal TK/RA</div><div class="card-value">${row["Asal TK/RA"]}</div></div>
-                    <div class="card-item"><div class="card-label">Jenis Kelamin</div><div class="card-value">${row["Jenis Kelamin"]}</div></div>
-                    <div class="card-item"><div class="card-label">Tanggal Daftar</div><div class="card-value">${row["Tanggal Pendaftaran"]}</div></div>
-                    <div class="card-item"><div class="card-label">Status Pendaftaran</div><div class="card-value"><span class="status-label ${statusClass}">${row["Status Pendaftaran"]}</span></div></div>
+                    <div class="card-body">
+                        <h5 class="card-title">${row["No. Urut"]}. ${row["Nama Lengkap Siswa"]}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Asal TK/RA: <span class="fw-bold">${row["Asal TK/RA"]}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Jenis Kelamin: <span class="fw-bold">${row["Jenis Kelamin"]}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Tanggal Pendaftaran: <span class="fw-bold">${row["Tanggal Pendaftaran"]}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Status: <span class="badge ${statusClass} fw-bold">${row["Status Pendaftaran"]}</span>
+                            </li>
+                        </ul>
+                    </div>
                 `;
                 cardViewContainer.appendChild(card);
             });
@@ -160,58 +179,29 @@
         }
 
         function showToast() {
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
-            setTimeout(() => {
-                toast.style.display = 'none';
-                toast.classList.remove('hidden');
-            }, 3500);
+            const toastEl = document.getElementById('toast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
         }
 
         async function loadPartials() {
             try {
                 const headerResponse = await fetch('header.html');
-                const navResponse = await fetch('nav.html');
                 const footerResponse = await fetch('footer.html');
 
                 document.getElementById('header-placeholder').innerHTML = await headerResponse.text();
-                document.getElementById('nav-placeholder').innerHTML = await navResponse.text();
                 document.getElementById('footer-placeholder').innerHTML = await footerResponse.text();
                 
-                initSideNav();
+                // Add active class to nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.href === window.location.href) {
+                        link.classList.add('active');
+                    }
+                });
+
             } catch (error) {
                 console.error('Gagal memuat partials:', error);
             }
-        }
-        function initSideNav() {
-            const openNavBtn = document.getElementById('open-nav-btn');
-            const closeNavBtn = document.getElementById('close-nav-btn');
-            const sideNav = document.getElementById('side-nav');
-            const overlay = document.getElementById('overlay');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            openNavBtn.addEventListener('click', () => {
-                sideNav.classList.add('is-open');
-                overlay.style.display = 'block';
-            });
-            closeNavBtn.addEventListener('click', () => {
-                sideNav.classList.remove('is-open');
-                overlay.style.display = 'none';
-            });
-            overlay.addEventListener('click', () => {
-                sideNav.classList.remove('is-open');
-                overlay.style.display = 'none';
-            });
-            navLinks.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add('nav-link-active');
-                } else {
-                    link.classList.remove('nav-link-active');
-                }
-            });
         }
 
         searchInput.addEventListener('input', filterData);
